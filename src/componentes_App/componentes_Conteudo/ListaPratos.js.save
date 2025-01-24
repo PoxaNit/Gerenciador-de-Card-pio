@@ -1,0 +1,591 @@
+import React from "react";
+import styles from "./ListaPratos.module.css";
+import ExibirInformacoesPrato from "./componentes_ListaPratos/ExibirInformacoesPrato.js";
+import Contexto from "../Contexto.js";
+import MensagemAlerta from "../MensagemAlerta.js";
+
+
+
+export default function ListaPratos ({setLista}) {
+
+  const [controleUseCallback, setControleUseCallback] = React.useState(true); //controla quando o componente deve fazer requisição ao servidor para pegar os pratos para exibir na lista
+
+  const [pratos, setPratos] = React.useState({info: []}); //objeto contendo os pratos do menu
+
+  const [coordenadasTela, setCoordenadasTela] = React.useState({x: 0, y: 0}); //armazena as coordenadas de tela atuais
+
+  const [dispararAlerta, setDispararAlerta] = React.useState({exibir: false, mensagem: "", tempo: 0}); //controla quando exibir a mensagem de alerta.
+
+  const [mudarComponente, setMudarComponente] = React.useState(false); //serve para avisar ao useCallback quando o componente ExibirInformacoesPrato for fechado
+
+//  const [pratosDisponiveis, setPratosDisponiveis] = React.useState(false); //avisa para este componente quando a requisição dos pratos já estiver sido concluída e o estado pratos já tem os dados, para que as operações relacionadas ocorram.
+
+
+
+
+  const [componenteExibir, setComponenteExibir] = React.useState({ //controla quando e quais informações exibir do prato clicado.
+    renderizar: false,
+    infos: null
+ });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*------------Funções relacionadas às coordenadas de tela------‐-----*/
+
+
+
+   function armazenar_coordenadas_tela () {
+
+	setCoordenadasTela({x: window.scrollX, y: window.scrollY});
+
+ };
+
+
+ React.useEffect(() => {
+
+ window.addEventListener("scroll", armazenar_coordenadas_tela);
+
+
+  }, []);
+
+
+/*----------------------/////////////////////------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*---------------------- Primeiras operações ------------------------*/
+
+
+ async function fetchData () {
+
+    if (controleUseCallback) {
+        setDispararAlerta({mensagem: "carregando...", tempo: 20000, exibir: true});
+
+	const resposta = await fetch("/retornar_dados"); //retorna o array com todos os pratos e suas informações
+	const pratos_info = await resposta.json();
+
+    if (pratos_info.sucesso) {
+//		setPratosDisponiveis(true); //explicita para o componente que os dados chegaram.
+
+  };
+
+	setPratos(pratos_info);
+	setControleUseCallback(false);
+        setDispararAlerta({mensagem: "", tempo: 0, exibir: false});
+
+   } else {
+     return null;
+  };
+
+};
+
+
+
+
+  const buscarPratos = React.useCallback(fetchData, [controleUseCallback]);
+
+
+
+  React.useEffect(() => {
+	buscarPratos();
+
+ }, [buscarPratos]);
+
+
+
+/*----------------------/////////////////////------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*------------Funções relacionadas às coordenadas de tela------‐-----*/
+
+
+ const mudarCoordenadas = React.useCallback(() => {
+
+     if (mudarComponente) {
+
+	window.scrollTo(coordenadasTela.x, coordenadasTela.y);
+	armazenar_coordenadas_tela();
+        setMudarComponente(false);
+
+   } else {
+
+	return null
+
+   };
+
+ }, [mudarComponente, coordenadasTela.x, coordenadasTela.y]);
+
+ React.useEffect(() => {
+
+	mudarCoordenadas();
+
+ }, [mudarCoordenadas]);
+
+/*----------------------/////////////////////------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*                     Tratando o modo de pesquisa                     */
+
+
+
+
+
+  const [modoPesquisarPratos, setModoPesquisarPratos] = React.useState(false); //Controla quando exibir o input para pesquisar e filtrar os pratos por nome na lista.
+
+  const [nomePesquisado, setNomePesquisado] = React.useState(""); //armazena o valor de entrada que o usuário passar no input da pesquisa
+
+//  const filtroDeNome = React.useMemo(() => new RegExp(nomePesquisado), [nomePesquisado]); //regex para filtrar quais itens devem ser renderizados para o usuário, conrrespondente ao que for digitado
+
+
+  //const [pratosFiltrados, setPratosFiltrados]  = React.useState([]); //armazena os itens que passarem no teste da regex para renderização
+
+
+
+/*
+    React.useEffect(() => {
+
+    if (pratosDisponiveis) {
+	const novoArray = pratos.info.filter(prato => filtroDeNome.test(prato));
+	setPratosFiltrados(novoArray);
+
+ };
+
+
+
+}, [filtroDeNome, pratos.info, pratosDisponiveis]);
+
+*/
+
+
+
+
+
+{/*onInput={evento => {
+
+  const novoValor = evento.target.value;
+
+
+         setNomePesquisado(novoValor);
+
+
+}}*/}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const inputPesquisa = React.useRef(null); //faz referência ao input da pesqusia para um melhor acesso ao seu valor
+
+  const [teste, setTeste] = React.useState(false);
+
+  const [executarUseCallbackPesquisa, setExecutarUseCallbackPesquisa] = React.useState({bool1: false, bool2: false});
+
+
+
+  const [inputPesquisaEstaPronto, setInputPesquisaEstaPronto] = React.useState(false); //avisa quando o useRef inputPesquisa não for mais null e estiver armazenando o input da pesquisa.
+
+
+
+  React.useEffect(() =>  setInputPesquisaEstaPronto(true), [inputPesquisa]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const atualizarEstado = React.useCallback(() => {
+
+
+
+
+      if (executarUseCallbackPesquisa.bool1 && executarUseCallbackPesquisa.bool2) {
+          setTeste(teste => !teste)
+          alert(teste);
+	  setExecutarUseCallbackPesquisa({bool1: false, bool2: false});
+  };
+
+
+
+
+
+}, [
+     executarUseCallbackPesquisa
+   ]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+  React.useEffect(() => atualizarEstado(), [atualizarEstado]);
+
+
+  React.useCallback(() => {
+   if (inputPesquisaEstaPronto && inputPesquisa.current.value) {
+     setExecutarUseCallbackPesquisa({bool1: false, bool2: true})
+   };
+ }, [inputPesquisaEstaPronto]);
+
+
+
+
+
+
+
+
+  React.useEffect(() => {
+
+
+
+
+    if (!executarUseCallbackPesquisa.bool1 && executarUseCallbackPesquisa.bool2) {
+	setExecutarUseCallbackPesquisa({bool1: true, bool2: true})
+};
+
+
+
+
+}, [executarUseCallbackPesquisa]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function RenderizarInputPesquisa () {
+
+
+      return (
+  <>
+     <label>Pesquisa por nome:</label>
+
+
+     <input
+  	ref={inputPesquisa}
+	type="text"
+/>
+
+
+     <button onTouchEnd={() => {
+
+         setNomePesquisado("");
+         setModoPesquisarPratos(false)}} >X</button>
+
+  </>
+)
+}
+
+
+
+
+/*----------------------/////////////////////------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  return (
+<>
+ {dispararAlerta.exibir && <MensagemAlerta setDispararAlerta={setDispararAlerta} exibir={dispararAlerta.exibir} mensagem={dispararAlerta.mensagem} tempo={dispararAlerta.tempo} />}
+ <Contexto.Provider value={{setControleUseCallback, setComponenteExibir}}>
+
+ {componenteExibir.renderizar ? <ExibirInformacoesPrato func_tirar_evento_rolagem={armazenar_coordenadas_tela} func_coord_pai={armazenar_coordenadas_tela} infos_prato={componenteExibir.infos} controle={setComponenteExibir} coordenadas_tela_componente_pai={coordenadasTela} este_componente_fechou={setMudarComponente} setCoordenadasTela={setCoordenadasTela}/> : (
+
+ <div className={styles.conteudo}>
+ <header id={styles.hl}>
+
+  <section className={styles.s1}>
+    <button onClick={() => setLista(false)}>Sair</button>
+    <button onTouchEnd={() => {
+	if (!modoPesquisarPratos) {
+		setModoPesquisarPratos(true)
+	}
+}} >Pesquisar por nome</button>
+  </section>
+
+  <section className={styles.s2}>
+    <h1>Pratos do menu</h1>
+  </section>
+
+ </header>
+ <main>
+ {modoPesquisarPratos && <RenderizarInputPesquisa />}
+ {pratos.sucesso ? (<ul>
+
+
+
+{
+  pratos.info.map((prato, indice) => {
+
+	return (
+
+	<li key={indice} onClick={() => {
+	  setComponenteExibir({renderizar: true, infos: prato});
+}}>
+	 <strong>{prato.nome_prato}</strong>
+    <br/>
+	 <img alt={prato.nome_prato} src={"/" + prato.imagem_prato} />
+    <br/>
+         <p>Clique para ver</p>
+
+	</li>
+  )
+
+
+})
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+
+/*
+  {!nomePesquisado ? (
+     pratos.info.map((prato, index) => {
+      return (
+	<li key={index} onClick={() => {
+	  setComponenteExibir({renderizar: true, infos: prato});
+}}>
+	 <strong>{prato.nome_prato}</strong>
+    <br/>
+	 <img alt="imagem do prato" src={"/" + prato.imagem_prato} />
+    <br/>
+         <p>Clique para ver</p>
+
+	</li>
+  )
+
+    })
+
+
+  ) : (
+   pratosFiltrados.map((prato, index) => {
+      return (
+	<li key={index} onClick={() => {
+	  setComponenteExibir({renderizar: true, infos: prato});
+}}>
+	 <strong>{prato.nome_prato}</strong>
+    <br/>
+	 <img alt="imagem do prato" src={"/" + prato.imagem_prato} />
+    <br/>
+         <p>Clique para ver</p>
+
+	</li>
+  )
+
+
+
+}))}
+*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </ul>) : <h2 id={styles.altH2}>Não há pratos no menu</h2>}
+ </main>
+</div>
+)};
+</Contexto.Provider>
+</>);
+};

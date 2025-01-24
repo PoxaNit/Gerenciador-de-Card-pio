@@ -2,30 +2,16 @@ import React from "react";
 import CadastroPratos from "./componentes_Conteudo/CadastrarProdutos.js";
 import ListaPratos from "./componentes_Conteudo/ListaPratos.js";
 import styles from "./Conteudo.module.css";
+import RelatorioMenu from "./componentes_Conteudo/RelatorioMenu.js";
 
  export default function Conteudo () {
 
    const [cadastro, setCadastro] = React.useState(false);
    const [lista, setLista]       = React.useState(false);
+   const [relatorio, setRelatorio] = React.useState(false);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  if (!cadastro && !lista) { return (
+  if (!cadastro && !lista && !relatorio) { return (
 
      <div className={styles.conteudo}>
 
@@ -33,7 +19,8 @@ import styles from "./Conteudo.module.css";
 
              <h1>Gerenciador de menu</h1>
 
-             <button className={styles.relatorio}>Relatório do menu</button>
+             <button onClick={() => setRelatorio(true)}
+	     className={styles.relatorio}>Relatório do menu</button>
 
              <button className={styles.sobre}>Sobre esta aplicação</button>
 
@@ -52,7 +39,7 @@ import styles from "./Conteudo.module.css";
 	 <p>
 	     <small>
 
-	         &copy;2025 Feito por <strong><em>César</em></strong>
+	         &copy;{new Date().getFullYear()} Feito por <strong><em>César</em></strong>
 
 	     </small>
 	 </p>
@@ -97,6 +84,6 @@ import styles from "./Conteudo.module.css";
 
   if (lista) { return (<ListaPratos setLista={setLista} />)};
 
-
+  if (relatorio) { return (<RelatorioMenu setRelatorio={setRelatorio}/>)};
 
 }

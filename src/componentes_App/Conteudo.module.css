@@ -1,0 +1,110 @@
+ .conteudo {
+   height: 101.5vh;
+   width: 100dvw;
+   background-color: #4B9FC2;
+   margin-top: -7%;
+   padding-top: 4%;
+   display: grid;
+   grid-template-columns: 2fr;
+   grid-template-rows: 27% 35% 5%;
+   row-gap: 10%;
+
+   grid-template-areas:
+   'header header'
+   'main main'
+   'footer footer';
+   font-family: 'roboto', 'arial', 'helvetica', 'verdana', 'sans-serif';
+}
+
+ .conteudo button {
+   font-size: 4.3vw;
+   font-weight: 700;
+   background-image: linear-gradient(to bottom, #FE824C, #FD7B41);
+   color: #fff;
+   border-style: solid;
+   border-width: 2px;
+   border-color: black;
+   border-radius: 16px;
+   box-shadow: 1px 2px 13px -7px black;
+}
+
+ .conteudo button:active {
+   background-image: linear-gradient(to bottom, #FD6927, #FD540A);
+   transition-duration: .009s;
+   box-shadow: 3px 4px 8px -2px black;
+}
+ 
+ .conteudo h1 {
+   color: black;
+   font-weight: 600;
+   font-size: 10vw;
+   text-align: center;
+   border-style: solid;
+   border-color: #FE824C;
+   border-width: 5px;
+   border-radius: 8px;
+   font-family: impact, fantasy, arial, helvetica, verdana, roboto, 'sans-serif';
+}
+
+ .conteudo header {
+   grid-area: header;
+   background-color: white;
+   border-radius: 12px;
+   padding: 2.6%;
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   grid-template-rows: 1fr 1fr;
+
+   grid-template-areas:
+   'h1 h1'
+   'relatorio sobre';
+   column-gap: 4%;
+}
+
+ header h1 {
+   grid-area: h1;
+}
+
+ .sobre {
+   grid-area: sobre;
+}
+
+ .relatorio {
+   grid-area: relatorio;
+}
+
+ .conteudo main {
+   grid-area: main;
+   background-color: white;
+   display: flex;
+   flex-direction: column;
+   align-items: stretch;
+   padding: 4.8%;
+   justify-content: space-evenly;
+   border-radius: 10px;
+   
+}
+
+ .conteudo main button {
+   width: 100%;
+   height: 30%;
+   margin: 8% 0;
+}
+
+ .cadastrar {
+   display: block;
+}
+
+ .menu {
+   display: block;
+}
+
+ .conteudo footer {
+   grid-area: footer;
+   background-color: white;
+   border-radius: 10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 4.3vw;
+}

@@ -1,0 +1,57 @@
+ .header_pesquisa {
+   background-color: white;
+   border-color: #EF9103;
+   border-style: solid;
+   border-width: 3px;
+   border-radius: 12px;
+   padding: 2% 1%;
+   margin-top: 3.4%;
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+ }
+
+ .header_pesquisa label {
+   font-size: 3.5vw;
+   font-weight: 500;
+   
+ }
+
+ .header_pesquisa input {
+   font-size: 3vw;
+ }
+
+ .header_pesquisa button {
+   font-size: 3.2vw;
+   font-weight: 700;
+   padding: 2%;
+   width: 16%;
+   height: auto;
+   border-radius: 8px;
+   border-color: black;
+   border-width: 2px;
+   border-style: solid;
+   background-color: #54A4C4;
+   color: white;
+   box-shadow: 1px 2px 3px -3px black;
+   transition-duration: .008s;
+ }
+
+ .header_pesquisa button:active {
+   background-color: #4199BD;
+ }
+
+ .header_pesquisa input[type="text"] {
+   border-width: 2px;
+   border-style: solid;
+   border-color: black;
+   border-radius: 5px;
+   padding: 1% .4%;
+ }
+
+ .header_pesquisa input[type="text"]:focus {
+   border-width: 2px;
+   border-style: solid;
+   border-color: black;
+   border-radius: 5px;
+ }

@@ -1,0 +1,94 @@
+.form {
+ background-color: #FF904B;
+ display: flex;
+ flex-direction: column;
+ min-height: 80vh;
+ height: auto;
+ justify-content: space-between;
+ padding: 2%;
+ box-shadow: 1px 2px 6px -2px black;
+ border-radius: 3%;
+ font-size: 4.3vw;
+ font-family: "roboto", "arial", "sans-serif";
+}
+
+.form section input {
+ border-radius: 4px;
+ font-size: 4vw;
+}
+
+.form section input:not([type="file"]) {
+ border-width: 1px;
+ border-style: solid;
+ border-color: black;
+
+}
+
+.form section {
+ background-color: white;
+ border-radius: 5px;
+ box-shadow: 2px 0px 6px -3px black;
+ padding: .8%;
+ margin: 2% 0;
+}
+
+.form section img {
+ height: auto;
+ width: 37%;
+}
+
+.form section button {
+ height: 100%;
+ width: 30%;
+ padding: 1.2%;
+ border-radius: 4px;
+ background-color: #4BBAFF;
+ border: none;
+ color: black;
+ font-weight: 400;
+ min-height: 9vw;
+ font-size: 4vw;
+}
+
+.form section button:active {
+ background-color: #45C7FF;
+}
+
+.form section button:disabled {
+ background-color: #72B4CF;
+}
+
+.st {
+ text-align: center;
+}
+
+.sb {
+ display: flex;
+ justify-content: space-between;
+}
+
+.form section textarea {
+ resize: none;
+ border-radius: 6px;  
+ font-size: 3vw;
+}
+ 
+.form section label {
+ margin-right: 1.2%;
+ flex-wrap: nowrap;
+}
+
+.form legend {
+ font-weight: bold;
+ font-style: oblique;
+ text-align: center;
+ font-size: 5vw;
+}
+
+.form section select {
+ font-size: 4vw;
+}
+
+.form section input[type="number"] {
+  width: 47%;
+}
