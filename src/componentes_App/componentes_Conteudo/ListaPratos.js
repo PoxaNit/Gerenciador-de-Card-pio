@@ -4,6 +4,7 @@ import ExibirInformacoesPrato from "./componentes_ListaPratos/ExibirInformacoesP
 import Contexto from "../Contexto.js";
 import MensagemAlerta from "../MensagemAlerta.js";
 import RenderizarPesquisa from "./componentes_ListaPratos/RenderizarPesquisa.js";
+import SubirAoTopo from "./SubirAoTopo.js";
 
 
 export default function ListaPratos ({setLista}) {
@@ -117,10 +118,10 @@ export default function ListaPratos ({setLista}) {
 	const resposta = await fetch("/retornar_dados"); //retorna o array com todos os pratos e suas informações
 	const json = await resposta.json();
 
-	setPratos(pratos_info);
+	setPratos(json);
 	setControleUseCallback(false);
         setDispararAlerta({mensagem: "", tempo: 0, exibir: false});
-
+    }
 };
 
 
@@ -216,9 +217,7 @@ export default function ListaPratos ({setLista}) {
 
   React.useEffect(() => {
 
-      if(pratos.info === "undefined") {
-
-	  return null;
+      if(pratos.info === undefined) {
 
       } else {
 
@@ -303,7 +302,9 @@ export default function ListaPratos ({setLista}) {
  </header>
  <main>
 
- {pratos.sucesso && modoPesquisarPratos && <RenderizarPesquisa setModoPesquisarPratos={setModoPesquisarPratos} pratos={pratos.info} setTermoPesquisado={setTermoPesquisado} setPratosFiltrados={setPratosFiltrados} termoPesquisado={termoPesquisado} />}
+ {(coordenadasTela.y >= 300) && <SubirAoTopo />}
+
+ {modoPesquisarPratos && <RenderizarPesquisa setModoPesquisarPratos={setModoPesquisarPratos} pratos={pratos.info} setTermoPesquisado={setTermoPesquisado} setPratosFiltrados={setPratosFiltrados} termoPesquisado={termoPesquisado} />}
 
 
   {(pratos.sucesso) && ((!modoPesquisarPratos && !termoPesquisado) || (modoPesquisarPratos && !termoPesquisado)) && (<ul>
@@ -368,7 +369,7 @@ export default function ListaPratos ({setLista}) {
 
 
 
- {!pratos.sucesso && <h2>Sem resultados</h2>}
+ {!pratos.sucesso && <h2 className={styles.h2}>Sem resultados</h2>}
  </main>
 </div>
 
@@ -376,5 +377,4 @@ export default function ListaPratos ({setLista}) {
 
 </Contexto.Provider>
 
-</>)
-}
+</>)}

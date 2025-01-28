@@ -3,8 +3,6 @@ import styles from "./RenderizarPesquisa.module.css";
 
 export default function RenderizarPesquisa ({setModoPesquisarPratos, pratos, termoPesquisado, setTermoPesquisado}) {
 
-  const [valor, setValor] = React.useState("");
-
  return (<>
 
 
@@ -13,8 +11,8 @@ export default function RenderizarPesquisa ({setModoPesquisarPratos, pratos, ter
 	<label>Pesquisa por nome:</label>
 	<input
 	type="text"
-	value={valor}
-	onInput={e => {setTermoPesquisado(e.target.value); setValor(e.target.value)}}
+	value={termoPesquisado}
+	onInput={e => {setTermoPesquisado(e.target.value)}}
 	/>
 
 	<button

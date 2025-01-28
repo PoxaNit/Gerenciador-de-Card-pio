@@ -121,10 +121,22 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 
 /*------------------------ Mandando os dados para o back-end -------------------------*/
 
+  const [executarTimeout, setExecutarTimeout] = React.useState(false);
 
+  function fecharCadastro () {
 
+      if (executarTimeout) {
+
+          setExecutarTimeout(false);
+
+      }
+
+          setCadastro(false);
+
+  }
 
   async function exportar () { //função para armazenar os dados no banco de dados
+
 	try {
 		if(!informacoesCompletas) {
 
@@ -162,7 +174,27 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 
 		   const resposta_json = await resposta.json();
 		   setDispararAlerta({disparar: true, tempo: 2300, msg: resposta_json.msg});
-		   setTimeout(() => setCadastro(false), 2300);
+
+		   setExecutarTimeout(true);
+
+
+		   function doTimeout() {
+
+  		       if (executarTimeout) {
+
+		           setCadastro(false)
+
+		       }
+
+		   }
+
+
+
+		   setTimeout(() => {
+
+			doTimeout();
+
+		   }, 2300);
 
 
             };
@@ -246,7 +278,7 @@ return (
    </section>
 
    <section className={estilos.sb}>
-     <button onClick={() => setCadastro(false)}>Sair</button>
+     <button onClick={() => fecharCadastro()}>Sair</button>
      <button disabled={dispararAlerta.disparar} onClick={() => {exportar()}} type="submit">Salvar</button>
    </section>
 

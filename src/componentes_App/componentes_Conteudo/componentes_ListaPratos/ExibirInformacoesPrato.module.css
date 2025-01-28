@@ -33,6 +33,7 @@
 
  .header97 .section2 {
   text-align: center;
+  overflow-wrap: break-word;
 }
 
  .header97 h1 {

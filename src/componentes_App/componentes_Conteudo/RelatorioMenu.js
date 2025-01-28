@@ -17,8 +17,10 @@ import styles from "./RelatorioMenu.module.css";
      const [sobremesas, setSobremesas] = React.useState([]);
      const [lanches, setLanches] = React.useState([]);
 
-
-
+     //Caso só exista um elemento em alguma categoria, o nome dele deverá ser armazenado e exibido
+         const [nomePratos_principais, setNomePratos_principais] = React.useState("");
+         const [nomeLanches, setNomeLanches] = React.useState("");
+         const [nomeSobremesas, setNomeSobremesas] = React.useState("");
 
 
 
@@ -26,56 +28,84 @@ import styles from "./RelatorioMenu.module.css";
 //                Prato mais caro e mais barato
 
    const [precos, setPrecos] = React.useState([]);
+
    const [maisCaro, setMaisCaro] = React.useState(0);
+   const [nomeDoMaisCaro, setNomeDoMaisCaro] = React.useState("");
+
    const [maisBarato, setMaisBarato] = React.useState(0);
+   const [nomeDoMaisBarato, setNomeDoMaisBarato] = React.useState("");
+
    const [mediaDosPrecos, setMediaDosPrecos] = React.useState(0);
 
 
    React.useEffect(() => {
 
-       const precos_temp = [];
+       if (!(informacoes.length === 0)) {
 
-       for (let i = 0; i < informacoes.length; i++) {
+           const precos_temp = [];
 
-           precos_temp.push(parseFloat(informacoes[i].preco_prato));
+           for (let i = 0; i < informacoes.length; i++) {
 
-       };
+	       precos_temp.push(parseFloat(informacoes[i].preco_prato));
 
-       const media = precos_temp.reduce((n1, n2) => n1 + n2, 0) / precos_temp.length;
+           };
 
-       setPrecos(precos_temp);
+           const media = precos_temp.reduce((a, b) => a + b, 0) / precos_temp.length;
+           setPrecos(precos_temp);
 
-       setMediaDosPrecos(media);
+           setMediaDosPrecos(media);
 
-   },[informacoes]);
+       }
+
+   }, [informacoes]);
 
 
 
 
    const pegarPrecos = React.useCallback(function () {
 
-       let maiorPreco = precos[0]; //variável temporária para dar suporte ao loop abaixo
+       if (!(informacoes.length === 0)) {
 
-       for (let i = 1; i < precos.length; i++) {
+           let maiorPreco = precos[0]; //variável temporária para dar suporte ao loop abaixo
+	   let nome = informacoes[0].nome_prato;
 
-           if (precos[i] > maiorPreco) {
-    	       maiorPreco = precos[i];
+           for (let i = 1; i < precos.length; i++) {
+
+               if (precos[i] > maiorPreco) {
+
+	           maiorPreco = precos[i];
+		   nome = informacoes[i].nome_prato;
+
+               }
+
+           };
+
+	   let formato = Intl.NumberFormat('pt-br', {
+					    style: 'currency',
+					    currency: 'BRL'
+					  });
+
+           setMaisCaro(formato.format(maiorPreco));
+	   setNomeDoMaisCaro(nome);
+
+           let menorPreco = precos[0];
+	   nome = informacoes[0].nome_prato;
+
+           for (let i = 1; i < precos.length; i++) {
+
+    	       if (precos[i] < menorPreco) {
+
+	           menorPreco = precos[i];
+		   nome = informacoes[i].nome_prato;
+
+               }
            }
-       };
 
-       setMaisCaro(maiorPreco);
+           setMaisBarato(formato.format(menorPreco));
+	   setNomeDoMaisBarato(nome);
 
+   }
 
-       let menorPreco = precos[0];
-
-       for (let i = 1; i < precos.length; i++) {
-
-	   if (precos[i] < menorPreco) {
-	       menorPreco = precos[i];
-           }
-       }
-
-       setMaisBarato(menorPreco);
 
 }, [precos]);
 
@@ -86,35 +116,75 @@ import styles from "./RelatorioMenu.module.css";
 
    const separarCategorias = React.useCallback(function () {
 
+       if (!informacoes) {return null};
+
+
        const pratosPrincipais_temp = [];
        const sobremesas_temp = [];
        const lanches_temp = [];
 
+       const nomesPratosPrincipais = [];
+       const nomes_lanches = [];
+       const nomes_sobremesas = [];
+
        for (let i = 0; i < informacoes.length; i++) {
 
 	   const categoria = informacoes[i].categoria_prato;
+	   const nome = informacoes[i].nome_prato;
 
            if (categoria === "pratos principais") {
 
 	       pratosPrincipais_temp.push(categoria);
+	       nomesPratosPrincipais.push(nome);
 
            } else if (categoria === "sobremesas") {
 
 	       sobremesas_temp.push(categoria);
+	       nomes_sobremesas.push(nome);
 
           } else if (categoria === "lanches") {
 
 	       lanches_temp.push(categoria);
-
+	       nomes_lanches.push(nome);
           };
 
        };
+
+
+
+
+
+       if (nomesPratosPrincipais.length === 1) {
+
+	   setNomePratos_principais(nomesPratosPrincipais[0]);
+
+       };
+
+       if (nomes_lanches.length === 1) {
+
+	   setNomeLanches(nomes_lanches[0]);
+
+       };
+
+       if (nomes_sobremesas.length === 1) {
+
+	   setNomeSobremesas(nomes_sobremesas[0]);
+
+       }
+
+
+
 
        setPratos_principais(pratosPrincipais_temp);
        setSobremesas(sobremesas_temp);
        setLanches(lanches_temp);
 
+
+
+
  }, [informacoes]);
+
+
 
  React.useEffect(() => separarCategorias(), [separarCategorias]);
 
@@ -136,25 +206,35 @@ import styles from "./RelatorioMenu.module.css";
 
        } else {return null;};
 
-   return null;
- }, []);
+       return null;
+
+   }, []);
+
+
 
     return (
-      <div>
+
+      <div className={styles.conteudo}>
 
           <header>
-	      <button onClick={() => setRelatorio(false)}>Voltar</button>
+
+	      <button onClick={() => setRelatorio(false)}>
+
+		   <img src="/SetaBranca.png" alt="Voltar" />
+
+	      </button>
+
 	      <h1>Relatório do cardápio</h1>
 
           </header>
 
 	  <main>
 
-	      <section>
+	      <section className={styles.sectionDifferent}>
 
 	          <h2>Total de pratos:</h2>
 
-		  <p>{informacoes.length}</p>
+		  <p><span className={styles.valores}>{informacoes.length}</span> {informacoes.length === 1 && <span>({informacoes[0].nome_prato})</span>}</p>
 
 	      </section>
 
@@ -163,14 +243,25 @@ import styles from "./RelatorioMenu.module.css";
 
 	          <h2>Total por categoria:</h2>
 
-		  <label>Pratos principais:</label>
-		  <p>{pratos_principais.length}</p>
 
-		  <label>Sobremesas:</label>
-		  <p>{sobremesas.length}</p>
 
-		  <label>Lanches:</label>
-		  <p>{lanches.length}</p>
+		  <p>
+		      Pratos principais: <span className={styles.valores}>{pratos_principais.length}</span> {nomePratos_principais && <span>({nomePratos_principais})</span>}
+		  </p>
+
+
+
+		  <p>
+		      Lanches: <span className={styles.valores}>{lanches.length}</span> {nomeLanches && <span>({nomeLanches})</span>}
+		  </p>
+
+
+
+		  <p>
+		      Sobremesas: <span className={styles.valores}>{sobremesas.length}</span> {nomeSobremesas && <span>({nomeSobremesas})</span>}
+		  </p>
+
+
 
 	      </section>
 
@@ -178,17 +269,22 @@ import styles from "./RelatorioMenu.module.css";
 	      <section>
 
 	          <h2>Prato mais caro/barato:</h2>
-		  <p>Mais caro: {maisCaro}</p>
-		  <p>Mais barato: {maisBarato}</p>
+		  <p>Mais caro: {<span className={styles.valores}>{maisCaro}</span>} {nomeDoMaisCaro && <span>({nomeDoMaisCaro})</span>}</p>
+		  <p>Mais barato: {<span className={styles.valores}>{maisBarato}</span>} {nomeDoMaisBarato && <span>({nomeDoMaisBarato})</span>}</p>
 
 	      </section>
 
 
-	      <section>
+	      <section className={styles.sectionDifferent}>
 
 	 	  <h2>Média total dos preços:</h2>
 
-		  <p>{mediaDosPrecos.toFixed(2)}</p>
+		  <p><span className={styles.valores}>{Intl.NumberFormat("pt-br", {
+					style: "currency",
+					currency: "BRL"
+ 		                        }
+		     ).format(mediaDosPrecos.toFixed(2))}</span>
+		  </p>
 
 	      </section>
 
