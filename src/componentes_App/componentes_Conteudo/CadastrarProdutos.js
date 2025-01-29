@@ -121,13 +121,13 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 
 /*------------------------ Mandando os dados para o back-end -------------------------*/
 
-  var executarTimeout = false;
+  const [executarTimeout, setExecutarTimeout] = React.useState(false);
 
   function fecharCadastro () {
 
       if (executarTimeout) {
 
-          executarTimeout = false;
+          setExecutarTimeout(false);
 alert(executarTimeout)
 
       }
@@ -176,7 +176,7 @@ alert(executarTimeout)
 		   const resposta_json = await resposta.json();
 		   setDispararAlerta({disparar: true, tempo: 2300, msg: resposta_json.msg});
 
-		   executarTimeout = true;
+		   setExecutarTimeout(true);
 
 		   function doTimeout() {
 
