@@ -121,13 +121,14 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 
 /*------------------------ Mandando os dados para o back-end -------------------------*/
 
-  let executarTimeout = false;
+  var executarTimeout = false;
 
   function fecharCadastro () {
 
       if (executarTimeout) {
 
-          executarTimeout = false
+          executarTimeout = false;
+alert(executarTimeout)
 
       }
 
@@ -192,7 +193,7 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 		   setTimeout(() => {
 
 			doTimeout();
-alert(executarTimeout)
+
 		   }, 2300);
 
 
