@@ -107,7 +107,7 @@ import styles from "./RelatorioMenu.module.css";
    }
 
 
-}, [precos]);
+}, [precos, informacoes]);
 
 
  React.useEffect(() => pegarPrecos(), [pegarPrecos]);
@@ -192,7 +192,7 @@ import styles from "./RelatorioMenu.module.css";
 
 
 
-   const buscarInformacoes = React.useMemo(async function () {
+   const buscarInformacoes = React.useCallback(async function () {
 
        const resposta = await fetch("/retornar_dados").then(r => r.json());
 
@@ -210,6 +210,8 @@ import styles from "./RelatorioMenu.module.css";
 
    }, []);
 
+
+  React.useEffect(() => buscarInformacoes(), [buscarInformacoes]);
 
 
     return (

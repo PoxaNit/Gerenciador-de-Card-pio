@@ -241,7 +241,7 @@ return (
 
    <section>
      <label htmlfor="preco_prato">Preço do prato (R$):</label>
-     <input type="number" id="preco_prato" name="preco_prato" required onInput={e => {
+     <input step="0.01" type="number" id="preco_prato" name="preco_prato" required onInput={e => {
 
        	despachar({tipo: "mudar preco", valor: Number(e.target.value.toString())});
 }}/>
