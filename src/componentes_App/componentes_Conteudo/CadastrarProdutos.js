@@ -128,7 +128,6 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
       if (executarTimeout) {
 
           setExecutarTimeout(false);
-alert(executarTimeout)
 
       }
 
