@@ -192,7 +192,7 @@ import styles from "./RelatorioMenu.module.css";
 
 
 
-   const buscarInformacoes = React.useCallback(async function () {
+   React.useMemo(async function () {
 
        const resposta = await fetch("/retornar_dados").then(r => r.json());
 
@@ -204,14 +204,14 @@ import styles from "./RelatorioMenu.module.css";
 
 	   setInformacoes(info);
 
-       } else {return null;};
+       };
 
        return null;
 
    }, []);
 
 
-  React.useEffect(() => buscarInformacoes(), [buscarInformacoes]);
+//  React.useEffect(buscarInformacoes, [buscarInformacoes]);
 
 
     return (
