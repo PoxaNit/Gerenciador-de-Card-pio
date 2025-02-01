@@ -329,13 +329,13 @@ export default function ListaPratos ({setLista}) {
 
   {(pratos.sucesso) && ((!modoPesquisarPratos && !termoPesquisado) || (modoPesquisarPratos && !termoPesquisado)) && (<ul>
 
-{pratos.info.map((prato, indice) => {
+      {pratos.info.map((prato, indice) => {
 
-     <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={"/" + prato.imagem_prato} descricaoImagem="Imagem do prato" indiceParaItem={indice} prato={prato} />
+          <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={"/" + prato.imagem_prato} descricaoImagem="Imagem do prato" indiceParaItem={indice} prato={prato} />
 
-})
+  })
 
-}
+      }
 
   </ul>)}
 
