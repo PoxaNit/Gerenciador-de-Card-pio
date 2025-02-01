@@ -5,6 +5,7 @@ import Contexto from "../Contexto.js";
 import MensagemAlerta from "../MensagemAlerta.js";
 import RenderizarPesquisa from "./componentes_ListaPratos/RenderizarPesquisa.js";
 import SubirAoTopo from "./SubirAoTopo.js";
+import LayoutCategoria from "./componentes_ListaPratos/LayoutCategoria.js";
 
 
 export default function ListaPratos ({setLista}) {
@@ -249,6 +250,30 @@ export default function ListaPratos ({setLista}) {
 
 
 
+/*                Tratando a filtragem por categoria                 */
+
+
+  const [filtragemCategoriaAtivo, setFiltragemCategoriaAtivo] = React.useState(false);
+
+  const [pratosFiltrados_pratosPrincipais, setPratosFiltrados_pratosPrincipais] = React.useState([]);
+  const [pratosFiltrados_lanches, setPratosFiltrados_lanches] = React.useState([]);
+  const [pratosFiltrados_sobremesas, setPratosFiltrados_sobremesas] = React.useState([]);
+
+
+
+
+
+/*----------------------/////////////////////------------------------*/
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -263,7 +288,7 @@ export default function ListaPratos ({setLista}) {
   return (
 <>
  {dispararAlerta.exibir && <MensagemAlerta setDispararAlerta={setDispararAlerta} exibir={dispararAlerta.exibir} mensagem={dispararAlerta.mensagem} tempo={dispararAlerta.tempo} />}
- <Contexto.Provider value={{setControleUseCallback, setComponenteExibir, setTermoPesquisado}}>
+ <Contexto.Provider value={{setControleUseCallback, setComponenteExibir, setTermoPesquisado, setPratosFiltrados_pratosPrincipais, setPratosFiltrados_lanches, setPratosFiltrados_sobremesas}}>
 
  {componenteExibir.renderizar ? <ExibirInformacoesPrato func_tirar_evento_rolagem={armazenar_coordenadas_tela} func_coord_pai={armazenar_coordenadas_tela} infos_prato={componenteExibir.infos} controle={setComponenteExibir} coordenadas_tela_componente_pai={coordenadasTela} este_componente_fechou={setMudarComponente} setCoordenadasTela={setCoordenadasTela}/> : (
 
@@ -297,6 +322,10 @@ export default function ListaPratos ({setLista}) {
 
   <section className={styles.s2}>
     <h1>Pratos do menu</h1>
+  </section>
+
+  <section>
+    <LayoutCategoria pratos={pratos.info} filtragemAtiva={filtragemCategoriaAtivo} setFiltragemAtiva={setFiltragemCategoriaAtivo} />
   </section>
 
  </header>
