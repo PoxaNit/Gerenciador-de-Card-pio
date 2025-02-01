@@ -1,7 +1,7 @@
 import React from "react";
 import Contexto from "../../Contexto.js";
 
- const ItemDeLista = function ({nomeDoPrato, imagemDoPrato, descricaoImagem, indiceParaItem, prato}) {
+ function ItemDeLista ({nomeDoPrato, imagemDoPrato, descricaoImagem, indiceParaItem, prato}) {
 
      const { setComponenteExibir } = React.useContext(Contexto);
 

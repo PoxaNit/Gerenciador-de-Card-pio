@@ -356,7 +356,7 @@ export default function ListaPratos ({setLista}) {
 
  {pratosFiltrados.map((prato, indice) => {
 
-     <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={"/" + prato.imagem_prato} descricaoImagem="Imagem do prato" indiceParaItem={indice} prato={prato} />
+     <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={"/" + prato.imagem_prato} descricaoImagem={"Imagem do prato"} indiceParaItem={indice} prato={prato} />
 
  })
 
