@@ -1,7 +1,7 @@
 import React from "react";
 import Contexto from "../../Contexto.js";
 
- React.useMemo(function ItemDeLista ({nomeDoPrato, imagemDoPrato, descricaoImagem, indiceParaItem, prato}) {
+ const ItemDeLista = React.useMemo(function ({nomeDoPrato, imagemDoPrato, descricaoImagem, indiceParaItem, prato}) {
 
      const { setComponenteExibir } = React.useContext(Contexto);
 
@@ -22,4 +22,4 @@ import Contexto from "../../Contexto.js";
 
  });
 
-  export default ItemdeLista;
+  export default ItemDeLista;
