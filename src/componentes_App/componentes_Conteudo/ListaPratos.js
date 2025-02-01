@@ -283,6 +283,31 @@ export default function ListaPratos ({setLista}) {
 
 
 
+//Retornar os itens de lista para as listas condicionais mais abaixo
+
+ React.useMemo(function ItemDeLista (nomeDoPrato, imagemDoPrato, descricaoImagem, indiceParaItem) {
+
+	return (
+
+	<li key={indiceParaItem} onClick={() => {
+	  setComponenteExibir({renderizar: true, infos: prato});
+}}>
+	 <strong>{nome}</strong>
+	<br/>
+	 <img alt={descricaoImagem} src={imagemDoPrato} />
+	<br/>
+         <p>Clique para ver</p>
+
+	</li>
+  )
+
+
+ });
+
+
+
+
+
 
 
   return (
