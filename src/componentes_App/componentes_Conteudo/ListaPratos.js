@@ -331,20 +331,7 @@ export default function ListaPratos ({setLista}) {
 
 {pratos.info.map((prato, indice) => {
 
-	return (
-
-	<li key={indice} onClick={() => {
-	  setComponenteExibir({renderizar: true, infos: prato});
-}}>
-	 <strong>{prato.nome_prato}</strong>
-	<br/>
-	 <img alt={prato.nome_prato} src={"/" + prato.imagem_prato} />
-	<br/>
-         <p>Clique para ver</p>
-
-	</li>
-  )
-
+     <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={"/" + prato.imagem_prato} descricaoImagem="Imagem do prato" indiceParaItem={indice} prato={prato} />
 
 })
 
@@ -369,21 +356,9 @@ export default function ListaPratos ({setLista}) {
 
  {pratosFiltrados.map((prato, indice) => {
 
+     <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={"/" + prato.imagem_prato} descricaoImagem="Imagem do prato" indiceParaItem={indice} prato={prato} />
 
-   return (
-
-       <li key={indice} onClick={() => setComponenteExibir({renderizar: true, infos: prato})}>
-
-	 <strong>{prato.nome_prato}</strong>
-	<br/>
-	 <img alt={prato.nome_prato} src={"/" + prato.imagem_prato} />
-	<br/>
-         <p>Clique para ver</p>
-
-       </li>
-    )
-
-  })
+ })
 
  }</ul>)}
 
@@ -393,11 +368,11 @@ export default function ListaPratos ({setLista}) {
 
 
 
-// Caso a filtragem por categoria esteja ativa, deve ser renderizada a lista com os pratos que correspondem.
+{ /* Caso a filtragem por categoria esteja ativa, deve ser renderizada a lista com os pratos que correspondem.*/}
 
  {filtragemCategoriaAtivo && (<ul>
 
- //aguardandk...
+ {/*aguardandk...*/}
 
 
  </ul>)}
