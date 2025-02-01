@@ -398,6 +398,28 @@ export default function ListaPratos ({setLista}) {
 
 
 
+
+
+
+
+// Caso a filtragem por categoria esteja ativa, deve ser renderizada a lista com os pratos que correspondem.
+
+ {filtragemCategoriaAtivo && (<ul>
+
+ //aguardandk...
+
+
+ </ul>)}
+
+
+
+
+
+
+
+
+
+
  {!pratos.sucesso && <h2 className={styles.h2}>Sem resultados</h2>}
  </main>
 </div>
