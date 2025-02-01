@@ -1,7 +1,7 @@
 import React from "react";
 import Contexto from "../../Contexto.js";
 
- function ItemDeLista (nomeDoPrato, imagemDoPrato, descricaoImagem, indiceParaItem) {
+ React.useMemo(function ItemDeLista ({nomeDoPrato, imagemDoPrato, descricaoImagem, indiceParaItem, prato}) {
 
      const { setComponenteExibir } = React.useContext(Contexto);
 
@@ -10,7 +10,7 @@ import Contexto from "../../Contexto.js";
         <li key={indiceParaItem} onClick={() => {
           setComponenteExibir({renderizar: true, infos: prato});
 }}>
-         <strong>{nome}</strong>
+         <strong>{nomeDoPrato}</strong>
         <br/>
          <img alt={descricaoImagem} src={imagemDoPrato} />
         <br/>
@@ -20,6 +20,6 @@ import Contexto from "../../Contexto.js";
   )
 
 
- };
+ });
 
-  export default React.useMemo(ItemdeLista);
+  export default ItemdeLista;
