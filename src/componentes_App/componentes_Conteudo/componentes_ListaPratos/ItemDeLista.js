@@ -12,7 +12,7 @@ import Contexto from "../../Contexto.js";
 }}>
          <strong>{nomeDoPrato}</strong>
         <br/>
-         <img alt={descricaoImagem} src={imagemDoPrato} />
+         <img alt={descricaoImagem} src={"/" + imagemDoPrato} />/
         <br/>
          <p>Clique para ver</p>
 
