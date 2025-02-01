@@ -6,6 +6,7 @@ import MensagemAlerta from "../MensagemAlerta.js";
 import RenderizarPesquisa from "./componentes_ListaPratos/RenderizarPesquisa.js";
 import SubirAoTopo from "./SubirAoTopo.js";
 import LayoutCategoria from "./componentes_ListaPratos/LayoutCategoria.js";
+import ItemDeLista from "./componentes_ListaPratos/ItemDeLista.js";
 
 
 export default function ListaPratos ({setLista}) {
@@ -268,41 +269,6 @@ export default function ListaPratos ({setLista}) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Retornar os itens de lista para as listas condicionais mais abaixo
-
- React.useMemo(function ItemDeLista (nomeDoPrato, imagemDoPrato, descricaoImagem, indiceParaItem) {
-
-	return (
-
-	<li key={indiceParaItem} onClick={() => {
-	  setComponenteExibir({renderizar: true, infos: prato});
-}}>
-	 <strong>{nome}</strong>
-	<br/>
-	 <img alt={descricaoImagem} src={imagemDoPrato} />
-	<br/>
-         <p>Clique para ver</p>
-
-	</li>
-  )
-
-
- });
 
 
 
