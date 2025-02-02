@@ -1,30 +1,51 @@
 import React from "react";
 import styles from "./LayoutCategoria.module.css";
-import FiltrarPratosPrincipais from "./functions_LayoutCategoria/FiltrarPratosPrincipais";
-import FiltrarLanches from "./functions_LayoutCategoria/FiltrarLanches";
-import FiltrarSobremesas from "./functions_LayoutCategoria/FiltrarSobremesas";
-
+import Contexto from "../../Contexto.js";
 
   function LayoutCategoria ({pratos, filtragemAtiva, setFiltragemAtiva}) {
 
 
-      const Opcoes = React.useMemo(function () {
 
+
+
+
+      const { setPratosCategorizados } = React.useContext(Contexto);
+
+
+
+
+
+
+
+
+
+
+      const Opcoes = React.memo(function () {
+
+
+
+
+//        Área das funções de filtro
 
          function filtrarPratosPrincipais () {
 
-	     <FiltrarPratosPrincipais />
+             const pratosFiltrados = pratos.filter(prato => prato.categoria_prato === "pratos principais");
 
-	     return null;
+             setPratosCategorizados(pratosFiltrados);
+
+             return null;
 
          };
 
 
          function filtrarLanches () {
 
-	     <FiltrarLanches />
 
-	     return null;
+             const pratosFiltrados = pratos.filter(prato => prato.categoria_prato === "lanches");
+
+             setPratosCategorizados(pratosFiltrados);
+
+             return null;
 
          };
 
@@ -32,13 +53,17 @@ import FiltrarSobremesas from "./functions_LayoutCategoria/FiltrarSobremesas";
 
          function filtrarSobremesas () {
 
-	     <FiltrarSobremesas />
+             const pratosFiltrados = pratos.filter(prato => prato.categoria_prato === "sobremesas");
 
-	     return null;
+             setPratosCategorizados(pratosFiltrados);
+
+             return null;
 
          };
 
 
+
+  //       Fim
 
 
 
@@ -62,7 +87,7 @@ import FiltrarSobremesas from "./functions_LayoutCategoria/FiltrarSobremesas";
 
     	              <button onClick={() => filtrarPratosPrincipais()} id={styles.s2b1}>Pratos principais</button>
 	              <button onClick={() => filtrarLanches()} id={styles.s2b2}>Lanches</button>
-	              <button onClick={() => filtrarSobremesas} id={styles.s2b3}>Sobremesas</button>
+	              <button onClick={() => filtrarSobremesas()} id={styles.s2b3}>Sobremesas</button>
 
 		  </main>
 
@@ -75,8 +100,13 @@ import FiltrarSobremesas from "./functions_LayoutCategoria/FiltrarSobremesas";
 
 
 
+//Limpa o array dos pratos filtrados e fecha as opções de filtro
+     function limparFiltragem () {
 
+	 setPratosCategorizados([]);
+         setFiltragemAtiva(false);
 
+     };
 
 
 
@@ -87,7 +117,7 @@ import FiltrarSobremesas from "./functions_LayoutCategoria/FiltrarSobremesas";
 
 	      <section>
 
-   	          <button id={styles.b1} onClick={() => setFiltragemAtiva(false)}>Todos</button>
+   	          <button id={styles.b1} onClick={() => limparFiltragem()}>Todos</button>
 	          <button id={styles.b2} onClick={() => setFiltragemAtiva(true)}>Por categoria</button>
 
 	      </section>
@@ -105,4 +135,4 @@ import FiltrarSobremesas from "./functions_LayoutCategoria/FiltrarSobremesas";
 
   };
 
- export default React.memo(LayoutCategoria);
+ export default LayoutCategoria;

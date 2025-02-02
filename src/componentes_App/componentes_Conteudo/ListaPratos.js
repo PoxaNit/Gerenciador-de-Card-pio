@@ -262,6 +262,10 @@ export default function ListaPratos ({setLista}) {
 
 
 
+//  Teste temporário
+
+ setTimeout(() => alert(pratosCategorizados.length), 2000);
+
 
 /*----------------------/////////////////////------------------------*/
 
@@ -326,7 +330,7 @@ export default function ListaPratos ({setLista}) {
  {modoPesquisarPratos && <RenderizarPesquisa setModoPesquisarPratos={setModoPesquisarPratos} pratos={pratos.info} setTermoPesquisado={setTermoPesquisado} setPratosFiltrados={setPratosFiltrados} termoPesquisado={termoPesquisado} />}
 
 
-  {(pratos.sucesso) && ((!modoPesquisarPratos && !termoPesquisado) || (modoPesquisarPratos && !termoPesquisado)) && (<ul>
+  {(pratos.sucesso) && (pratosCategorizados.length === 0) && ((!modoPesquisarPratos && !termoPesquisado) || (modoPesquisarPratos && !termoPesquisado)) && (<ul>
 
       {pratos.info.map((prato, indice) => {
 
