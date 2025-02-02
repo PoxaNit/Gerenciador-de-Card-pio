@@ -355,7 +355,8 @@ export default function ListaPratos ({setLista}) {
  {(pratos.sucesso && modoPesquisarPratos && termoPesquisado) && (<ul>
 
  {pratosFiltrados.map((prato, indice) => {
-     <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={prato.imagem_prato} descricaoImagem={"Imagem do prato"} indiceParaItem={indice} prato={prato} />
+<li>Teste</li>
+//     <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={prato.imagem_prato} descricaoImagem={"Imagem do prato"} indiceParaItem={indice} prato={prato} />
 
  })
 
