@@ -4,14 +4,13 @@ import Contexto from "../../../Contexto.js";
 
   function FiltrarPratosPrincipais () {
 
-      const { pratos, setPratosPrincipais, setLanches, setSobremesas } = React.useContext(Contexto);
-
-      setLanches([]);
-      setSobremesas([]);
+      const { pratos, setPratosCategorizados } = React.useContext(Contexto);
 
       const pratosFiltrados = pratos.filter(prato => prato.categoria_prato === "pratos principais");
 
-      setPratosPrincipais(pratosFiltrados);
+      setPratosCategorizados(pratosFiltrados);
+
+      return null;
 
   };
 

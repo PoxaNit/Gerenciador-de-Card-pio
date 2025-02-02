@@ -8,7 +8,45 @@ import FiltrarSobremesas from "./functions_LayoutCategoria/FiltrarSobremesas";
   function LayoutCategoria ({pratos, filtragemAtiva, setFiltragemAtiva}) {
 
 
-      function Opcoes () {
+      const Opcoes = React.useMemo(function () {
+
+
+         function filtrarPratosPrincipais () {
+
+	     <FiltrarPratosPrincipais />
+
+	     return null;
+
+         };
+
+
+         function filtrarLanches () {
+
+	     <FiltrarLanches />
+
+	     return null;
+
+         };
+
+
+
+         function filtrarSobremesas () {
+
+	     <FiltrarSobremesas />
+
+	     return null;
+
+         };
+
+
+
+
+
+
+
+
+
+
 
           return (
 
@@ -22,15 +60,15 @@ import FiltrarSobremesas from "./functions_LayoutCategoria/FiltrarSobremesas";
 
 		  <main>
 
-    	              <button id={styles.s2b1}>Pratos principais</button>
-	              <button id={styles.s2b2}>Lanches</button>
-	              <button id={styles.s2b3}>Sobremesas</button>
+    	              <button onClick={() => filtrarPratosPrincipais()} id={styles.s2b1}>Pratos principais</button>
+	              <button onClick={() => filtrarLanches()} id={styles.s2b2}>Lanches</button>
+	              <button onClick={() => filtrarSobremesas} id={styles.s2b3}>Sobremesas</button>
 
 		  </main>
 
               </section>
           );
-      };
+      }, []);
 
 
 
