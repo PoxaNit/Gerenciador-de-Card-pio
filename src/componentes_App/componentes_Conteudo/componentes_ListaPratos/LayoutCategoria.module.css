@@ -29,7 +29,8 @@
 
  .conteudo .s2 main #s2b1, 
  .conteudo .s2 main #s2b2, 
- .conteudo .s2 main #s2b3 
+ .conteudo .s2 main #s2b3 ,
+ .conteudo .s2 main #botao_ativado
 {
    font-size: 5.6vw;
    width: 80%;
@@ -43,3 +44,38 @@
    padding: 1.2%;
    font-size: 4vw;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*           Área que lida com os botões ativos                */
+
+
+ .conteudo .s2 main #botao_ativado {
+   border-width: 5px;
+   border-color: #D04102;
+   font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+
+/*           /////////////////////////////////                */

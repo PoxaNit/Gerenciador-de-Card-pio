@@ -257,14 +257,24 @@ export default function ListaPratos ({setLista}) {
   const [filtragemCategoriaAtivo, setFiltragemCategoriaAtivo] = React.useState(false);
 
 
-//Aramzena os pratos que passaram no filtro por categoria
+//   Aramzena os pratos que passaram no filtro por categoria
   const [pratosCategorizados, setPratosCategorizados] = React.useState([]);
 
+//   Armazena qual opção de filtro está ativa se a filtragem estiver ligada. Armazenar isso serve para quando o usuário mudar de componente, para quando ele voltar, ainda saber qual opção de filtro ele escolheu.
+  const [opcaoDeFiltroAtiva, setOpcaoDeFiltroAtiva] = React.useState({botao_todos: true});
+
+//   Armazena os pratos filtrados por categoria que foram pesquisados
+  const [filtradosPesquisados, setFiltradosPesquisados] = React.useState([]);
 
 
-//  Teste temporário
+  React.useEffect(() => {
 
- setTimeout(() => alert(pratosCategorizados.length), 2000);
+      if (pratosCategorizados.length !== 0) {
+          const filtrados = pratosCategorizados.filter(prato => prato.nome_prato.toUpperCase().includes(termoPesquisado.toUpperCase()));
+          setFiltradosPesquisados(filtrados);
+      }
+
+  },[pratosCategorizados, termoPesquisado]);
 
 
 /*----------------------/////////////////////------------------------*/
@@ -319,28 +329,26 @@ export default function ListaPratos ({setLista}) {
   </section>
 
   <section>
-    <LayoutCategoria pratos={pratos.info} filtragemAtiva={filtragemCategoriaAtivo} setFiltragemAtiva={setFiltragemCategoriaAtivo} />
+    <LayoutCategoria pratos={pratos.info} filtragemAtiva={filtragemCategoriaAtivo} setFiltragemAtiva={setFiltragemCategoriaAtivo} botaoAtivo={opcaoDeFiltroAtiva} setBotaoAtivo={setOpcaoDeFiltroAtiva} />
   </section>
 
  </header>
  <main>
 
- {(coordenadasTela.y >= 300) && <SubirAoTopo />}
+     {(coordenadasTela.y >= 300) && <SubirAoTopo />}
 
- {modoPesquisarPratos && <RenderizarPesquisa setModoPesquisarPratos={setModoPesquisarPratos} pratos={pratos.info} setTermoPesquisado={setTermoPesquisado} setPratosFiltrados={setPratosFiltrados} termoPesquisado={termoPesquisado} />}
+     {modoPesquisarPratos && <RenderizarPesquisa setModoPesquisarPratos={setModoPesquisarPratos} pratos={pratos.info} setTermoPesquisado={setTermoPesquisado} setPratosFiltrados={setPratosFiltrados} termoPesquisado={termoPesquisado} />}
 
 
-  {(pratos.sucesso) && (pratosCategorizados.length === 0) && ((!modoPesquisarPratos && !termoPesquisado) || (modoPesquisarPratos && !termoPesquisado)) && (<ul>
+         {((pratos.sucesso && !filtragemCategoriaAtivo) && ((!modoPesquisarPratos && !termoPesquisado) || (modoPesquisarPratos && !termoPesquisado))) && (<ul>
 
-      {pratos.info.map((prato, indice) => {
+             {pratos.info.map((prato, indice) => {
 
-          return <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={prato.imagem_prato} descricaoImagem="Imagem do prato" indiceParaItem={indice} prato={prato} />
+                 return <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={prato.imagem_prato} descricaoImagem="Imagem do prato" indiceParaItem={indice} prato={prato} />
 
-  })
+             })}
 
-      }
-
-  </ul>)}
+         </ul>)}
 
 
 
@@ -353,42 +361,55 @@ export default function ListaPratos ({setLista}) {
 
 
 
+     {(pratos.sucesso && !filtragemCategoriaAtivo && modoPesquisarPratos && termoPesquisado) && (<ul>
 
+         {pratosFiltrados.map((prato, indice) => {
 
- {(pratos.sucesso && modoPesquisarPratos && termoPesquisado) && (<ul>
+             return <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={prato.imagem_prato} descricaoImagem={"Imagem do prato"} indiceParaItem={indice} prato={prato} />
 
- {pratosFiltrados.map((prato, indice) => {
+         })
 
-     return <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={prato.imagem_prato} descricaoImagem={"Imagem do prato"} indiceParaItem={indice} prato={prato} />
-
- })
-
- }</ul>)}
-
+     }</ul>)}
 
 
 
+     {(pratos.sucesso && filtradosPesquisados.length !== 0  && filtragemCategoriaAtivo && modoPesquisarPratos && termoPesquisado) && (<ul>
 
+         {filtradosPesquisados.map((prato, indice) => {
 
+             return <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={prato.imagem_prato} descricaoImagem={"Imagem do prato"} indiceParaItem={indice} prato={prato} />
 
-{ /* Caso a filtragem por categoria esteja ativa, deve ser renderizada a lista com os pratos que correspondem.*/}
+         })}
 
- {filtragemCategoriaAtivo && pratosCategorizados.length && (<ul>
-
-     
-
- </ul>)}
+     </ul>)}
 
 
 
 
 
 
+     { /* Caso a filtragem por categoria esteja ativa, deve ser renderizada a lista com os pratos que correspondem.*/ }
+
+     {((modoPesquisarPratos && !termoPesquisado) || (!modoPesquisarPratos && !termoPesquisado)) && (pratos.sucesso && filtragemCategoriaAtivo && pratosCategorizados.length !== 0) && (<ul>
+
+         {pratosCategorizados.map((prato, indice) => {
+
+             return <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={prato.imagem_prato} descricaoImagem={"Imagem do prato"} indiceParaItem={indice} prato={prato} />
+
+         })}
+
+     </ul>)}
 
 
 
 
- {!pratos.sucesso && <h2 className={styles.h2}>Sem resultados</h2>}
+
+
+
+
+
+
+     {(!pratos.sucesso || (filtragemCategoriaAtivo && pratosCategorizados.length === 0) || (filtragemCategoriaAtivo && termoPesquisado && filtradosPesquisados.length === 0)) && <h2 className={styles.h2}>Sem resultados</h2>}
  </main>
 </div>
 

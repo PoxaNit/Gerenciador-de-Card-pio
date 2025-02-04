@@ -2,25 +2,17 @@ import React from "react";
 import styles from "./LayoutCategoria.module.css";
 import Contexto from "../../Contexto.js";
 
-  function LayoutCategoria ({pratos, filtragemAtiva, setFiltragemAtiva}) {
 
 
+  function LayoutCategoria ({pratos, filtragemAtiva,
+  setFiltragemAtiva, botaoAtivo, setBotaoAtivo}) {
 
-
-
-
+//    Define os pratos filtrados atuais
       const { setPratosCategorizados } = React.useContext(Contexto);
 
 
 
-
-
-
-
-
-
-
-      const Opcoes = React.memo(function () {
+      const Opcoes = React.memo(function () { //Exibe as opções de filtro
 
 
 
@@ -32,6 +24,7 @@ import Contexto from "../../Contexto.js";
              const pratosFiltrados = pratos.filter(prato => prato.categoria_prato === "pratos principais");
 
              setPratosCategorizados(pratosFiltrados);
+	     setBotaoAtivo({pratos_principais: true});
 
              return null;
 
@@ -44,6 +37,7 @@ import Contexto from "../../Contexto.js";
              const pratosFiltrados = pratos.filter(prato => prato.categoria_prato === "lanches");
 
              setPratosCategorizados(pratosFiltrados);
+	     setBotaoAtivo({lanches: true});
 
              return null;
 
@@ -56,6 +50,7 @@ import Contexto from "../../Contexto.js";
              const pratosFiltrados = pratos.filter(prato => prato.categoria_prato === "sobremesas");
 
              setPratosCategorizados(pratosFiltrados);
+	     setBotaoAtivo({sobremesas: true});
 
              return null;
 
@@ -85,14 +80,16 @@ import Contexto from "../../Contexto.js";
 
 		  <main>
 
-    	              <button onClick={() => filtrarPratosPrincipais()} id={styles.s2b1}>Pratos principais</button>
-	              <button onClick={() => filtrarLanches()} id={styles.s2b2}>Lanches</button>
-	              <button onClick={() => filtrarSobremesas()} id={styles.s2b3}>Sobremesas</button>
+    	              <button id={botaoAtivo?.pratos_principais && styles.botao_ativado || styles.s2b1} onClick={() => filtrarPratosPrincipais()}>Pratos principais</button>
+	              <button id={botaoAtivo?.lanches && styles.botao_ativado || styles.s2b2} onClick={() => filtrarLanches()}>Lanches</button>
+	              <button id={botaoAtivo?.sobremesas && styles.botao_ativado || styles.s2b3} onClick={() => filtrarSobremesas()}>Sobremesas</button>
 
 		  </main>
 
               </section>
+
           );
+
       }, []);
 
 
@@ -104,12 +101,25 @@ import Contexto from "../../Contexto.js";
      function limparFiltragem () {
 
 	 setPratosCategorizados([]);
+	 setBotaoAtivo({botao_todos: true});
          setFiltragemAtiva(false);
 
      };
 
 
+     function ligarFiltragem () {
 
+         if (botaoAtivo?.botao_todos) {
+
+             const pratosFiltrados = pratos.filter(prato => prato.categoria_prato === "pratos principais");
+
+             setFiltragemAtiva(true);
+             setPratosCategorizados(pratosFiltrados);
+             setBotaoAtivo({pratos_principais: true});
+
+         }
+
+     };
 
       return (
 
@@ -117,8 +127,8 @@ import Contexto from "../../Contexto.js";
 
 	      <section>
 
-   	          <button id={styles.b1} onClick={() => limparFiltragem()}>Todos</button>
-	          <button id={styles.b2} onClick={() => setFiltragemAtiva(true)}>Por categoria</button>
+   	          <button id={botaoAtivo?.botao_todos && styles.botao_ativo || styles.b1} onClick={() => limparFiltragem()}>Todos</button>
+	          <button id={styles.b2} onClick={() => ligarFiltragem()}>Por categoria</button>
 
 	      </section>
 
