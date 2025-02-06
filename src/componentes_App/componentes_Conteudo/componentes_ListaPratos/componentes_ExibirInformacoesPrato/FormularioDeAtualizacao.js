@@ -200,7 +200,7 @@ import estilos from "./FormularioDeAtualizacao.module.css";
         setControleUseCallback(true);
         mover_tela(coordenadas_alvo);
         setComponenteExibir({infos: null, renderizar: false});
-	exibirInfo_fechou(true);
+	exibirInfo_fechou(true); //Avisa ao componente ListaPratos.js quando o pai deste componente ( ExibirInformacoes.js ) fechar, para que as operações relacionadas ocorram.
 
   } else {
 
@@ -288,11 +288,11 @@ import estilos from "./FormularioDeAtualizacao.module.css";
 
 	 <option selected disabled>Escolher</option>
 
-	 <option>     Pratos principais    </option>
+	 <option value="pratos principais">     Pratos principais    </option>
 
-	 <option>     Lanches              </option>
+	 <option value="lanches">     Lanches              </option>
 
-	 <option>     Sobremesas           </option>
+	 <option value="sobremesas">     Sobremesas           </option>
 
 
        </select>

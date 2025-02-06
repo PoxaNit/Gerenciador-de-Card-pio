@@ -116,70 +116,70 @@ import styles from "./RelatorioMenu.module.css";
 
    const separarCategorias = React.useCallback(function () {
 
-       if (!informacoes) {return null};
+       if (informacoes.length !== 0) {
 
 
-       const pratosPrincipais_temp = [];
-       const sobremesas_temp = [];
-       const lanches_temp = [];
+           const pratosPrincipais_temp = [];
+           const sobremesas_temp = [];
+           const lanches_temp = [];
 
-       const nomesPratosPrincipais = [];
-       const nomes_lanches = [];
-       const nomes_sobremesas = [];
+           const nomesPratosPrincipais = [];
+           const nomes_lanches = [];
+           const nomes_sobremesas = [];
 
-       for (let i = 0; i < informacoes.length; i++) {
+           for (let i = 0; i < informacoes.length; i++) {
 
-	   const categoria = informacoes[i].categoria_prato;
-	   const nome = informacoes[i].nome_prato;
+    	       const categoria = informacoes[i].categoria_prato;
+	       const nome = informacoes[i].nome_prato;
 
-           if (categoria === "pratos principais") {
+               if (categoria === "pratos principais") {
 
-	       pratosPrincipais_temp.push(categoria);
-	       nomesPratosPrincipais.push(nome);
+    	           pratosPrincipais_temp.push(categoria);
+	           nomesPratosPrincipais.push(nome);
 
-           } else if (categoria === "sobremesas") {
+               } else if (categoria === "sobremesas") {
 
-	       sobremesas_temp.push(categoria);
-	       nomes_sobremesas.push(nome);
+    	           sobremesas_temp.push(categoria);
+	           nomes_sobremesas.push(nome);
 
-          } else if (categoria === "lanches") {
+              } else if (categoria === "lanches") {
 
-	       lanches_temp.push(categoria);
-	       nomes_lanches.push(nome);
-          };
+	           lanches_temp.push(categoria);
+	           nomes_lanches.push(nome);
+              };
 
-       };
-
-
-
-
-
-       if (nomesPratosPrincipais.length === 1) {
-
-	   setNomePratos_principais(nomesPratosPrincipais[0]);
-
-       };
-
-       if (nomes_lanches.length === 1) {
-
-	   setNomeLanches(nomes_lanches[0]);
-
-       };
-
-       if (nomes_sobremesas.length === 1) {
-
-	   setNomeSobremesas(nomes_sobremesas[0]);
-
-       }
+           };
 
 
 
 
-       setPratos_principais(pratosPrincipais_temp);
-       setSobremesas(sobremesas_temp);
-       setLanches(lanches_temp);
+
+           if (nomesPratosPrincipais.length === 1) {
+
+    	       setNomePratos_principais(nomesPratosPrincipais[0]);
+
+           };
+
+           if (nomes_lanches.length === 1) {
+
+	       setNomeLanches(nomes_lanches[0]);
+
+           };
+
+           if (nomes_sobremesas.length === 1) {
+
+	       setNomeSobremesas(nomes_sobremesas[0]);
+
+           }
 
 
+
+
+           setPratos_principais(pratosPrincipais_temp);
+           setSobremesas(sobremesas_temp);
+           setLanches(lanches_temp);
+
+     };
 
 
  }, [informacoes]);
@@ -206,12 +206,8 @@ import styles from "./RelatorioMenu.module.css";
 
        };
 
-       return null;
-
    }, []);
 
-
-//  React.useEffect(buscarInformacoes, [buscarInformacoes]);
 
 
     return (

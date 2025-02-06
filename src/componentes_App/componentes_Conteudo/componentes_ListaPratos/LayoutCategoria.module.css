@@ -35,7 +35,7 @@
    font-size: 5.6vw;
    width: 80%;
    height: 12%;
-   margin: 2% 0;
+   margin: 3.7% 0;
 }
 
  .conteudo section #b1, .conteudo section #b2 {
@@ -64,9 +64,8 @@
 
 
  .conteudo .s2 main #botao_ativado {
-   border-width: 5px;
-   border-color: #D04102;
    font-weight: 700;
+   color: #AE3601;
 }
 
 

@@ -207,7 +207,7 @@ export default function ListaPratos ({setLista}) {
 
 
 
-/*                     Tratando o modo de pesquisa                     */
+/*                     Tratando o modo de pesquisa                   */
 
 
 
@@ -263,16 +263,14 @@ export default function ListaPratos ({setLista}) {
 //   Armazena qual opção de filtro está ativa se a filtragem estiver ligada. Armazenar isso serve para quando o usuário mudar de componente, para quando ele voltar, ainda saber qual opção de filtro ele escolheu.
   const [opcaoDeFiltroAtiva, setOpcaoDeFiltroAtiva] = React.useState({botao_todos: true});
 
-//   Armazena os pratos filtrados por categoria que foram pesquisados
+//   Armazena os pratos filtrados por categoria que incluem o termo pesquisado no nome
   const [filtradosPesquisados, setFiltradosPesquisados] = React.useState([]);
 
 
   React.useEffect(() => {
 
-      if (pratosCategorizados.length !== 0) {
           const filtrados = pratosCategorizados.filter(prato => prato.nome_prato.toUpperCase().includes(termoPesquisado.toUpperCase()));
           setFiltradosPesquisados(filtrados);
-      }
 
   },[pratosCategorizados, termoPesquisado]);
 
@@ -340,6 +338,8 @@ export default function ListaPratos ({setLista}) {
      {modoPesquisarPratos && <RenderizarPesquisa setModoPesquisarPratos={setModoPesquisarPratos} pratos={pratos.info} setTermoPesquisado={setTermoPesquisado} setPratosFiltrados={setPratosFiltrados} termoPesquisado={termoPesquisado} />}
 
 
+         { /* Renderização padrão caso não haja filtragem nem busca por parte do usuário. Isto exibe normalmente os pratos do menu. */ }
+
          {((pratos.sucesso && !filtragemCategoriaAtivo) && ((!modoPesquisarPratos && !termoPesquisado) || (modoPesquisarPratos && !termoPesquisado))) && (<ul>
 
              {pratos.info.map((prato, indice) => {
@@ -359,7 +359,7 @@ export default function ListaPratos ({setLista}) {
 
 
 
-
+     { /* Caso o usuário tenha feito uma busca por nome, mas sem filtrar categorias. */ }
 
      {(pratos.sucesso && !filtragemCategoriaAtivo && modoPesquisarPratos && termoPesquisado) && (<ul>
 
@@ -373,7 +373,12 @@ export default function ListaPratos ({setLista}) {
 
 
 
-     {(pratos.sucesso && filtradosPesquisados.length !== 0  && filtragemCategoriaAtivo && modoPesquisarPratos && termoPesquisado) && (<ul>
+
+
+
+     { /* Caso o usuário busque pratos filtrando as categorias e por nome, e a busca tenha tido sucesso. */ }
+
+     {(pratos.sucesso && filtradosPesquisados.length !== 0 && filtragemCategoriaAtivo && modoPesquisarPratos && termoPesquisado) && (<ul>
 
          {filtradosPesquisados.map((prato, indice) => {
 
@@ -409,7 +414,7 @@ export default function ListaPratos ({setLista}) {
 
 
 
-     {(!pratos.sucesso || (filtragemCategoriaAtivo && pratosCategorizados.length === 0) || (filtragemCategoriaAtivo && termoPesquisado && filtradosPesquisados.length === 0)) && <h2 className={styles.h2}>Sem resultados</h2>}
+     {(!pratos.sucesso || (modoPesquisarPratos && termoPesquisado && pratosFiltrados.length === 0) || (filtragemCategoriaAtivo && pratosCategorizados.length === 0) || (filtragemCategoriaAtivo && termoPesquisado && filtradosPesquisados.length === 0)) && <h2 className={styles.h2}>Sem resultados</h2>}
  </main>
 </div>
 

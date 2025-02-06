@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./LayoutCategoria.module.css";
 import Contexto from "../../Contexto.js";
+import estilos_pai from '../ListaPratos.module.css';
 
 
 
@@ -80,9 +81,9 @@ import Contexto from "../../Contexto.js";
 
 		  <main>
 
-    	              <button id={botaoAtivo?.pratos_principais && styles.botao_ativado || styles.s2b1} onClick={() => filtrarPratosPrincipais()}>Pratos principais</button>
-	              <button id={botaoAtivo?.lanches && styles.botao_ativado || styles.s2b2} onClick={() => filtrarLanches()}>Lanches</button>
-	              <button id={botaoAtivo?.sobremesas && styles.botao_ativado || styles.s2b3} onClick={() => filtrarSobremesas()}>Sobremesas</button>
+    	              <button id={(botaoAtivo?.pratos_principais && styles.botao_ativado) || (styles.s2b1)} onClick={() => filtrarPratosPrincipais()}>Pratos principais</button>
+	              <button id={(botaoAtivo?.lanches && styles.botao_ativado) || (styles.s2b2)} onClick={() => filtrarLanches()}>Lanches</button>
+	              <button id={(botaoAtivo?.sobremesas && styles.botao_ativado) || (styles.s2b3)} onClick={() => filtrarSobremesas()}>Sobremesas</button>
 
 		  </main>
 
@@ -127,7 +128,7 @@ import Contexto from "../../Contexto.js";
 
 	      <section>
 
-   	          <button id={botaoAtivo?.botao_todos && styles.botao_ativo || styles.b1} onClick={() => limparFiltragem()}>Todos</button>
+   	          <button id={(!filtragemAtiva && estilos_pai.botao_todos_ativo) || (styles.b1)} onClick={() => limparFiltragem()}>Todos</button>
 	          <button id={styles.b2} onClick={() => ligarFiltragem()}>Por categoria</button>
 
 	      </section>

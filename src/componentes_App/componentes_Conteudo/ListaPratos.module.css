@@ -89,6 +89,15 @@
   border: solid 2px black;
 }
 
+ #hl #botao_todos_ativo { /*Apenas quando o botão "Todos" na filtragem por categoria estiver ativo*/
+   width: 36%;
+   height: 100%;
+   padding: 1.2%;
+   font-size: 4vw;
+   font-weight: 700;
+   color: #AE3601;
+}
+
 #hl button:active {
   background-color: #3B8BAB;
 }
