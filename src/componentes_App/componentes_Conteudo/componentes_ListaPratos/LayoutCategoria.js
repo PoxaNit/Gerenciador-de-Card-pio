@@ -110,6 +110,10 @@ import estilos_pai from '../ListaPratos.module.css';
 
      function ligarFiltragem () {
 
+	 if (!pratos) {
+	     return null;
+	 };
+
          if (botaoAtivo?.botao_todos) {
 
              const pratosFiltrados = pratos.filter(prato => prato.categoria_prato === "pratos principais");
@@ -133,7 +137,7 @@ import estilos_pai from '../ListaPratos.module.css';
 
 	      </section>
 
-	      {filtragemAtiva && <Opcoes />}
+	      {pratos && filtragemAtiva && <Opcoes />}
 
           </div>
       );

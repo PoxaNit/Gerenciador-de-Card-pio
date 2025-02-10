@@ -1,8 +1,8 @@
  .conteudo {
    height: 101.5vh;
    width: 100dvw;
+   margin-top: -9%;
    background-color: #4B9FC2;
-   margin-top: -7%;
    padding-top: 4%;
    display: grid;
    grid-template-columns: 2fr;

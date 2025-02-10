@@ -3,6 +3,7 @@ import CadastroPratos from "./componentes_Conteudo/CadastrarProdutos.js";
 import ListaPratos from "./componentes_Conteudo/ListaPratos.js";
 import styles from "./Conteudo.module.css";
 import RelatorioMenu from "./componentes_Conteudo/RelatorioMenu.js";
+import Topo from "./Topo.js";
 
  export default function Conteudo () {
 
@@ -11,7 +12,9 @@ import RelatorioMenu from "./componentes_Conteudo/RelatorioMenu.js";
    const [relatorio, setRelatorio] = React.useState(false);
 
 
-  if (!cadastro && !lista && !relatorio) { return (
+  if (!cadastro && !lista && !relatorio) { return (<>
+
+     <Topo />
 
      <div className={styles.conteudo}>
 
@@ -47,6 +50,8 @@ import RelatorioMenu from "./componentes_Conteudo/RelatorioMenu.js";
          </footer>
 
      </div>
+
+     </>
 
     )};
 
