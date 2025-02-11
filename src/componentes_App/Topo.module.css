@@ -14,13 +14,19 @@
  #conteudo button {
    font-size: 4.5vw;
    border: none;
-   padding: 0 1.2%;
    border-radius: 8px;
    box-shadow: 2px 1px 5px -1px black;
    background-color: #67AECB;
+   width: 40%;
+   height: 100%;
 }
 
  #conteudo button:active {
    background-color: #245468;
    color: white;
+}
+
+ #conteudo button img {
+   width: 12%;
+   height: auto;
 }

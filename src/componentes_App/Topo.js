@@ -16,7 +16,7 @@ import styles from "./Topo.module.css";
 
          <div id={styles.conteudo}>
 
-	     <button onClick={() => logout()}>Sair da conta</button>
+	     <button onClick={() => logout()}>Sair da conta <img src="/logout_icon.png" /></button>
 
          </div>
      );
