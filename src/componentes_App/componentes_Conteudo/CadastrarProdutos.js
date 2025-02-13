@@ -121,17 +121,22 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 
 /*------------------------ Mandando os dados para o back-end -------------------------*/
 
-  const [executarTimeout, setExecutarTimeout] = React.useState(false);
+  let executarTimeout = false; //Evita de o alerta ainda estar sendo exibido depois de fechar o componente e abrir denovo
+  let deveFechar = false; //Evita o componente de fechar após exportar os dados, fechar o componente e abrir denovo ( sem isso, o componente buga ).
 
-  function fecharCadastro () {
+  function fecharCadastro (fechouPeloBotaoSair = false) {
 
-      if (executarTimeout) {
+      if (!fechouPeloBotaoSair && executarTimeout && deveFechar) {
 
-          setExecutarTimeout(false);
-
-      }
-
+          executarTimeout = false;
           setCadastro(false);
+
+      } else if (fechouPeloBotaoSair) {
+
+	    setCadastro(false);
+
+        };
+
 
   }
 
@@ -175,24 +180,17 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 		   const resposta_json = await resposta.json();
 		   setDispararAlerta({disparar: true, tempo: 2300, msg: resposta_json.msg});
 
-		   setExecutarTimeout(true);
+		   executarTimeout = true;
 
-		   function doTimeout() {
-
-  		       if (executarTimeout) {
-
-		           setCadastro(false)
-
-		       }
-
-		   }
-
-
+		   deveFechar = true;
 
 		   setTimeout(() => {
+alert(executarTimeout && deveFechar)
+			if (deveFechar) {
 
-			doTimeout();
+			    fecharCadastro();
 
+			}
 		   }, 2300);
 
 
@@ -277,7 +275,7 @@ return (
    </section>
 
    <section className={estilos.sb}>
-     <button onClick={() => fecharCadastro()}>Sair</button>
+     <button onClick={() => fecharCadastro(true)}>Sair</button>
      <button disabled={dispararAlerta.disparar} onClick={() => {exportar()}} type="submit">Salvar</button>
    </section>
 
