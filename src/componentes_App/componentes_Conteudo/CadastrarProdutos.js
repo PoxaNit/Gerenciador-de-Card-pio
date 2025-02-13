@@ -200,7 +200,7 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 
 
     } catch (exceção) {
-	const mensagem = exceção.message.replace("Error :", "");
+	const mensagem = exceção.message.replace("Error :", ""); //Para não dar json inválido
 	const erro = JSON.parse(mensagem);
 	setDispararAlerta(erro);
     };

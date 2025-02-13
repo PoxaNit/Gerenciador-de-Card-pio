@@ -6,10 +6,11 @@ function App() {
 
     const [autenticado, setAutenticado] = React.useState(false);
     const [session_id, setSession_id] = React.useState("");
+    const [usuario_nome, setUsuario_nome] = React.useState("");
 
     async function verificarAutenticacao() {
 
-        const autenticacao = await fetch("/autenticacao/session_id.php").then(resposta => resposta.json());
+        const autenticacao = await fetch("/autenticacao/session_id.php").then(r => r.json());
 
         if (!autenticacao.sucesso) {
 
@@ -17,10 +18,25 @@ function App() {
 
         } else {
 
+	    const id = autenticacao.id;
+
+   	    const corpo = JSON.stringify({"id": id}); //Corpo da requisição.
+
+	    const usuario_nome = await fetch("/autenticacao/retornar_nome_usuario.php", {
+		   			      method: "POST",
+					      body: corpo
+					    });
+
+	    const json = await usuario_nome.json();
+
             setAutenticado(autenticacao.sucesso);
-	    setSession_id(autenticacao.id);
+  	    setSession_id(id);
+	    setUsuario_nome(json.nome);
 
         };
+
+
+
 
     };
 
@@ -34,9 +50,8 @@ function App() {
 
     },[]);
 
-
     return autenticado && (
-        <Autenticado.Provider value={{autenticado, session_id}}>
+        <Autenticado.Provider value={{autenticado, session_id, usuario_nome}}>
             <div className="App">
    	        <Conteudo />
             </div>
