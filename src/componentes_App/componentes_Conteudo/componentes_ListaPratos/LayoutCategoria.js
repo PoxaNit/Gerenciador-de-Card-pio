@@ -2,19 +2,23 @@ import React from "react";
 import styles from "./LayoutCategoria.module.css";
 import Contexto from "../../Contexto.js";
 import estilos_pai from '../ListaPratos.module.css';
-
+import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
 
 
   function LayoutCategoria ({pratos, filtragemAtiva,
-  setFiltragemAtiva, botaoAtivo, setBotaoAtivo}) {
+  setFiltragemAtiva, botaoAtivo, setBotaoAtivo,
+  atualizarListaFiltrada, setAtualizarListaFiltrada}) {
 
 //    Define os pratos filtrados atuais
       const { setPratosCategorizados } = React.useContext(Contexto);
 
+      const { eParaAtualizarOsFiltrados, setEParaAtualizarOsFiltrados } = React.useContext(SincronizarPratos);
+
+
+
 
 
       const Opcoes = React.memo(function () { //Exibe as opções de filtro
-
 
 
 
@@ -63,8 +67,45 @@ import estilos_pai from '../ListaPratos.module.css';
 
 
 
+//	  Serve para avisar ao useEffect quando atualizar o array de pratos categorizados sem a necessidade de apertar nos botões ( útil quando você deleta um prato e precisa que isso esteja sincronizado automaticamente com os pratos brutos ).
+//          const [atualizar, setAtualizar] = React.useState(false);
 
 
+
+/*
+          React.useEffect(() => {
+
+              setAtualizar(true);
+
+          }, [eParaAtualizarOsFiltrados]);
+*/
+
+
+          React.useEffect(() => {
+
+	      if (atualizarListaFiltrada && botaoAtivo?.pratos_principais) {
+
+	          filtrarPratosPrincipais();
+		  setAtualizarListaFiltrada(false);
+
+	      };
+
+	      if (atualizarListaFiltrada && botaoAtivo?.lanches) {
+
+	          filtrarLanches();
+		  setAtualizarListaFiltrada(false);
+
+	      };
+
+	      if (atualizarListaFiltrada && botaoAtivo?.sobremesas) {
+
+	          filtrarSobremesas();
+		  setAtualizarListaFiltrada(false);
+
+	      };
+
+
+	  }, [atualizarListaFiltrada]);
 
 
 
@@ -104,6 +145,7 @@ import estilos_pai from '../ListaPratos.module.css';
 	 setPratosCategorizados([]);
 	 setBotaoAtivo({botao_todos: true});
          setFiltragemAtiva(false);
+	 setEParaAtualizarOsFiltrados(false);
 
      };
 
@@ -121,6 +163,7 @@ import estilos_pai from '../ListaPratos.module.css';
              setFiltragemAtiva(true);
              setPratosCategorizados(pratosFiltrados);
              setBotaoAtivo({pratos_principais: true});
+	     setEParaAtualizarOsFiltrados(true);
 
          }
 

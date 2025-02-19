@@ -20,7 +20,7 @@ import Autenticado from "./Autenticado.js";
          <div id={styles.conteudo}>
 
 	     <p>Usuário(a): <strong>{usuario_nome}</strong></p>
-	     <button onClick={() => logout()}>Sair da conta <img src="/logout_icon.png" /></button>
+	     <button onClick={() => logout()}>Sair da conta <img src="/logout_icon.png" alt="ícone de logout" /></button>
 
          </div>
      );

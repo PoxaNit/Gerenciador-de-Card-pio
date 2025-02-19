@@ -1,12 +1,13 @@
 import React from "react";
 import styles from "./ListaPratos.module.css";
 import ExibirInformacoesPrato from "./componentes_ListaPratos/ExibirInformacoesPrato.js";
-import Contexto from "../Contexto.js";
+import Contexto from "../Contexto.js"; //Contexto genérico
 import MensagemAlerta from "../MensagemAlerta.js";
 import RenderizarPesquisa from "./componentes_ListaPratos/RenderizarPesquisa.js";
 import SubirAoTopo from "./SubirAoTopo.js";
 import LayoutCategoria from "./componentes_ListaPratos/LayoutCategoria.js";
 import ItemDeLista from "./componentes_ListaPratos/ItemDeLista.js";
+import SincronizarPratos from "../Contexto_sincronizacao_pratos.js";
 
 
 export default function ListaPratos ({setLista}) {
@@ -21,7 +22,7 @@ export default function ListaPratos ({setLista}) {
 
   const [mudarComponente, setMudarComponente] = React.useState(false); //serve para avisar ao useCallback quando o componente ExibirInformacoesPrato for fechado
 
-
+  const { eParaAtualizarOsFiltrados } = React.useContext(SincronizarPratos);
 
 
   const [componenteExibir, setComponenteExibir] = React.useState({ //controla quando e quais informações exibir do prato clicado.
@@ -72,101 +73,17 @@ export default function ListaPratos ({setLista}) {
 
  React.useEffect(() => {
 
- window.scrollTo(0, 0);
+     window.scrollTo(0, 0);
 
- window.addEventListener("scroll", armazenar_coordenadas_tela);
+     window.addEventListener("scroll", armazenar_coordenadas_tela);
 
 
   }, []);
 
 
-/*----------------------/////////////////////------------------------*/
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*---------------------- Primeiras operações ------------------------*/
-
-
- async function fetchData () {
-
-    if (controleUseCallback) {
-        setDispararAlerta({mensagem: "carregando...", tempo: 20000, exibir: true});
-
-	const resposta = await fetch("/retornar_dados"); //retorna o array com todos os pratos e suas informações
-	const json = await resposta.json();
-
-	setPratos(json);
-	setControleUseCallback(false);
-        setDispararAlerta({mensagem: "", tempo: 0, exibir: false});
-    }
-};
-
-
-
-
-  const buscarPratos = React.useCallback(fetchData, [controleUseCallback]);
-
-
-
-  React.useEffect(() => {
-	buscarPratos();
-
- }, [buscarPratos]);
-
-
-
-/*----------------------/////////////////////------------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*------------Funções relacionadas às coordenadas de tela------‐-----*/
 
 
  const mudarCoordenadas = React.useCallback(() => {
@@ -184,6 +101,9 @@ export default function ListaPratos ({setLista}) {
    };
 
  }, [mudarComponente, coordenadasTela.x, coordenadasTela.y]);
+
+
+
 
  React.useEffect(() => {
 
@@ -220,6 +140,7 @@ export default function ListaPratos ({setLista}) {
   React.useEffect(() => {
 
       if(pratos.info === undefined) {
+
 
       } else {
 
@@ -261,24 +182,73 @@ export default function ListaPratos ({setLista}) {
   const [pratosCategorizados, setPratosCategorizados] = React.useState([]);
 
 //   Armazena qual opção de filtro está ativa se a filtragem estiver ligada. Armazenar isso serve para quando o usuário mudar de componente, para quando ele voltar, ainda saber qual opção de filtro ele escolheu.
-  const [opcaoDeFiltroAtiva, setOpcaoDeFiltroAtiva] = React.useState({botao_todos: true});
+  const [opcaoDeFiltroAtiva, setOpcaoDeFiltroAtiva] = React.useState({botao_todos: true}); //O botão "todos" é o botão ativo quando a filtragem por categoria não estiver ativa. Esta é a opção inicial.
 
-//   Armazena os pratos filtrados por categoria que incluem o termo pesquisado no nome
+//   Armazena os pratos filtrados por categoria que incluem o termo pesquisado no nome, caso o modo de busca por nome esteja ativo e o usuário já tenha pesquisado pelo prato.
   const [filtradosPesquisados, setFiltradosPesquisados] = React.useState([]);
 
+//   Controla quando atualizar a lista dos pratos categorizados.
+  const [atualizar, setAtualizar] = React.useState(false);
 
   React.useEffect(() => {
 
           const filtrados = pratosCategorizados.filter(prato => prato.nome_prato.toUpperCase().includes(termoPesquisado.toUpperCase()));
           setFiltradosPesquisados(filtrados);
 
-  },[pratosCategorizados, termoPesquisado]);
+  }, [pratosCategorizados, termoPesquisado]);
 
 
 /*----------------------/////////////////////------------------------*/
 
 
 
+
+
+
+
+
+
+
+/*---------------------- Primeiras operações ------------------------*/
+
+
+
+ async function fetchData () {
+
+    if (controleUseCallback) {
+        setDispararAlerta({mensagem: "carregando...", tempo: 20000, exibir: true});
+
+	const resposta = await fetch("/retornar_dados"); //retorna o array com todos os pratos e suas informações
+	const json = await resposta.json();
+
+	setPratos(json);
+	setControleUseCallback(false);
+        setDispararAlerta({mensagem: "", tempo: 0, exibir: false});
+
+        if (eParaAtualizarOsFiltrados) {
+
+            setAtualizar(true);
+
+        };
+
+    }
+};
+
+
+
+
+  const buscarPratos = React.useCallback(fetchData, [controleUseCallback]);
+
+
+
+  React.useEffect(() => {
+	buscarPratos();
+
+ }, [buscarPratos]);
+
+
+
+/*----------------------/////////////////////------------------------*/
 
 
 
@@ -295,47 +265,62 @@ export default function ListaPratos ({setLista}) {
  {componenteExibir.renderizar ? <ExibirInformacoesPrato func_tirar_evento_rolagem={armazenar_coordenadas_tela} func_coord_pai={armazenar_coordenadas_tela} infos_prato={componenteExibir.infos} controle={setComponenteExibir} coordenadas_tela_componente_pai={coordenadasTela} este_componente_fechou={setMudarComponente} setCoordenadasTela={setCoordenadasTela}/> : (
 
  <div className={styles.conteudo}>
- <header id={styles.hl}>
 
-  <section className={styles.s1}>
-
-
-    <button onClick={() => setLista(false)}>Sair</button>
+     <header id={styles.hl}>
 
 
-    <button onTouchEnd={() => {
+         <section className={styles.s1}>
+
+             <button onClick={() => setLista(false)}>Sair</button>
+
+             <button onTouchEnd={() => {
 
 
-	if (!modoPesquisarPratos) {
+	                                   if (!modoPesquisarPratos) {
 
 
-		setModoPesquisarPratos(true);
+		                               setModoPesquisarPratos(true);
 
 
-	}
+	                                   }
+
+                                       }
+
+                                }
+
+                 className={styles.btnImg}
+
+             >
+
+                 <img src={"/ePZfIIUTjEcAAAAASUVORK5CYII_-removebg-preview.png"} alt="Ícone de lupa" />
+
+             </button>
+
+         </section>
 
 
-}} className={styles.btnImg} >
-    <img src={"/ePZfIIUTjEcAAAAASUVORK5CYII_-removebg-preview.png"} alt="Ícone de lupa" />
-</button>
+         <section className={styles.s2}>
+
+             <h1>Pratos do menu</h1>
+
+         </section>
 
 
-  </section>
+         <section>
 
-  <section className={styles.s2}>
-    <h1>Pratos do menu</h1>
-  </section>
+             <LayoutCategoria pratos={pratos.info} filtragemAtiva={filtragemCategoriaAtivo} setFiltragemAtiva={setFiltragemCategoriaAtivo} botaoAtivo={opcaoDeFiltroAtiva} setBotaoAtivo={setOpcaoDeFiltroAtiva} atualizarListaFiltrada={atualizar} setAtualizarListaFiltrada={setAtualizar} />
 
-  <section>
-    <LayoutCategoria pratos={pratos.info} filtragemAtiva={filtragemCategoriaAtivo} setFiltragemAtiva={setFiltragemCategoriaAtivo} botaoAtivo={opcaoDeFiltroAtiva} setBotaoAtivo={setOpcaoDeFiltroAtiva} />
-  </section>
+         </section>
 
- </header>
- <main>
+     </header>
 
-     {(coordenadasTela.y >= 300) && <SubirAoTopo />}
+     <main>
 
-     {modoPesquisarPratos && <RenderizarPesquisa setModoPesquisarPratos={setModoPesquisarPratos} pratos={pratos.info} setTermoPesquisado={setTermoPesquisado} setPratosFiltrados={setPratosFiltrados} termoPesquisado={termoPesquisado} />}
+{/*Lembrete: termine a refatoração deste retorno.*/}
+
+         {(coordenadasTela.y >= 300) && <SubirAoTopo />}
+
+         {modoPesquisarPratos && <RenderizarPesquisa setModoPesquisarPratos={setModoPesquisarPratos} pratos={pratos.info} setTermoPesquisado={setTermoPesquisado} setPratosFiltrados={setPratosFiltrados} termoPesquisado={termoPesquisado} />}
 
 
          { /* Renderização padrão caso não haja filtragem nem busca por parte do usuário. Isto exibe normalmente os pratos do menu. */ }

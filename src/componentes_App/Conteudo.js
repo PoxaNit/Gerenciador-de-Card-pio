@@ -4,6 +4,7 @@ import ListaPratos from "./componentes_Conteudo/ListaPratos.js";
 import styles from "./Conteudo.module.css";
 import RelatorioMenu from "./componentes_Conteudo/RelatorioMenu.js";
 import Topo from "./Topo.js";
+import SincronizarPratos from "./Contexto_sincronizacao_pratos.js";
 
  export default function Conteudo () {
 
@@ -11,6 +12,7 @@ import Topo from "./Topo.js";
    const [lista, setLista]       = React.useState(false);
    const [relatorio, setRelatorio] = React.useState(false);
 
+   const [eParaAtualizarOsFiltrados, setEParaAtualizarOsFiltrados] = React.useState(false);
 
   if (!cadastro && !lista && !relatorio) { return (<>
 
@@ -87,7 +89,15 @@ import Topo from "./Topo.js";
 
   if (cadastro) { return (<CadastroPratos setCadastro={setCadastro} />)};
 
-  if (lista) { return (<ListaPratos setLista={setLista} />)};
+  if (lista) {
+
+      return (
+          <SincronizarPratos.Provider value={{eParaAtualizarOsFiltrados, setEParaAtualizarOsFiltrados}}>
+
+              <ListaPratos setLista={setLista} />
+
+          </SincronizarPratos.Provider>
+      )};
 
   if (relatorio) { return (<RelatorioMenu setRelatorio={setRelatorio}/>)};
 
