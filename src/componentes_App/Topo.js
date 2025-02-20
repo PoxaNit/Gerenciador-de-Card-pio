@@ -3,9 +3,22 @@ import React from "react";
 import styles from "./Topo.module.css";
 import Autenticado from "./Autenticado.js";
 
+
  function Topo () {
 
      const { usuario_nome } = React.useContext(Autenticado);
+
+     const [mostrar, setMostrar] = React.useState(false);
+
+
+
+
+
+
+
+
+
+
 
      function logout() {
 
@@ -15,14 +28,55 @@ import Autenticado from "./Autenticado.js";
 
 
 
+
+
+
+
+
+
+
+
+     function deletarConta () {
+
+         
+
+     };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      return (
 
-         <div id={styles.conteudo}>
+         <header id={styles.conteudo} className={!mostrar ? styles.esconder_menu : styles.mostrar_menu}>
 
-	     <p>Usuário(a): <strong>{usuario_nome}</strong></p>
-	     <button onClick={() => logout()}>Sair da conta <img src="/logout_icon.png" alt="ícone de logout" /></button>
+	     <section className={styles.section1}>
 
-         </div>
+	         <p>Usuário(a): <strong>{usuario_nome}</strong></p>
+
+  	         <button onClick={() => setMostrar(m => !m)}>Conta <img alt="Opções de conta" src="/configurar.png"/></button>
+
+             </section>
+
+
+	     <section className={styles.section2}>
+
+	         <button onClick={() => logout()}>Sair da conta <img src="/logout_icon.png" alt="ícone de logout" /></button>
+
+		 <button onClick={() => deletarConta()}>Deletar conta <img alt="Ícone de lixeira" src="/lixeira.png" id={styles.lixeira_img}/></button>
+
+             </section>
+
+         </header>
      );
 
  };
