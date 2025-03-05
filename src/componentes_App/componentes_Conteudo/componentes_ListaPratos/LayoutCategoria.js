@@ -12,7 +12,7 @@ import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
 //    Define os pratos filtrados atuais
       const { setPratosCategorizados } = React.useContext(Contexto);
 
-      const { eParaAtualizarOsFiltrados, setEParaAtualizarOsFiltrados } = React.useContext(SincronizarPratos);
+      const { /*eParaAtualizarOsFiltrados*/ setEParaAtualizarOsFiltrados } = React.useContext(SincronizarPratos);
 
 
 
@@ -66,21 +66,6 @@ import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
   //       Fim
 
 
-
-//	  Serve para avisar ao useEffect quando atualizar o array de pratos categorizados sem a necessidade de apertar nos botões ( útil quando você deleta um prato e precisa que isso esteja sincronizado automaticamente com os pratos brutos ).
-//          const [atualizar, setAtualizar] = React.useState(false);
-
-
-
-/*
-          React.useEffect(() => {
-
-              setAtualizar(true);
-
-          }, [eParaAtualizarOsFiltrados]);
-*/
-
-
           React.useEffect(() => {
 
 	      if (atualizarListaFiltrada && botaoAtivo?.pratos_principais) {
@@ -105,7 +90,7 @@ import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
 	      };
 
 
-	  }, [atualizarListaFiltrada]);
+	  }, [/*atualizarListaFiltrada*/]);
 
 
 

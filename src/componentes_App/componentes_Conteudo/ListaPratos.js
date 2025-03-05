@@ -8,6 +8,7 @@ import SubirAoTopo from "./SubirAoTopo.js";
 import LayoutCategoria from "./componentes_ListaPratos/LayoutCategoria.js";
 import ItemDeLista from "./componentes_ListaPratos/ItemDeLista.js";
 import SincronizarPratos from "../Contexto_sincronizacao_pratos.js";
+import Autenticado from "../Autenticado.js";
 
 
 export default function ListaPratos ({setLista}) {
@@ -24,6 +25,7 @@ export default function ListaPratos ({setLista}) {
 
   const { eParaAtualizarOsFiltrados } = React.useContext(SincronizarPratos);
 
+  const { session_id } = React.useContext(Autenticado);
 
   const [componenteExibir, setComponenteExibir] = React.useState({ //controla quando e quais informações exibir do prato clicado.
     renderizar: false,
@@ -215,33 +217,55 @@ export default function ListaPratos ({setLista}) {
 
  async function fetchData () {
 
-    if (controleUseCallback) {
-        setDispararAlerta({mensagem: "carregando...", tempo: 20000, exibir: true});
+    const Apratos = await JSON.parse(sessionStorage.getItem("pratos_" + session_id));
 
-	const resposta = await fetch("/retornar_dados"); //retorna o array com todos os pratos e suas informações
-	const json = await resposta.json();
+    if (Apratos) {
 
-	setPratos(json);
-	setControleUseCallback(false);
-        setDispararAlerta({mensagem: "", tempo: 0, exibir: false});
+        setPratos(Apratos);
 
-        if (eParaAtualizarOsFiltrados) {
+    } else {
 
-            setAtualizar(true);
+        if (controleUseCallback) {
 
-        };
+            setDispararAlerta({mensagem: "carregando...", tempo: 20000, exibir: true});
+
+	    const resposta = await fetch("/retornar_dados"); //retorna o array com todos os pratos e suas informações
+    	    const json = await resposta.json();
+
+
+	    if (json.sucesso) {
+
+	        await sessionStorage.setItem("pratos_" + session_id, JSON.stringify(json));
+
+	        setPratos(json);
+
+	    };
+
+	    setControleUseCallback(false);
+            setDispararAlerta({mensagem: "", tempo: 0, exibir: false});
+
+            if (eParaAtualizarOsFiltrados) {
+
+                setAtualizar(true);
+
+            };
+
+        }
 
     }
+
+
 };
 
 
 
 
-  const buscarPratos = React.useCallback(fetchData, [controleUseCallback]);
+  const buscarPratos = React.useCallback(fetchData, [controleUseCallback, eParaAtualizarOsFiltrados, session_id]);
 
 
 
   React.useEffect(() => {
+
 	buscarPratos();
 
  }, [buscarPratos]);

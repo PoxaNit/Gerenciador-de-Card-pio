@@ -176,16 +176,18 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 		     method: "POST",
 		     body: dados
 		  });
-
+alert(JSON.parse(resposta))
 		   const resposta_json = await resposta.json();
 		   setDispararAlerta({disparar: true, tempo: 2300, msg: resposta_json.msg});
+//alert(resposta_json);
+//		   await sessionStorage.setItem("pratos",);
 
 		   executarTimeout = true;
 
 		   deveFechar = true;
 
 		   setTimeout(() => {
-alert(executarTimeout && deveFechar)
+
 			if (deveFechar) {
 
 			    fecharCadastro();

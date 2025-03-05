@@ -14,6 +14,12 @@ import SincronizarPratos from "./Contexto_sincronizacao_pratos.js";
 
    const [eParaAtualizarOsFiltrados, setEParaAtualizarOsFiltrados] = React.useState(false);
 
+
+  React.useEffect(() => {
+      sessionStorage.clear();
+}, []);
+
+
   if (!cadastro && !lista && !relatorio) { return (<>
 
      <Topo />

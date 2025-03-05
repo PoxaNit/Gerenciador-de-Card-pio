@@ -1,0 +1,38 @@
+ #container {
+   position: fixed;
+   top: 43%;
+   width: 80%;
+   left: 10%;
+   min-height: 24vh;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   background-color: white;
+   box-shadow: 1px 2px 4px 1px black;
+   border-radius: 12px;
+}
+
+ #btns {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   padding: 2%;
+}
+
+ #btns button {
+   font-size: 6vw;
+   width: 30%;
+   background-color: #52A3C4;
+   color: white;
+   font-weight: 500;
+   border-radius: 7px;
+}
+
+ #btns button:active {
+   background-color: #3C8FB1;
+}
+
+ #mensagem {
+   font-size: 7.4vw;
+   text-align: center;
+}
