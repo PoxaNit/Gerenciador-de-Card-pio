@@ -5,6 +5,7 @@ import React from "react";
 import MensagemAlerta from "../../../MensagemAlerta.js";
 import Contexto from "../../../Contexto.js";
 import estilos from "./FormularioDeAtualizacao.module.css";
+import Autenticado from "../../../Autenticado.js";
 
 
  export default function FormularioDeAtualizacao ({
@@ -21,7 +22,7 @@ import estilos from "./FormularioDeAtualizacao.module.css";
 
    const formulario = React.useRef(); //Faz referência ao formulário de atualização deste componente.
 
-
+   const { session_id } = React.useContext(Autenticado);
 
 
    const [novosDados_prato, despachar] = React.useReducer(reducer, { //local de armazenamento dos novos dados
@@ -83,7 +84,7 @@ import estilos from "./FormularioDeAtualizacao.module.css";
 
  const [novosDadosPreenchidos, setNovosDadosPreenchidos] = React.useState(false); //verdadeiro se todos os novos dados tiverem conteúdo
 
- const { setComponenteExibir, setControleUseCallback, setTermoPesquisado } = React.useContext(Contexto); //as funções para arualizar a lista de pratos
+ const { eParaAtualizarOsFiltrados, setAtualizar, setPratos, setComponenteExibir, setTermoPesquisado } = React.useContext(Contexto); //as funções para arualizar a lista de pratos
 
 
  const [dispararAlerta, setDispararAlerta] = React.useState({mensagem: "", tempo: 0, disparar: false}); //controla quando a mensagem de alerta deve ser exibida
@@ -148,15 +149,13 @@ import estilos from "./FormularioDeAtualizacao.module.css";
   };
 
 
+
+
+
  async function atualizarEstePrato () {
-
-
+console.log(`SessionStorage antes: ${sessionStorage.getItem('pratos_' + session_id)}`)
     const corpoDaRequisicao = new FormData(formulario.current);
     corpoDaRequisicao.append("informacoes_antigas", JSON.stringify(informacoes_antigas));
-
-
-
-
 
 
 
@@ -172,21 +171,24 @@ import estilos from "./FormularioDeAtualizacao.module.css";
 	corpoDaRequisicao.append("imagem_prato_novo", imagemPadrao);
      };
 
+     const dados = await fetch("/atualizarPrato", {
+               method: "POST",
+	       body: corpoDaRequisicao
+	   }).then(r => r.json());
 
 
+//Chave para os dados em cache
+     const chave = 'pratos_' + session_id;
 
+     const valor = JSON.stringify(dados);
 
+//Deixando os pratos disponíveis globalmente na aplicação.
+     await sessionStorage.clear();
+     await sessionStorage.setItem(chave, valor);
 
+     setPratos(dados);
 
-
-    			await fetch("/atualizarPrato", {
-						   method: "POST",
-						   body: corpoDaRequisicao
-						   });
-
-
-
-
+console.log(`sessionStorage agora: ${sessionStorage.getItem('pratos_' + session_id)}`);
  };
 
 
@@ -195,12 +197,12 @@ import estilos from "./FormularioDeAtualizacao.module.css";
  async function tratarSalvamento () {
 
    if (novosDadosPreenchidos) {
-      await  atualizarEstePrato();
+        await atualizarEstePrato();
 	setTermoPesquisado("");
-        setControleUseCallback(true);
         mover_tela(coordenadas_alvo);
         setComponenteExibir({infos: null, renderizar: false});
 	exibirInfo_fechou(true); //Avisa ao componente ListaPratos.js quando o pai deste componente ( ExibirInformacoes.js ) fechar, para que as operações relacionadas ocorram.
+        if (eParaAtualizarOsFiltrados) {setAtualizar(true)}
 
   } else {
 

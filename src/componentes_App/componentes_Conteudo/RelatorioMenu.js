@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./RelatorioMenu.module.css";
+import Autenticado from "../Autenticado.js";
 
 
  export default function RelatorioMenu ({ setRelatorio }) {
@@ -7,6 +8,7 @@ import styles from "./RelatorioMenu.module.css";
    React.useEffect(() => window.scrollTo(0, 0), []);
 
 
+   const { session_id } = React.useContext(Autenticado);
 
    const [informacoes, setInformacoes] = React.useState([]); //guarda as informações dos pratos do menu
 
@@ -194,19 +196,40 @@ import styles from "./RelatorioMenu.module.css";
 
    React.useMemo(async function () {
 
-       const resposta = await fetch("/retornar_dados").then(r => r.json());
 
-       const status = resposta.sucesso;
+       const chave = 'pratos_' + session_id; //Para acessar o cache da sessão
 
-       const info = resposta.info;
+       const pratos = sessionStorage.getItem(chave);
 
-       if (status && info) {
 
-	   setInformacoes(info);
+
+       if (pratos) {
+
+           const dados = JSON.parse(pratos);
+
+           setInformacoes(dados.info);
+
+       } else {
+
+           const resposta = await fetch("/retornar_dados").then(r => r.json());
+
+           const status = resposta.sucesso;
+
+           const info = resposta.info;
+
+           if (status && info) {
+
+	       const valor = await JSON.stringify(resposta);
+
+               await sessionStorage.setItem(chave, valor); //Para acesso global dos dados na aplicação
+
+	       setInformacoes(info);
+
+           };
 
        };
 
-   }, []);
+   }, [session_id]);
 
 
 

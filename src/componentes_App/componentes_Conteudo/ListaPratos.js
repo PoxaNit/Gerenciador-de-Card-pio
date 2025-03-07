@@ -217,45 +217,45 @@ export default function ListaPratos ({setLista}) {
 
  async function fetchData () {
 
-    const Apratos = await JSON.parse(sessionStorage.getItem("pratos_" + session_id));
+    if (controleUseCallback) {
 
-    if (Apratos) {
+        const Apratos = await JSON.parse(sessionStorage.getItem("pratos_" + session_id));
 
-        setPratos(Apratos);
+        if (Apratos) {
 
-    } else {
+            await setPratos(Apratos);
 
-        if (controleUseCallback) {
+        } else {
 
-            setDispararAlerta({mensagem: "carregando...", tempo: 20000, exibir: true});
+                setDispararAlerta({mensagem: "carregando...", tempo: 20000, exibir: true});
 
-	    const resposta = await fetch("/retornar_dados"); //retorna o array com todos os pratos e suas informações
-    	    const json = await resposta.json();
+	        const resposta = await fetch("/retornar_dados"); //retorna o array com todos os pratos e suas informações
+    	        const json = await resposta.json();
 
 
-	    if (json.sucesso) {
+	        if (json.sucesso) {
 
-	        await sessionStorage.setItem("pratos_" + session_id, JSON.stringify(json));
+	            await sessionStorage.setItem("pratos_" + session_id, JSON.stringify(json));
 
-	        setPratos(json);
+	            setPratos(json);
 
-	    };
+	        }
 
-	    setControleUseCallback(false);
-            setDispararAlerta({mensagem: "", tempo: 0, exibir: false});
+	        setControleUseCallback(false);
+                setDispararAlerta({mensagem: "", tempo: 0, exibir: false});
 
-            if (eParaAtualizarOsFiltrados) {
+                if (eParaAtualizarOsFiltrados) {
 
-                setAtualizar(true);
+                    setAtualizar(true);
 
-            };
+                }
 
         }
 
     }
 
 
-};
+}
 
 
 
@@ -284,7 +284,7 @@ export default function ListaPratos ({setLista}) {
   return (
 <>
  {dispararAlerta.exibir && <MensagemAlerta setDispararAlerta={setDispararAlerta} exibir={dispararAlerta.exibir} mensagem={dispararAlerta.mensagem} tempo={dispararAlerta.tempo} />}
- <Contexto.Provider value={{setControleUseCallback, setComponenteExibir, setTermoPesquisado, setFiltragemCategoriaAtivo, setPratosCategorizados}}>
+ <Contexto.Provider value={{setControleUseCallback, setComponenteExibir, setTermoPesquisado, setFiltragemCategoriaAtivo, setPratosCategorizados, setPratos, eParaAtualizarOsFiltrados, setAtualizar}}>
 
  {componenteExibir.renderizar ? <ExibirInformacoesPrato func_tirar_evento_rolagem={armazenar_coordenadas_tela} func_coord_pai={armazenar_coordenadas_tela} infos_prato={componenteExibir.infos} controle={setComponenteExibir} coordenadas_tela_componente_pai={coordenadasTela} este_componente_fechou={setMudarComponente} setCoordenadasTela={setCoordenadasTela}/> : (
 

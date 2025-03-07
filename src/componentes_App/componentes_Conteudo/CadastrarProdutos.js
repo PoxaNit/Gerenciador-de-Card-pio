@@ -1,6 +1,7 @@
 import React from "react";
 import estilos from "./CadastrarProdutos.module.css";
 import MensagemAlerta from "../MensagemAlerta.js";
+import Autenticado from "../Autenticado.js";
 
 export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPratos}) {
 
@@ -10,6 +11,8 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 /*------------------------------- Estados -------------------------------------------*/
 
  const form = React.useRef(); //irá fazer referência ao formulário
+
+ const { session_id } = React.useContext(Autenticado);
 
 // const [desativarBotao, setDesativarBotao] = React.useState({status: false}); //controla quando o botão de salvar deve ficar desabilitado, para evitar conflito com a mensagem de alerta
 
@@ -176,12 +179,15 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 		     method: "POST",
 		     body: dados
 		  });
-alert(JSON.parse(resposta))
-		   const resposta_json = await resposta.json();
-		   setDispararAlerta({disparar: true, tempo: 2300, msg: resposta_json.msg});
-//alert(resposta_json);
-//		   await sessionStorage.setItem("pratos",);
 
+		   const resposta_json = await resposta.json();
+
+		   if (resposta_json.sucesso) {
+		       await sessionStorage.setItem("pratos_" + session_id, JSON.stringify(resposta_json));
+		       setDispararAlerta({disparar: true, tempo: 2300, msg: resposta_json.msg});
+		   };
+//		   await sessionStorage.setItem("pratos_" + session_id, resposta_json);
+/*
 		   executarTimeout = true;
 
 		   deveFechar = true;
@@ -194,7 +200,7 @@ alert(JSON.parse(resposta))
 
 			}
 		   }, 2300);
-
+*/
 
             };
 
@@ -234,7 +240,7 @@ return (
    </section>
 
    <section className={estilos.st}>
-     <label htmlfor="descricao_produto">Descrição do produto:</label>
+     <label htmlfor="descricao_prato">Descrição do produto:</label>
    <br/>
      <textarea cols="25" rows="6" id="descricao_prato" onInput={e => despachar({tipo: "mudar descricao", valor: e.target.value})} name="descricao_prato" required></textarea>
    </section>

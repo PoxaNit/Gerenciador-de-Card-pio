@@ -46,6 +46,8 @@ function App() {
 
 	     verificarAutenticacao();
 
+             sessionStorage.clear();
+
         })();
 
     },[]);
