@@ -44,7 +44,7 @@ export default function ListaPratos ({setLista}) {
 
 
 
-
+React.useEffect(() => console.log("Renderizou"), []);
 
 
 
@@ -215,21 +215,25 @@ export default function ListaPratos ({setLista}) {
 
 
 
- async function fetchData () {
-
+ const fetchData = React.useCallback(async function () {
+console.log("fetchData executado!");
     if (controleUseCallback) {
-
-        const Apratos = await JSON.parse(sessionStorage.getItem("pratos_" + session_id));
-
+console.log("Validação do controleUseCallback: " + controleUseCallback);
+        const Apratos = JSON.parse(sessionStorage.getItem("pratos_" + session_id));
+console.log("Apratos formado!");
         if (Apratos) {
+console.log("Validação do Apratos: " + Apratos);
+            setPratos(Apratos);
+	    await setControleUseCallback(false);
 
-            await setPratos(Apratos);
+console.log("Validação do Apratos: " + Apratos);
+        } else { console.log("Apratos é null!");
 
-        } else {
-
+console.log("controleUseCallback depois: " + controleUseCallback);
                 setDispararAlerta({mensagem: "carregando...", tempo: 20000, exibir: true});
 
 	        const resposta = await fetch("/retornar_dados"); //retorna o array com todos os pratos e suas informações
+console.log("Requisição feita!");
     	        const json = await resposta.json();
 
 
@@ -241,8 +245,8 @@ export default function ListaPratos ({setLista}) {
 
 	        }
 
-	        setControleUseCallback(false);
                 setDispararAlerta({mensagem: "", tempo: 0, exibir: false});
+	        await setControleUseCallback(false);
 
                 if (eParaAtualizarOsFiltrados) {
 
@@ -255,20 +259,20 @@ export default function ListaPratos ({setLista}) {
     }
 
 
-}
+}, [controleUseCallback]);
 
 
 
 
-  const buscarPratos = React.useCallback(fetchData, [controleUseCallback, eParaAtualizarOsFiltrados, session_id]);
+//  const buscarPratos = React.useCallback(fetchData, [fetchData]);
 
 
 
   React.useEffect(() => {
 
-	buscarPratos();
+	fetchData();
 
- }, [buscarPratos]);
+ }, [fetchData]);
 
 
 
@@ -423,7 +427,11 @@ export default function ListaPratos ({setLista}) {
 
 
 
-     {(!pratos.sucesso || (modoPesquisarPratos && termoPesquisado && pratosFiltrados.length === 0) || (filtragemCategoriaAtivo && pratosCategorizados.length === 0) || (filtragemCategoriaAtivo && termoPesquisado && filtradosPesquisados.length === 0)) && <h2 className={styles.h2}>Sem resultados</h2>}
+     {(!pratos.info.length ||
+      (modoPesquisarPratos && termoPesquisado && pratosFiltrados.length === 0) ||
+      (filtragemCategoriaAtivo && pratosCategorizados.length === 0) ||
+      (filtragemCategoriaAtivo && termoPesquisado && filtradosPesquisados.length === 0)) && <h2 className={styles.h2}>Sem resultados</h2>
+     }
  </main>
 </div>
 

@@ -6,7 +6,8 @@ import MenuOpcoes from "./componentes_ExibirInformacoesPrato/MenuOpcoes.js";
 import MensagemConfirmar from "../../MensagemConfirmar.js";
 import FormularioDeAtualizacao from "./componentes_ExibirInformacoesPrato/FormularioDeAtualizacao.js";
 import Contexto from "../../Contexto.js";
-//import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
+import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
+import Autenticado from "../../Autenticado.js";
 
 
  export default function Exibir_informacoes_prato ({
@@ -20,8 +21,8 @@ import Contexto from "../../Contexto.js";
 
 
 
-  const {setControleUseCallback} = React.useContext(Contexto); //quando usada, esta função de estado serve para re-fazer a requisição dos pratos no componente pai e exibir a lista atualizada
-//  const {setEParaAtualizarOsFiltrados} = React.useContext(SincronizarPratos);
+  const { eParaAtualizarOsFiltrados, setAtualizar, setPratos } = React.useContext(Contexto); //quando usada, esta função de estado serve para re-fazer a requisição dos pratos no componente pai e exibir a lista atualizada
+  const { session_id } = React.useContext(Autenticado);
 
   const [componente, setComponente] = React.useState(); //armazena as cordenadas de tela passadas pelo componente pai (ListaPratos.js).
   const [precoPrato, setPrecoPrato] = React.useState(); //armazena o preço formatado do prato para exibir
@@ -104,13 +105,21 @@ import Contexto from "../../Contexto.js";
 					body: dados
 					}).then(resposta => resposta.json());
 
-		if (deletou.prato_deletado) {
+		if (deletou.sucesso) {
 
-			setControleUseCallback(true);
+			const chave = "pratos_" + session_id;
+			const valor = JSON.stringify(deletou);
+
 			setCoordenadasTela(componente);
 			este_componente_fechou(true);
 			controle({renderizar: false, infos: null})
-//			setEParaAtualizarOsFiltrados(true);
+
+			await sessionStorage.clear();
+			await sessionStorage.setItem(chave, valor);
+
+			setPratos(deletou);
+			if (eParaAtualizarOsFiltrados) {setAtualizar(true)}
+
 	} else {
 		throw new Error("Prato não foi deletado!");
 	 };
