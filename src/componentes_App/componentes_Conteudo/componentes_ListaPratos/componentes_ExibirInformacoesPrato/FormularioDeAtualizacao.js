@@ -6,6 +6,7 @@ import MensagemAlerta from "../../../MensagemAlerta.js";
 import Contexto from "../../../Contexto.js";
 import estilos from "./FormularioDeAtualizacao.module.css";
 import Autenticado from "../../../Autenticado.js";
+import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEstePrato.js";
 
 
  export default function FormularioDeAtualizacao ({
@@ -152,52 +153,20 @@ import Autenticado from "../../../Autenticado.js";
 
 
 
- async function atualizarEstePrato () {
-console.log(`SessionStorage antes: ${sessionStorage.getItem('pratos_' + session_id)}`)
-    const corpoDaRequisicao = new FormData(formulario.current);
-    corpoDaRequisicao.append("informacoes_antigas", JSON.stringify(informacoes_antigas));
-
-
-
-
-    if (!novaImagemCarregada) {
-
-	const resposta = await fetch(imagem_prato_novo);
-
-	const dadosBinariosDaImagem = await resposta.arrayBuffer();
-
-	const imagemPadrao = new File([dadosBinariosDaImagem], "imagem.jpg", {type: "image/jpeg"});
-
-	corpoDaRequisicao.append("imagem_prato_novo", imagemPadrao);
-     };
-
-     const dados = await fetch("/atualizarPrato", {
-               method: "POST",
-	       body: corpoDaRequisicao
-	   }).then(r => r.json());
-
-
-//Chave para os dados em cache
-     const chave = 'pratos_' + session_id;
-
-     const valor = JSON.stringify(dados);
-
-//Deixando os pratos disponíveis globalmente na aplicação.
-     await sessionStorage.clear();
-     await sessionStorage.setItem(chave, valor);
-
-     setPratos(dados);
-
-console.log(`sessionStorage agora: ${sessionStorage.getItem('pratos_' + session_id)}`);
- };
-
-
-
-
  async function tratarSalvamento () {
 
    if (novosDadosPreenchidos) {
-        await atualizarEstePrato();
+
+        await atualizarEstePrato(
+              formulario,
+              novaImagemCarregada,
+              imagem_prato_novo,
+              setPratos,
+              session_id,
+              informacoes_antigas
+             );
+
+
 	setTermoPesquisado("");
         mover_tela(coordenadas_alvo);
         setComponenteExibir({infos: null, renderizar: false});

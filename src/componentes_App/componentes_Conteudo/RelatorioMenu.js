@@ -1,6 +1,9 @@
 import React from "react";
 import styles from "./RelatorioMenu.module.css";
 import Autenticado from "../Autenticado.js";
+import buscarPratos from "../../resources/buscarPratos.js";
+import verificarPratosEmCache from "../../resources/verificarPratosEmCache.js";
+
 
 
  export default function RelatorioMenu ({ setRelatorio }) {
@@ -194,42 +197,61 @@ import Autenticado from "../Autenticado.js";
 
 
 
-   React.useMemo(async function () {
+   const execute = React.useRef(true);
+
+   React.useEffect(() => {
 
 
-       const chave = 'pratos_' + session_id; //Para acessar o cache da sessão
-
-       const pratos = sessionStorage.getItem(chave);
+       if (execute.current) {
 
 
+           async function executar () {
 
-       if (pratos) {
 
-           const dados = JSON.parse(pratos);
+               const chave = 'pratos_' + session_id; //Para acessar o cache da sessão
 
-           setInformacoes(dados.info);
 
-       } else {
+	     			    //Se houver, já retorna em JSON
+               const pratosEmCache = verificarPratosEmCache(chave);
 
-           const resposta = await fetch("/retornar_dados").then(r => r.json());
 
-           const status = resposta.sucesso;
 
-           const info = resposta.info;
+               if (pratosEmCache) {
 
-           if (status && info) {
+                   const dados = pratosEmCache;
 
-	       const valor = await JSON.stringify(resposta);
+                   setInformacoes(dados.info);
 
-               await sessionStorage.setItem(chave, valor); //Para acesso global dos dados na aplicação
+               } else {
 
-	       setInformacoes(info);
+                   const resposta = await buscarPratos();
 
-           };
+                   const status = resposta?.sucesso;
 
-       };
+                   const info = resposta?.info;
 
-   }, [session_id]);
+
+                   if (status && info) {
+
+	               const valor = JSON.stringify(resposta);
+
+                       sessionStorage.setItem(chave, valor); //Para acesso global dos dados na aplicação
+
+	               setInformacoes(info);
+
+                   }
+
+
+               }
+
+
+           } executar();
+
+           execute.current = false;
+
+       }
+
+   });
 
 
 

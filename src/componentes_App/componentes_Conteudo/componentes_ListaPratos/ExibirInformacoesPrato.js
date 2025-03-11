@@ -6,7 +6,6 @@ import MenuOpcoes from "./componentes_ExibirInformacoesPrato/MenuOpcoes.js";
 import MensagemConfirmar from "../../MensagemConfirmar.js";
 import FormularioDeAtualizacao from "./componentes_ExibirInformacoesPrato/FormularioDeAtualizacao.js";
 import Contexto from "../../Contexto.js";
-import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
 import Autenticado from "../../Autenticado.js";
 
 

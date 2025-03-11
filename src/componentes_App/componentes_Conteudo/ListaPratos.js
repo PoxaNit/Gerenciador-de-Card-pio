@@ -9,11 +9,13 @@ import LayoutCategoria from "./componentes_ListaPratos/LayoutCategoria.js";
 import ItemDeLista from "./componentes_ListaPratos/ItemDeLista.js";
 import SincronizarPratos from "../Contexto_sincronizacao_pratos.js";
 import Autenticado from "../Autenticado.js";
+import verificarPratosEmCache from "../../resources/verificarPratosEmCache.js";
+import buscarPratos from "../../resources/buscarPratos.js";
 
 
 export default function ListaPratos ({setLista}) {
 
-  const [controleUseCallback, setControleUseCallback] = React.useState(true); //controla quando o componente deve fazer requisição ao servidor para pegar os pratos para exibir na lista
+//  const [controleUseCallback, setControleUseCallback] = React.useState(true); //controla quando o componente deve fazer requisição ao servidor para pegar os pratos para exibir na lista
 
   const [pratos, setPratos] = React.useState({info: []}); //objeto contendo os pratos do menu
 
@@ -35,16 +37,6 @@ export default function ListaPratos ({setLista}) {
 
 
 
-
-
-
-
-
-
-
-
-
-React.useEffect(() => console.log("Renderizou"), []);
 
 
 
@@ -213,66 +205,70 @@ React.useEffect(() => console.log("Renderizou"), []);
 
 /*---------------------- Primeiras operações ------------------------*/
 
+       const execute = React.useRef(true);
+
+       async function primeirasOperacoes () {
 
 
- const fetchData = React.useCallback(async function () {
-console.log("fetchData executado!");
-    if (controleUseCallback) {
-console.log("Validação do controleUseCallback: " + controleUseCallback);
-        const Apratos = JSON.parse(sessionStorage.getItem("pratos_" + session_id));
-console.log("Apratos formado!");
-        if (Apratos) {
-console.log("Validação do Apratos: " + Apratos);
-            setPratos(Apratos);
-	    await setControleUseCallback(false);
+           if (execute.current) {
 
-console.log("Validação do Apratos: " + Apratos);
-        } else { console.log("Apratos é null!");
+	       const chave = "pratos_" + session_id;
 
-console.log("controleUseCallback depois: " + controleUseCallback);
-                setDispararAlerta({mensagem: "carregando...", tempo: 20000, exibir: true});
-
-	        const resposta = await fetch("/retornar_dados"); //retorna o array com todos os pratos e suas informações
-console.log("Requisição feita!");
-    	        const json = await resposta.json();
+               const pratosEmCache = verificarPratosEmCache(chave);
 
 
-	        if (json.sucesso) {
+               if (pratosEmCache) {
 
-	            await sessionStorage.setItem("pratos_" + session_id, JSON.stringify(json));
+                   setPratos(pratosEmCache);
 
-	            setPratos(json);
+                   return null;
 
-	        }
-
-                setDispararAlerta({mensagem: "", tempo: 0, exibir: false});
-	        await setControleUseCallback(false);
-
-                if (eParaAtualizarOsFiltrados) {
-
-                    setAtualizar(true);
-
-                }
-
-        }
-
-    }
+               } else {
 
 
-}, [controleUseCallback]);
+                   setDispararAlerta({mensagem: "carregando...", tempo: 20000, exibir: true});
+
+		   const pratosBuscados = await buscarPratos();
 
 
+	           if (pratosBuscados) {
+
+		       const valor = JSON.stringify(pratosBuscados);
+
+	               sessionStorage.setItem(chave, valor);
+
+	               setPratos(pratosBuscados);
+
+	           }
 
 
-//  const buscarPratos = React.useCallback(fetchData, [fetchData]);
+                   setDispararAlerta({mensagem: "", tempo: 0, exibir: false});
+
+                   eParaAtualizarOsFiltrados && setAtualizar(true);
+
+                   return null;
+
+               }
+
+
+           }
+
+       }
 
 
 
   React.useEffect(() => {
 
-	fetchData();
 
- }, [fetchData]);
+      if (execute.current) {
+
+          primeirasOperacoes();
+
+          execute.current = false;
+
+      }
+
+ });
 
 
 
@@ -288,7 +284,7 @@ console.log("Requisição feita!");
   return (
 <>
  {dispararAlerta.exibir && <MensagemAlerta setDispararAlerta={setDispararAlerta} exibir={dispararAlerta.exibir} mensagem={dispararAlerta.mensagem} tempo={dispararAlerta.tempo} />}
- <Contexto.Provider value={{setControleUseCallback, setComponenteExibir, setTermoPesquisado, setFiltragemCategoriaAtivo, setPratosCategorizados, setPratos, eParaAtualizarOsFiltrados, setAtualizar}}>
+ <Contexto.Provider value={{setComponenteExibir, setTermoPesquisado, setFiltragemCategoriaAtivo, setPratosCategorizados, setPratos, eParaAtualizarOsFiltrados, setAtualizar}}>
 
  {componenteExibir.renderizar ? <ExibirInformacoesPrato func_tirar_evento_rolagem={armazenar_coordenadas_tela} func_coord_pai={armazenar_coordenadas_tela} infos_prato={componenteExibir.infos} controle={setComponenteExibir} coordenadas_tela_componente_pai={coordenadasTela} este_componente_fechou={setMudarComponente} setCoordenadasTela={setCoordenadasTela}/> : (
 
