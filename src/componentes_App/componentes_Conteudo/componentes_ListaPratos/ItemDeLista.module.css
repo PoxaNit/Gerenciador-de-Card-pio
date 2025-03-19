@@ -1,0 +1,17 @@
+
+ @media screen and (min-width: 900px) {
+
+   .item {
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+  }
+
+   .item h2 {
+     overflow: hidden;
+     text-overflow: ellipsis;
+     margin: 0;
+     white-space: nowrap;
+  }
+
+}

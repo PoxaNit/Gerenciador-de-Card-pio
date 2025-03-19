@@ -349,7 +349,7 @@ export default function ListaPratos ({setLista}) {
 
          { /* Renderização padrão caso não haja filtragem nem busca por parte do usuário. Isto exibe normalmente os pratos do menu. */ }
 
-         {((pratos.sucesso && !filtragemCategoriaAtivo) && ((!modoPesquisarPratos && !termoPesquisado) || (modoPesquisarPratos && !termoPesquisado))) && (<ul>
+         {((pratos.sucesso && !filtragemCategoriaAtivo) && ((!modoPesquisarPratos && !termoPesquisado) || (modoPesquisarPratos && !termoPesquisado))) && (<ul id={styles.lista_pratos}>
 
              {pratos.info.map((prato, indice) => {
 
@@ -370,7 +370,7 @@ export default function ListaPratos ({setLista}) {
 
      { /* Caso o usuário tenha feito uma busca por nome, mas sem filtrar categorias. */ }
 
-     {(pratos.sucesso && !filtragemCategoriaAtivo && modoPesquisarPratos && termoPesquisado) && (<ul>
+     {(pratos.sucesso && !filtragemCategoriaAtivo && modoPesquisarPratos && termoPesquisado) && (<ul id={styles.lista_pratos}>
 
          {pratosFiltrados.map((prato, indice) => {
 
@@ -387,7 +387,7 @@ export default function ListaPratos ({setLista}) {
 
      { /* Caso o usuário busque pratos filtrando as categorias e por nome, e a busca tenha tido sucesso. */ }
 
-     {(pratos.sucesso && filtradosPesquisados.length !== 0 && filtragemCategoriaAtivo && modoPesquisarPratos && termoPesquisado) && (<ul>
+     {(pratos.sucesso && filtradosPesquisados.length !== 0 && filtragemCategoriaAtivo && modoPesquisarPratos && termoPesquisado) && (<ul id={styles.lista_pratos}>
 
          {filtradosPesquisados.map((prato, indice) => {
 
@@ -404,7 +404,7 @@ export default function ListaPratos ({setLista}) {
 
      { /* Caso a filtragem por categoria esteja ativa, deve ser renderizada a lista com os pratos que correspondem.*/ }
 
-     {((modoPesquisarPratos && !termoPesquisado) || (!modoPesquisarPratos && !termoPesquisado)) && (pratos.sucesso && filtragemCategoriaAtivo && pratosCategorizados.length !== 0) && (<ul>
+     {((modoPesquisarPratos && !termoPesquisado) || (!modoPesquisarPratos && !termoPesquisado)) && (pratos.sucesso && filtragemCategoriaAtivo && pratosCategorizados.length !== 0) && (<ul id={styles.lista_pratos}>
 
          {pratosCategorizados.map((prato, indice) => {
 

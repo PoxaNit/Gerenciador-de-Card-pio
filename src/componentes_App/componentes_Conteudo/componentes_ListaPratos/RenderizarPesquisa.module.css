@@ -55,3 +55,17 @@
    border-color: black;
    border-radius: 5px;
  }
+
+
+ @media screen and (min-width: 900px) {
+
+   .header_pesquisa input {
+     font-size: 3.5vw;
+     border: solid black 4px !important;
+  }
+
+   .header_pesquisa button {
+     border-width: 5px;
+  }
+
+}

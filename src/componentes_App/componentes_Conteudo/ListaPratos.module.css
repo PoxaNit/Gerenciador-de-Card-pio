@@ -22,6 +22,7 @@
 .conteudo ul li strong {
   color: #EF9103;
   font-weight: 700;
+  margin: 0;
 }
 
 .conteudo ul li p {
@@ -105,4 +106,51 @@
 .h2 {
   text-align: center;
   font-size: 7.4vw;
+}
+
+
+@media screen and (min-width: 900px) {
+
+  #hl button {
+    border-width: 6px;
+    border-radius: 10px;
+ }
+
+  #hl h1 {
+    border-width: 8px;
+    border-radius: 10px;
+ }
+
+  #hl {
+    border-radius: 14px;
+    transition-duration: 3s;
+    transition-property: height;
+ }
+
+  #lista_pratos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-right: 2.3%;
+    list-style: none;
+  }
+
+
+  .conteudo ul li {
+    max-width: 20%;
+ }
+
+  .conteudo #lista_pratos li p {
+    font-size: 2.5vw;
+    display: inline-block;
+ }
+  .conteudo ul li img {
+    width: 100%;
+ }
+
+  #lista_pratos h2 {
+    font-size: 5vw;
+    color: #EF9103;
+ }
+
 }
