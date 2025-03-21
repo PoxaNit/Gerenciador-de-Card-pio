@@ -4,7 +4,7 @@
 import React from "react";
 import MensagemAlerta from "../../../MensagemAlerta.js";
 import Contexto from "../../../Contexto.js";
-import estilos from "./FormularioDeAtualizacao.module.css";
+import styles from "./FormularioDeAtualizacao.module.css";
 import Autenticado from "../../../Autenticado.js";
 import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEstePrato.js";
 
@@ -192,10 +192,10 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
  <>
  {dispararAlerta.disparar && <MensagemAlerta mensagem={dispararAlerta.mensagem} tempo={dispararAlerta.tempo} setDispararAlerta={setDispararAlerta} exibir={dispararAlerta.disparar} /> }
 
-   <form ref={formulario} onSubmit={e => e.preventDefault()} className={estilos.formulario}>
+   <form ref={formulario} onSubmit={e => e.preventDefault()} className={styles.formulario}>
 
 
-     <section>
+     <section className={styles.sectionHeader}>
 
 
  	<h1>Formulário de atualização</h1>
@@ -204,7 +204,7 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
      </section>
 
 
-     <section className={estilos.sectionComInput}>
+     <section className={`${styles.sectionComInput} ${styles.sectionNome}`}>
 
 
        <label htmlfor="novoNome">Novo nome:</label>
@@ -219,10 +219,10 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
 
 
 
-     <section>
+     <section className={styles.sectionDescricao}>
 
 
-       <label htmlfor="novaDescricao" className={estilos.sectionComTextarea}>Nova descrição:</label>
+       <label htmlfor="novaDescricao" className={styles.sectionComTextarea}>Nova descrição:</label>
 
        <br/>
 
@@ -234,7 +234,7 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
 
 
 
-     <section className={estilos.sectionComInput}>
+     <section className={`${styles.sectionComInput} ${styles.sectionPreco}`}>
 
 
        <label htmlfor="novoPreco">Novo preço (R$):</label>
@@ -249,7 +249,7 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
 
 
 
-     <section>
+     <section className={styles.sectionCategoria}>
 
 
        <label htmlfor="novaCategoria">Nova categoria:</label>
@@ -273,7 +273,7 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
 
 
 
-     <section className={estilos.sectionComInput_file}>
+     <section className={styles.sectionComInput_file}>
 
        <label htmlfor="novaImagem">Nova imagem:</label>
 
@@ -289,10 +289,10 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
 
 
 
-     <section>
+     <section className={styles.sectionIngredientes}>
 
 
-       <label htmlfor="novosIngredientes" className={estilos.sectionComTextarea}>Novos ingredientes:</label>
+       <label htmlfor="novosIngredientes" className={styles.sectionComTextarea}>Novos ingredientes:</label>
 
        <br/>
 
@@ -304,10 +304,10 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
 
 
 
-     <section>
+     <section className={styles.sectionRestricoes}>
 
 
-       <label htmlfor="novasAlergias_restricoes" className={estilos.sectionComTextarea}>Alergias/restrições (mudar):</label>
+       <label htmlfor="novasAlergias_restricoes" className={styles.sectionComTextarea}>Alergias/restrições (mudar):</label>
 
        <br/>
 
@@ -317,7 +317,7 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
      </section>
 
 
-     <section className={estilos.sectionComBotoes}>
+     <section className={styles.sectionComBotoes}>
 
        <button onClick={() => {
 

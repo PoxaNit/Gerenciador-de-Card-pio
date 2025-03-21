@@ -118,5 +118,49 @@
 }
 
   .header97 .section1 .botaoVoltar:active {
-  background-color: #C4E0EB;
+    background-color: #C4E0EB;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+ @media screen and (min-width: 900px) {
+
+  .header97 .section1 .botaoVoltar {
+    font-size: 4vw;
+ }
+
+  .header97 .section1 .botaoDeOpcoes {
+    width: 16%;
+ }
+
+  #h1 {
+    font-size: 8vw;
+ }
+
+  .header97 .section2 img {
+    width: 50%;
+ }
+
+  .header97 .section2 img:hover {
+    width: 70%;
+    transition-duration: .09s;
+ }
+
+  #sh {
+    font-size: 3.5vw;
+ }
+
+
+  .main97 section p {
+    font-size: 4vw;
+ }
 }

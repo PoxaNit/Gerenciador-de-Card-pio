@@ -54,15 +54,11 @@
   .formulario section button:active {
   background-color: #7BB9D2;
 }
-  .sectionComInput_file {
-
-}
 
   .sectionComTextarea {
   display: flex;
   flex-direction: row;
   justify-content: center;
-
 }
 
   .formulario textarea {
@@ -116,3 +112,105 @@
   width: 60%;
 }
 
+
+
+ @media screen and (min-width: 900px) {
+
+   .formulario {
+     width: 100vw;
+     display: grid;
+     grid-template-columns: repeat(2, 1fr);
+     grid-template-rows: auto;
+     row-gap: 2%;
+     column-gap: 1%;
+     grid-template-areas:
+
+     "header header"
+
+     "nome preco"
+
+     "descricao descricao"
+
+     "categoria imagem"
+
+     "ingredientes restricoes"
+
+     "botoes botoes";
+  }
+
+   .sectionHeader {
+     grid-area: header;
+     flex-direction: column;
+  }
+
+   .sectionHeader h1 {
+     font-size: 1vw;
+  }
+
+   .sectionNome {
+     grid-area: nome;
+     flex-direction: column;
+  }
+
+   .sectionDescricao {
+     grid-area: descricao;
+     flex-direction: column;
+  }
+
+   .sectionPreco {
+     grid-area: preco;
+     flex-direction: column;
+  }
+
+   .sectionCategoria {
+     grid-area: categoria;
+     flex-direction: column;
+  }
+
+   .sectionDescricao textarea {
+      max-width: 50%;
+  }
+
+   .sectionCategoria label {
+     display: block;
+  }
+
+   .sectionComInput_file {
+     grid-area: imagem;
+     flex-direction: column;
+  }
+
+   .sectionIngredientes {
+     grid-area: ingredientes;
+     flex-direction: column;
+  }
+
+   .sectionRestricoes {
+     grid-area: restricoes;
+     flex-direction: column;
+  }
+
+   .sectionComBotoes {
+     grid-area: botoes;
+  }
+
+   .formulario section {
+     max-width: 100%;
+     padding: 0;
+     margin: 0;
+  }
+   .formulario section label {
+     font-size: 3vw;
+  }
+
+   .formulario section :is(textarea, select) {
+     width: 90%;
+     margin: 0;
+  }
+
+   .sectionComTextarea {
+     flex-direction: column;
+     align-items: center;
+  }
+
+}

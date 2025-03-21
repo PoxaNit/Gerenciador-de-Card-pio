@@ -213,7 +213,7 @@ import Autenticado from "../../Autenticado.js";
 
     <section className={styles.section2}>
 
-      <h1 id = "h1">{infos_prato.nome_prato}</h1>
+      <h1 id={styles.h1}>{infos_prato.nome_prato}</h1>
       <img src={"/" + infos_prato.imagem_prato} alt="Imagem do prato não carregada!" />
 
     </section>
@@ -223,7 +223,7 @@ import Autenticado from "../../Autenticado.js";
   <main className={styles.main97}>
 
     <section id={styles.sh}>
-      <h2>Informações deste prato</h2>
+      <h2 id={styles.h2}>Informações deste prato</h2>
     </section>
 
     <section>
