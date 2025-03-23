@@ -1,6 +1,7 @@
 import React from "react";
 import Conteudo from "./componentes_App/Conteudo.js";
 import Autenticado from "./componentes_App/Autenticado.js"; //Contexto de autenticação
+import testarTamanhoJanela from "./resources/testarTamanhoJanela.js";
 
 function App() {
 
@@ -51,6 +52,30 @@ function App() {
         })();
 
     },[]);
+
+
+
+
+
+    //Verificando se o tamanho da janela do navegador é desktoo
+
+    const [modoDesktop, setModoDesktop] = React.useState(false);
+
+    const [executar, setExecutar] = React.useState(true);
+
+    React.useEffect(() => {
+
+        if (executar) {
+
+	    setExecutar(false);
+
+	    testarTamanhoJanela("(min-width: 900px)") && setModoDesktop(true);
+
+	}
+
+    }, []);
+
+
 
     return autenticado && (
         <Autenticado.Provider value={{autenticado, session_id, usuario_nome}}>

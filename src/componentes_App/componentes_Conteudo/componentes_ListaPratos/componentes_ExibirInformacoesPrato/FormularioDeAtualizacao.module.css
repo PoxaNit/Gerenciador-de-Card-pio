@@ -15,7 +15,7 @@
   font-size: 4.5vw;
 }
 
-  .sectionComBotoes {
+  #sectionComBotoes {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -117,12 +117,13 @@
  @media screen and (min-width: 900px) {
 
    .formulario {
-     width: 100vw;
+     width: 90vw;
      display: grid;
      grid-template-columns: repeat(2, 1fr);
      grid-template-rows: auto;
      row-gap: 2%;
      column-gap: 1%;
+     margin: 2%;
      grid-template-areas:
 
      "header header"
@@ -138,13 +139,15 @@
      "botoes botoes";
   }
 
-   .sectionHeader {
+   #sectionHeader {
      grid-area: header;
-     flex-direction: column;
+     padding: 0 2%;
   }
 
-   .sectionHeader h1 {
-     font-size: 1vw;
+   #sectionHeader #title {
+     font-size: 4vw;
+     border-width: 5px;
+     text-align: center;
   }
 
    .sectionNome {
@@ -168,7 +171,8 @@
   }
 
    .sectionDescricao textarea {
-      max-width: 50%;
+      max-width: 80%;
+      
   }
 
    .sectionCategoria label {
@@ -190,22 +194,77 @@
      flex-direction: column;
   }
 
-   .sectionComBotoes {
+   #sectionComBotoes {
      grid-area: botoes;
+     padding: 1%;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     background-color: #419ABE;
+     box-shadow: none;
+  }
+
+   #sectionComBotoes button {
+     width: 10%;
+     height: 80%;
+     font-size: 4vw;
+     padding: 0;
+     background-color: white;
+     color: #419ABE;
+  }
+
+   #sectionComBotoes button:active {
+     background-color: gray;
+  }
+
+   #sectionComBotoes button:disabled {
+     background-color: #A5B2BB;
   }
 
    .formulario section {
      max-width: 100%;
      padding: 0;
      margin: 0;
+     max-height: 100%;
+     box-shadow: 4px 3px 6px -2px black;
+     border-radius: 8px;
   }
+
    .formulario section label {
      font-size: 3vw;
+  }
+
+   .formulario section:has(textarea) {
+     text-align: center;
+     border-radius: 6px;
+  }
+
+   .formulario section:has(input[type="file"], select) {
+     text-align: center;
+  }
+
+   .formulario section input[type="file"],
+   .formulario section select {
+     font-size: 3vw;
+     text-align: center;
+  }
+
+   .formulario section img {
+     width: 26.999%;
+  }
+
+   .formulario section :is(textarea, input) {
+     border-width: 4px;
+  }
+
+   .formulario section :is(input) {
+     padding: 1.2%;
   }
 
    .formulario section :is(textarea, select) {
      width: 90%;
      margin: 0;
+     max-height: 50%;
   }
 
    .sectionComTextarea {

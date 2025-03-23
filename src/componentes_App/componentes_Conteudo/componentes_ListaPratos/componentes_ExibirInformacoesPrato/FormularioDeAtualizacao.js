@@ -195,10 +195,10 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
    <form ref={formulario} onSubmit={e => e.preventDefault()} className={styles.formulario}>
 
 
-     <section className={styles.sectionHeader}>
+     <section id={styles.sectionHeader}>
 
 
- 	<h1>Formulário de atualização</h1>
+ 	<h1 id={styles.title}>Formulário de atualização</h1>
 
 
      </section>
@@ -317,7 +317,7 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
      </section>
 
 
-     <section className={styles.sectionComBotoes}>
+     <section id={styles.sectionComBotoes}>
 
        <button onClick={() => {
 
