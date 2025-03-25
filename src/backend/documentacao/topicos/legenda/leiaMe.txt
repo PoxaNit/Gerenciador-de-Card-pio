@@ -1,0 +1,3 @@
+
+ Este diretório guarda os detalhes informativos sobre
+ o diretório de tópicos.

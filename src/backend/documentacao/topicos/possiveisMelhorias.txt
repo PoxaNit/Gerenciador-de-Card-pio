@@ -1,0 +1,14 @@
+
+ *Possíveis Melhorias:*
+
+
+   **Experiência de Usuário**: possibilitar a 
+     modificação de credenciais (nome, senha, 
+     email), permitir a personalização com temas de 
+     cores variadas, fornecer feedback visual e 
+     interativo em determinadas ações.
+
+
+   **Segurança**: implementar recuperação de senha, 
+     recuperação de conta e autenticação de dois 
+     fatores para aumentar a proteção das contas.

@@ -1,0 +1,18 @@
+
+ *O Que É?*
+
+
+   Esta é uma ferramenta destinada especialmente a 
+   gerentes e administradores de restaurantes. 
+   Permite ao usuário monitorar e gerenciar o menu 
+   do restaurante, como cadastrar novos pratos, 
+   remover pratos do menu, atualizar informações 
+   (preço, descrição) de pratos existentes, etc. O 
+   usuário pode procurar facilmente por pratos 
+   específicos fazendo uma rápida pesquisa por nome, 
+   ou filtrando os pratos por categoria, ou 
+   combinando as duas formas. Esta ferramenta 
+   permite ao usuário obter o status atual do menu, 
+   como o número de pratos (incluindo a contagem por 
+   categoria) e média dos preços.
+

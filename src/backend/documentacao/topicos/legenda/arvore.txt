@@ -1,0 +1,18 @@
+
+ Nestale armazenamento dos tópicos da documentação,
+ o número de "*" antes e depois dos títulos indica a
+ hierarquia.
+
+
+ Exemplos:
+
+
+ *Título*
+
+ **SubTítulo**
+
+ ***SubSubTítulo***
+
+ ****SubSubSubTítulo****
+
+ ***** ... *****

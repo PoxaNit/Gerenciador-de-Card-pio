@@ -1,0 +1,40 @@
+
+ @media screen and (min-width: 900px) {
+
+     form {
+       width: 90%;
+    }
+
+     form h1 {
+       font-size: 8vw;
+       margin-bottom: 4%;
+    }
+
+     form label {
+       font-size: 5.6vw;
+    }
+
+     .form-control {
+       font-size: 3.4vw;
+       height: 12%;
+       border-width: 3px;
+       border-radius: 6px;
+       margin-top: 6%;
+       margin-bottom: 6%;
+    }
+
+     .btn {
+       font-size: 5.4vw;
+       margin-top: 6%;
+       margin-bottom: 6%;
+    }
+
+     a {
+       font-size: 4.6vw;
+    }
+
+     .text-danger {
+       font-size: 5vw;
+    }
+
+}

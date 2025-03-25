@@ -1,0 +1,481 @@
+
+ *O Que É?*
+
+
+   Esta é uma ferramenta destinada especialmente a 
+   gerentes e administradores de restaurantes. 
+   Permite ao usuário monitorar e gerenciar o menu 
+   do restaurante, como cadastrar novos pratos, 
+   remover pratos do menu, atualizar informações 
+   (preço, descrição) de pratos existentes, etc. O 
+   usuário pode procurar facilmente por pratos 
+   específicos fazendo uma rápida pesquisa por nome, 
+   ou filtrando os pratos por categoria, ou 
+   combinando as duas formas. Esta ferramenta 
+   permite ao usuário obter o status atual do menu, 
+   como o número de pratos (incluindo a contagem por 
+   categoria) e média dos preços.
+
+ 
+ 
+ 
+
+ *Como Usar?*
+
+
+   Na tela inicial há algumas opções para explorar (como
+   você já deve ter visto):
+
+
+   **interagindo com o menu dos pratos:**
+
+
+     Clique em "Ver menu" para exibir a interface dos 
+     pratos. Se houver pratos no menu, irá exibí-los 
+     em lista, na ordem em que foram cadastrados; caso 
+     contrário, exibirá "Sem resultados".
+
+
+     ***Pesquisa por Nome***
+
+
+       No bloco superior da interface, clique no 
+       botão com um ícone de lupa para fazer uma 
+       busca pelo nome do prato que você procura. Um 
+       campo de entrada aparecerá logo abaixo do 
+       bloco superior; digite um nome e veja o 
+       resultado. Você pode sair do modo de pesquisa 
+       clicando no botão "Fechar" (ao lado do campo 
+       de entrada).
+
+
+       _Nota:_
+
+
+       Serão exibidos na lista todos os pratos que 
+       contêm o padrão que você digitou. Por 
+       exemplo: se na lista houver pratos com os 
+       nomes "morango" e "laranja", e você digitar 
+       "ran" no campo de entrada, irão aparecer 
+       tanto um como outro, pois ambos possuem o 
+       padrão no nome. A busca por nome não 
+       diferencia caracteres maiúsculos de 
+       minúsculos, ou seja: "Laranja" = "lARANJA" = 
+       "LaRaNjA" = "LARANJA" = "laranja".
+
+
+     ***Filtragem por Categoria***
+
+
+       Ainda no bloco superior, clique no botão "Por 
+       categoria" para exibir as opções de 
+       filtragem. A opção "pratos principais" é 
+       ativada automaticamente quando você liga a 
+       filtragem. Com a filtragem ligada, a lista só 
+       irá exibir os pratos que correspondem à 
+       categoria do filtro ativo. Você pode 
+       desativar a filtragem clicando no botão 
+       "Todos".
+
+
+       _Nota:_
+
+
+       Você pode combinar a busca por nome com a 
+       filtragem por categoria para buscar pratos de 
+       uma categoria específica.
+
+
+     ***Exibindo as Informações dos Pratos***
+
+
+       Na lista exibida, clique no prato que deseja 
+       analisar para abrir sua interface de 
+       informações. Na primeira sessão da interface, 
+       você verá o nome do prato e sua imagem. Na 
+       segunda sessão estarão as informações 
+       organizadas: preço, descrição, categoria, 
+       ingredientes e alergias/restrições.
+
+
+         ****Modificando os Dados do Prato****
+
+
+           Também na primeira sessão da interface, 
+           clique no menu (com 3 traços) e escolha 
+           entre as opções "Atualizar este prato" e 
+           "Deletar este prato". Se quiser fechar o 
+           menu de opções, clique em "Fechar". Ao 
+           clicar para para deletar o prato, irá 
+           exibir um alerta de confirmação; clique 
+           em "Ok" para deletar, e "Não" para 
+           cancelar. Caso clique em "Atualizar este 
+           prato", irá aparecer o formulário de 
+           atualização; preencha os campos 
+           com os dados correspondentes e clique em 
+           "Salvar" (nota: a imagem permanecerá a 
+           mesma caso você não a troque).
+
+
+   **Cadastrando Novos Pratos**
+
+
+     Na tela inicial clique em "Cadastrar pratos" e 
+     preencha o formulário com os dados necessários. 
+     Em seguida, clique em salvar. O prato será 
+     adicionado ao menu imediatamente.
+
+
+   **Vendo o Status do Menu**
+
+
+     Na tela inicial, clique em "Relatório do menu" 
+     para visualizar o estado atual. Isso exibirá 
+     informações úteis, como o total de pratos e a 
+     média de preços.
+
+ 
+ 
+ 
+
+ *Contexto de Desenvolvimento*
+
+
+   **Introdução**
+
+
+     Como estudante de Desenvolvimento de Software 
+     (Web) Front-End, a ideia deste projeto surgiu 
+     da necessidade de praticar React e começar a 
+     montar meu portfólio.
+
+
+   **Objetivo Inicial**
+
+
+     O objetivo inicial era praticar a criação de 
+     interface de usuário (UI) no Front-End, 
+     desenvolvendo um CRUD básico para os pratos do 
+     menu.
+
+
+   **Evolução e Refinamento**
+
+
+     Após concluir o objetivo principal, decidi 
+     fazer algo mais. Quis refinar e adicionar mais 
+     funcionalidades. Várias coisas que não planejei 
+     inicialmente foram incorporadas: busca por 
+     nome, filtragem por categoria, um botão que 
+     leva o usuário ao topo quando ele rola o menu 
+     dos pratos para baixo, além de um sistema de 
+     relatório onde é possível ver o estado do menu. 
+     Ao alcançar todas essas metas, quis 
+     experimentar e me aprofundar na lógica de 
+     Back-End, implementando autenticação e um 
+     sistema de contas para que cada usuário pudesse 
+     ter seu próprio ambiente personalizado e 
+     acessar seus pratos. Adicionei funcionalidades 
+     de log-in e log-out, além de um sistema para 
+     deletar contas.
+
+
+   **Limite de Refinamento**
+
+
+     Este projeto não está perfeito; ainda há muitas 
+     coisas que eu gostaria de melhorar. Contudo, 
+     não é conveniente focar em refinamentos 
+     infinitos, especialmente se meu objetivo é 
+     montar um portfólio sólido.
+
+ 
+ 
+ 
+
+ *Tecnologias Usadas*
+
+
+   HTML, CSS, JavaScript, React.js, PHP e SQLite3.
+
+ 
+ 
+ 
+
+ *O que eu Aprendi Desenvolvendo Este Projeto?*
+
+
+   **Me aprofundei na lógica de Back-End**: aprendi 
+     a fazer APIs simples (lidar com requisições e 
+     verbos HTTP, maipular JSON, endpoints), 
+     redirecionar e proteger rotas, gerenciar bancos 
+     de dados, criptografar dados (senhas), 
+     autenticar sessões de usuário e fazer código 
+     seguro.
+
+
+   **Me aprofundei em Front-End**: aprendi a 
+     desenvolver layouts, estilização com CSS, 
+     responsividade, acessibilidade, lógica do 
+     React, lógica de Front-End.
+
+
+   **Versionamento de Código**: fiz bastante uso do 
+     Git para desenvolver novas funcionalidades, 
+     corrigir erros e resolver bugs sem afetar 
+     resultados já alcançados. Aprendi branches, 
+     commits, merge, e os principais comandos.
+
+
+   **Shell Script (Bash) e Terminal (Termux)**: 
+     aprendi automação (ligar e desligar servidores, 
+     backups), gerenciar processos, manipular o 
+     sistema de arquivos, personalizar e otimizar 
+     meu fluxo de trabalho, além de outros conceitos 
+     Linux.
+
+
+ Me familiarizei com as tecnologias que usei 
+ (principalmente o PHP), melhorei minha 
+ interpretação de documentações técnicas e 
+ desenvolvi minha capacidade de aprender. Com o 
+ conhecimento que adquiri, sou capaz de fazer 
+ sistemas mais complexos.
+ 
+ 
+ 
+
+ *Possíveis Melhorias:*
+
+
+   **Experiência de Usuário**: possibilitar a 
+     modificação de credenciais (nome, senha, 
+     email), permitir a personalização com temas de 
+     cores variadas, fornecer feedback visual e 
+     interativo em determinadas ações.
+
+
+   **Segurança**: implementar recuperação de senha, 
+     recuperação de conta e autenticação de dois 
+     fatores para aumentar a proteção das contas.
+ 
+ 
+ 
+
+ *Desafios Enfrentados*
+
+
+   Quebrei muito a cabeça resolvendo bugs, erros, e 
+   problemas internos das tecnologias, como as 
+   interações entre os Hooks do React. Passei dias 
+   pensando e buscando soluções para problemas 
+   específicos (não seria uma simples pesquisa no 
+   ChatGPT que me daria a resposta), fazendo longas 
+   pesquisas para entender pequenos aspectos. Depois 
+   de juntar tudo, criei as soluções para os problemas.
+ 
+ 
+ 
+
+ *Decisões Técnicas*
+
+
+   **Arquitetura e Tecnologias**
+
+
+     ***Por que eu escolhi o PHP para o Back-End em vez 
+     de outra linguagem como Node.js ou Python?***
+
+
+         Porque o PHP é uma linguagem simples, fácil 
+	 de aprender, altamente compatível com 
+	 servidores, e é natural para o 
+	 Desenvolvimento Web.
+
+
+     ***O que motivou a escolha do React para o 
+     Front-End?***
+
+
+         No momento em que escrevo esta documentação 
+	 (e no momento que pesquisei por Frameworks 
+	 JavaScript) o React é o FrameWork Front-End 
+	 mais usado. Eu, como iniciante em 
+	 Desenvolvimento Web, quis aprender o que 
+	 julguei ser mais vantajoso.
+
+
+     ***Qual foi o critério para decidir entre SQLite, 
+     MySQL ou outro banco de dados?***
+
+
+	 SQLite é mais portável, mais simples, com uma 
+	 curva de aprendizado menor, o que seria 
+	 excelente para eu praticar com meu primeiro 
+	 projeto.
+
+
+     ***Considerei usar um Framework PHP como 
+     Laravel?***
+
+
+	 Não, pois quis me familiarizar primeiro com 
+	 o PHP e me consolidar em seus fundamentos.
+
+
+   **Estrutura do Código**
+
+
+     ***Como organizei os arquivos e pastas do Back-End e 
+     Front-End?***
+
+
+	 Front-End:
+
+	   Cada componente tem seu próprio diretório de 
+	   filhos e recursos (funções, módulos CSS). 
+	   Exemplo: o componente App.js tem o diretório 
+	   "componentes_App", onde estão seus filhos. Os 
+	   componentes de contexto (Context API) ficam em 
+	   "componentes_App" para uma "globalização" dos 
+	   contextos. Toda a fonte está em "src", 
+	   seguindo a convenção.
+
+
+	 Back-End:
+
+	   No diretório raíz estão os scripts de 
+	   CRUD, o arquivo binário do banco de 
+	   dados, e as outras pastas, como o 
+	   diretório dos scripts de autenticação.
+
+
+     ***Como separei as responsabilidades entre o 
+     Back-End e o Front-End?***
+
+
+       O Back-End cuida do gerenciamento do banco de 
+       dados, da proteção das rotas e dados, e da 
+       lógica de negócios. O Front-End cuida da 
+       renderização da página, das requisições ao 
+       servidor, e da lógica e validações do 
+       cliente.
+
+
+   **Segurança e Autenticação**
+
+
+     ***Como decidi implementar a autenticação (cookies, 
+     tokens, sessions)?***
+
+
+       Implementei autenticação e log-in via 
+       sessões, para evitar que dados sejam 
+       descobertos por meio dos cookies, e deixar a 
+       autenticação mais simples dinâmica.
+
+
+     ***Quais medidias de segurança apliquei no Back-End 
+     para evitar SQL Injection e XSS?***
+
+
+       Usei declarações preparadas (Prepared 
+       Statements) em PHP para evitar injeção de SQL 
+       (SQL Injection), e usei a função 
+       htmlspecialchars para evitar código
+       malicioso vindo das entradas de usuário.
+
+
+     ***Como protegi as rotas que exigem autenticação?***
+
+
+       Fiz redirecionamentos condicionais para a 
+       página de log-in, sempre validando a 
+       autenticação do usuário.
+
+
+   **Experiência de Usuário e Performance**
+
+
+     ***Quais otimizações fiz para melhorar a performance 
+     da aplicação?***
+
+
+       Usei Hooks do React como useMemo e 
+       useCallback para evitar re-renderizações 
+       desnecessárias, e usei Memo para componentes.
+
+
+     ***Como lidei com a responsividade e adaptação para 
+     diferentes dispositivos?***
+
+
+       Usei medidas CSS relativas e Media Queries para 
+       dispositivos com tamanhos de tela diferentes.
+
+
+   **API e Comunicação Backend-Frontend**
+
+
+     ***Como estruturei as requisições entre Back-End e 
+     Front-End?***
+
+
+       O cliente faz requisições via Fetch para as rotas 
+       definidas no Back-End, e então os scripts PHP são 
+       executados, fazendo as tarefas necessárias e 
+       retornando uma resposta em formato JSON.
+
+
+     ***Implementei cache ou alguma estratégia para 
+     reduzir requisições desnecessárias?***
+
+
+       Implementei cache guardando as respostas das 
+       requisições no armazenamento da sessão de 
+       usuário (sessionStorage), para que os dados 
+       estejam disponíveis enquanto o usuário 
+       estiver usando a aplicação, e que não 
+       persistam após o log-out.
+
+     ***Como gerencio erros e respostas do Back-End para 
+     o Front-End?***
+
+
+       O cliente trata as respostas com base em 
+       condições definidas.
+
+
+   **Testes e Versionamento**
+
+
+     ***Fiz testes automatizados ou testes manuais?***
+
+
+       Fiz bastante teste manual, implementei 
+       validações e ações condicionais para aumentar 
+       a segurança.
+
+
+     ***Como organizei o versionamento do código com 
+     Git***
+
+
+       Há branches específicas para ajustes. Quando 
+       quero implementar algo novo sem comprometer o 
+       que já tenho, eu crio uma nova branch 
+       específica para isso. Quando a funcionalidade 
+       ou ajuste está pronto, levo as modificações 
+       para a branch principal e testo.
+ 
+ 
+ 
+
+ *Planos Futuros*
+
+
+   Este aplicativo não será usado para problemas 
+   reais, mas apenas para compor o portfólio.
+ 
+ 
+ 

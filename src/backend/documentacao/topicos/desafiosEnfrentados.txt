@@ -1,0 +1,12 @@
+
+ *Desafios Enfrentados*
+
+
+   Quebrei muito a cabeça resolvendo bugs, erros, e 
+   problemas internos das tecnologias, como as 
+   interações entre os Hooks do React. Passei dias 
+   pensando e buscando soluções para problemas 
+   específicos (não seria uma simples pesquisa no 
+   ChatGPT que me daria a resposta), fazendo longas 
+   pesquisas para entender pequenos aspectos. Depois 
+   de juntar tudo, criei as soluções para os problemas.
