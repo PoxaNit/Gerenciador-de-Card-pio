@@ -134,33 +134,80 @@
 
  @media screen and (min-width: 900px) {
 
+  #corpo {
+    width: 90%;
+    margin-left: 4%;
+ }
+
+  #corpo main {
+    display: grid;
+    border-radius: 13px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    column-gap: 4%;
+    row-gap: 6%;
+    padding: 4%;
+    padding-bottom: 9%;
+    grid-template-areas: 
+      'h2 h2'
+      'preco categoria'
+      'descricao descricao'
+      'ingredientes restricoes'
+    ;
+ }
+
+  #sectionPreco {
+    grid-area: preco;
+ }
+
+  #sectionDescricao {
+    grid-area: descricao;
+ }
+
+  #sectionCategoria {
+    grid-area: categoria;
+ }
+
+  #sectionIngredientes {
+    grid-area: ingredientes;
+ }
+
+  #sectionRestricoes {
+    grid-area: restricoes;
+ }
+
   .header97 .section1 .botaoVoltar {
-    font-size: 4vw;
+    font-size: 1.5vw;
  }
 
-  .header97 .section1 .botaoDeOpcoes {
-    width: 16%;
- }
-
-  #h1 {
-    font-size: 8vw;
- }
-
-  .header97 .section2 img {
-    width: 50%;
- }
-
-  .header97 .section2 img:hover {
-    width: 70%;
-    transition-duration: .09s;
+  .header97 .section1 button {
+    width: 9%;
  }
 
   #sh {
     font-size: 3.5vw;
+    grid-area: h2;
  }
 
+  #sh h2 {
+    font-size: 2.9vw;
+ }
 
   .main97 section p {
+    font-size: 2vw;
+ }
+
+  #h1 {
     font-size: 4vw;
  }
+
+  .header97 .section2 img {
+    width: 20%;
+ }
+
+  .header97 .section2 img:hover {
+    transform: scale(1.2);
+    transition-duration: .09s;
+ }
+
 }

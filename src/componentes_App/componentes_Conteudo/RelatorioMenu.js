@@ -261,7 +261,7 @@ import verificarPratosEmCache from "../../resources/verificarPratosEmCache.js";
 
           <header>
 
-	      <button onClick={() => setRelatorio(false)}>
+	      <button id={styles.headBut} onClick={() => setRelatorio(false)}>
 
 		   <img src="/SetaBranca.png" alt="Voltar" />
 
@@ -273,7 +273,7 @@ import verificarPratosEmCache from "../../resources/verificarPratosEmCache.js";
 
 	  <main>
 
-	      <section className={styles.sectionDifferent}>
+	      <section className={styles.sectionDifferent} id={styles.sectionTotalPratos}>
 
 	          <h2>Total de pratos:</h2>
 
@@ -282,7 +282,7 @@ import verificarPratosEmCache from "../../resources/verificarPratosEmCache.js";
 	      </section>
 
 
-	      <section>
+	      <section id={styles.sectionTotalCategoria}>
 
 	          <h2>Total por categoria:</h2>
 
@@ -309,7 +309,7 @@ import verificarPratosEmCache from "../../resources/verificarPratosEmCache.js";
 	      </section>
 
 
-	      <section>
+	      <section id={styles.sectionMaisCaroBarato}>
 
 	          <h2>Prato mais caro/barato:</h2>
 		  <p>Mais caro: {<span className={styles.valores}>{maisCaro}</span>} {nomeDoMaisCaro && <span>({nomeDoMaisCaro})</span>}</p>
@@ -318,7 +318,7 @@ import verificarPratosEmCache from "../../resources/verificarPratosEmCache.js";
 	      </section>
 
 
-	      <section className={styles.sectionDifferent}>
+	      <section className={styles.sectionDifferent} id={styles.sectionMediaDosPrecos}>
 
 	 	  <h2>Média total dos preços:</h2>
 

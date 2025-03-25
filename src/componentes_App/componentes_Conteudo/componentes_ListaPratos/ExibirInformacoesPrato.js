@@ -226,23 +226,23 @@ import Autenticado from "../../Autenticado.js";
       <h2 id={styles.h2}>Informações deste prato</h2>
     </section>
 
-    <section>
+    <section id={styles.sectionPreco}>
       <p>Preço: <span>R${precoPrato}</span></p>
     </section>
 
-    <section>
+    <section id={styles.sectionDescricao}>
       <p>Descrição: <span>{infos_prato.descricao_prato}</span></p>
     </section>
 
-    <section>
+    <section id={styles.sectionCategoria}>
       <p>Categoria: <span>{infos_prato.categoria_prato}</span></p>
     </section>
 
-    <section>
+    <section id={styles.sectionIngredientes}>
       <p>Ingredientes: <span>{infos_prato.ingredientes_prato}</span></p>
     </section>
 
-    <section>
+    <section id={styles.sectionRestricoes}>
       <p>Alergias/Restrições: <span>{infos_prato.alergias_restricoes_prato}</span></p>
     </section>
 

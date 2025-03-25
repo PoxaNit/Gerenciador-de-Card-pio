@@ -75,3 +75,83 @@
    color: #FD5910;
    font-size: 5vw;
 }
+
+
+ @media screen and (min-width: 900px) {
+
+   .conteudo {
+     width: 90%;
+     margin-left: 3%;
+     margin-top: 50%;
+     border-radius: 12px;
+  }
+
+   .conteudo main {
+     display: grid;
+     grid-template-columns: repeat(2, 1fr);
+     grid-template-rows: auto;
+     column-gap: 4%;
+     row-gap: 2%;
+     grid-template-areas: 
+
+     "header header"
+
+     "totalPratos totalPorCategoria"
+
+     "maisCaroBarato mediaPrecos";
+  }
+
+   .conteudo main section {
+     box-shadow: 6px 3px 7px -6px black;
+  }
+
+   .conteudo main section p {
+     font-size: 2vw;
+  }
+
+   .conteudo main p .valores {
+     font-size: 2vw;
+  }
+
+   .conteudo main section h2 {
+     font-size: 2vw;
+  }
+
+   .conteudo header {
+     grid-area: header;
+  }
+
+   #headBut {
+     width: 10%;
+     transition-duration: .09s;
+  }
+
+   .conteudo header button:hover {
+     transform: scale(1.2);
+  }
+
+   #sectionTotalPratos {
+     grid-area: totalPratos;
+  }
+
+   #sectionTotalCategoria {
+     grid-area: totalPorCategoria;
+  }
+
+   #sectionMaisCaroBarato {
+     grid-area: maisCaroBarato;
+  }
+
+   #sectionMediaDosPrecos {
+     grid-area: mediaPrecos;
+  }
+
+   .conteudo header h1 {
+     font-size: 3vw;
+  }
+
+   .conteudo header button {
+     width: 12%;
+  }
+
+}

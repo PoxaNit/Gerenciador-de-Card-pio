@@ -61,3 +61,21 @@
   font-weight: 700;
 }
 
+
+
+ @media screen and (min-width: 900px) {
+
+   .container {
+     width: 40%;
+     left: 25%;
+  }
+
+   #section1 :is(button, b) {
+     font-size: 2vw;
+  }
+
+   #section2 button, #section3 button {
+     font-size: 2vw;
+  }
+
+}
