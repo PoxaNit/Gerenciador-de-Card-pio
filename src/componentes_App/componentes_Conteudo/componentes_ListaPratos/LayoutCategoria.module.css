@@ -85,7 +85,11 @@
 
      .conteudo .s2 main {
        flex-direction: row;
-       justify-content: space-between;
+       justify-content: space-evenly;
+    }
+
+     .s2 header h3 {
+       font-size: 3vw;
     }
 
      .conteudo .s2 main #s2b1, 
@@ -93,17 +97,17 @@
      .conteudo .s2 main #s2b3 ,
      .conteudo .s2 main #botao_ativado
     {
-       font-size: 3.1vw;
-       width: 32.78%;
+       font-size: 2vw;
+       width: 20.555%;
        padding: 1.2%;
-       border-width: 5px;
+       border-width: 3px;
        border-color: black;
        border-style: solid;
        border-radius: 7px;
     }
 
      .conteudo .s2 main #botao_ativado {
-       font-size: 4vw;
+       font-size: 2.5vw;
     }
 
 
@@ -112,10 +116,20 @@
     }
 
 
+     .conteudo section button {
+       font-size: 1.6vw;
+    }
+
      .conteudo section #b1, .conteudo section #b2 {
-       border-width: 5px;
+       font-size: 2.5vw;
+       border-width: 3px;
        border-color: black;
        border-style: solid;
        border-radius: 11px;
+    }
+
+     .conteudo section #botao_todos_ativo {
+       font-size: 2vw;
+       color: white;
     }
 }

@@ -119,7 +119,7 @@ import Confirmacao from "./componentes_Conteudo/Confirmacao";
 
 	         <p>Usuário(a): <strong>{usuario_nome}</strong></p>
 
-  	         <button onClick={() => setMostrar(m => !m)}>Conta <img alt="Opções de conta" src="/configurar.png"/></button>
+  	         <button onClick={() => setMostrar(m => !m)}>Conta <img id={styles.contaImg} alt="Opções de conta" src="/configurar.png"/></button>
 
              </section>
 

@@ -234,18 +234,18 @@ return (
 
    <legend>Cadastro de pratos</legend>
 
-   <section>
+   <section id={estilos.sectionNome}>
      <label htmlfor="nome_prato">Nome do prato:</label>
      <input onInput={e => despachar({tipo: "mudar nome", valor: e.target.value})} type="text" name="nome_prato" id="nome_prato" required />
    </section>
 
-   <section className={estilos.st}>
+   <section className={estilos.st} id={estilos.sectionDescricao}>
      <label htmlfor="descricao_prato">Descrição do produto:</label>
    <br/>
      <textarea cols="25" rows="6" id="descricao_prato" onInput={e => despachar({tipo: "mudar descricao", valor: e.target.value})} name="descricao_prato" required></textarea>
    </section>
 
-   <section>
+   <section id={estilos.sectionPreco}>
      <label htmlfor="preco_prato">Preço do prato (R$):</label>
      <input step="0.01" type="number" id="preco_prato" name="preco_prato" required onInput={e => {
 
@@ -253,7 +253,7 @@ return (
 }}/>
    </section>
 
-   <section>
+   <section id={estilos.sectionCategoria}>
      <label htmlfor="categoria_prato">Categoria:</label>
      <select name="categoria_prato" id="categoria_prato" onInput={e => despachar({tipo: "mudar categoria", valor: e.target.value})} required>
        <option selected disabled>Escolher</option>
@@ -263,26 +263,26 @@ return (
      </select>
    </section>
 
-   <section>
+   <section id={estilos.sectionImagem}>
      <label htmlfor="imagem_prato">Carregar imagem:</label>
      <input type="file" onInput={e => lerArquivo(e.target.files[0])} id="imagem_prato" name="imagem_prato" />
    <br/>
      {estados.imagem && <img alt="foto do prato" src={estados.imagem} />}
    </section>
 
-   <section className={estilos.st}>
+   <section className={estilos.st} id={estilos.sectionIngredientes}>
      <label htmlfor="ingredientes_prato">Ingredientes:</label>
    <br/>
      <textarea onInput={e => despachar({tipo: "mudar ingredientes", valor: e.target.value})} cols="25" rows="6" required id="ingredientes_prato" name="ingredientes_prato"></textarea>
    </section>
 
-   <section className={estilos.st}>
+   <section className={estilos.st} id={estilos.sectionRestricoes}>
      <label htmlfor="alergias/restricoes">Alergias/restrições:</label>
    <br/>
      <textarea cols="25" rows="6" required id="alergias/restricoes" onInput={e => despachar({tipo: "mudar alergias/restricoes", valor: e.target.value})} name="alergias/restricoes"></textarea>
    </section>
 
-   <section className={estilos.sb}>
+   <section className={estilos.sb} id={estilos.sectionBotoes}>
      <button onClick={() => fecharCadastro(true)}>Sair</button>
      <button disabled={dispararAlerta.disparar} onClick={() => {exportar()}} type="submit">Salvar</button>
    </section>

@@ -108,3 +108,44 @@
    align-items: center;
    font-size: 4.3vw;
 }
+
+
+
+
+
+ @media screen and (min-width: 900px) {
+
+   #container {
+     margin-top: 50%;
+  }
+
+   .conteudo {
+     width: 92%;
+     padding: 4%;
+     height: 40vh;
+  }
+
+   .conteudo header h1 {
+     font-size: 3vw;
+  }
+
+   .conteudo header button,
+   .conteudo main button,
+   .conteudo footer p {
+     font-size: 2.4vw;
+     height: 40%;
+  }
+
+   .conteudo main {
+     flex-direction: row;
+     max-height: 30%;
+     padding: 0;
+  }
+
+   .conteudo main button {
+     width: 40%;
+     height: 60%;
+     margin: 3% 0;
+  }
+
+}

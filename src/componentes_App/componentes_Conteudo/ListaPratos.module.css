@@ -109,15 +109,28 @@
 }
 
 
+
+
+
+
+
+
 @media screen and (min-width: 900px) {
 
   #hl button {
-    border-width: 6px;
+    border-width: 2px;
     border-radius: 10px;
+    font-size: 3vw;
+    width: 10%;
+ }
+
+  #hl button :is(img) {
+    width: 40%;
  }
 
   #hl h1 {
-    border-width: 8px;
+    font-size: 3.2vw;
+    border-width: 4px;
     border-radius: 10px;
  }
 
@@ -137,19 +150,20 @@
 
 
   .conteudo ul li {
-    max-width: 20%;
+    max-width: 10%;
  }
 
   .conteudo #lista_pratos li p {
-    font-size: 2.5vw;
+    font-size: 2vw;
     display: inline-block;
  }
+
   .conteudo ul li img {
     width: 100%;
  }
 
   #lista_pratos h2 {
-    font-size: 5vw;
+    font-size: 2vw;
     color: #EF9103;
  }
 

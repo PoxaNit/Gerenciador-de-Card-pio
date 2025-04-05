@@ -207,7 +207,7 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
      <section className={`${styles.sectionComInput} ${styles.sectionNome}`}>
 
 
-       <label htmlfor="novoNome">Novo nome:</label>
+       <label className={styles.labels} htmlfor="novoNome">Novo nome:</label>
 
        <br/>
 
@@ -222,11 +222,11 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
      <section className={styles.sectionDescricao}>
 
 
-       <label htmlfor="novaDescricao" className={styles.sectionComTextarea}>Nova descrição:</label>
+       <label className={styles.labels} htmlfor="novaDescricao" className={styles.sectionComTextarea}>Nova descrição:</label>
 
        <br/>
 
-       <textarea name="novo_descricao_prato" onInput={e => despachar({tipo: "mudar descricao", valor: e.target.value})} /*value={novosDados_prato.novo_descricao_prato}*/ required id="novaDescricao"></textarea>
+       <textarea id={styles.novaDescricao} name="novo_descricao_prato" onInput={e => despachar({tipo: "mudar descricao", valor: e.target.value})} /*value={novosDados_prato.novo_descricao_prato}*/ required id="novaDescricao"></textarea>
 
 
      </section>
@@ -237,7 +237,7 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
      <section className={`${styles.sectionComInput} ${styles.sectionPreco}`}>
 
 
-       <label htmlfor="novoPreco">Novo preço (R$):</label>
+       <label className={styles.labels} htmlfor="novoPreco">Novo preço (R$):</label>
 
        <br/>
 
@@ -252,7 +252,7 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
      <section className={styles.sectionCategoria}>
 
 
-       <label htmlfor="novaCategoria">Nova categoria:</label>
+       <label className={styles.labels} htmlfor="novaCategoria">Nova categoria:</label>
 
        <select id="novaCategoria" name="novo_categoria_prato" required onChange={e => despachar({tipo: "mudar categoria", valor: e.target.value})}>
 
@@ -275,7 +275,7 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
 
      <section className={styles.sectionComInput_file}>
 
-       <label htmlfor="novaImagem">Nova imagem:</label>
+       <label className={styles.labels} htmlfor="novaImagem">Nova imagem:</label>
 
        <br/>
 
@@ -292,11 +292,11 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
      <section className={styles.sectionIngredientes}>
 
 
-       <label htmlfor="novosIngredientes" className={styles.sectionComTextarea}>Novos ingredientes:</label>
+       <label className={styles.labels} htmlfor="novosIngredientes" className={styles.sectionComTextarea}>Novos ingredientes:</label>
 
        <br/>
 
-       <textarea required id="novosIngredientes" name="novo_ingredientes_prato" onInput={e => despachar({tipo: "mudar ingredientes", valor: e.target.value})} ></textarea>
+       <textarea required id={styles.novosIngredientes} name="novo_ingredientes_prato" onInput={e => despachar({tipo: "mudar ingredientes", valor: e.target.value})} ></textarea>
 
 
      </section>
@@ -307,11 +307,11 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
      <section className={styles.sectionRestricoes}>
 
 
-       <label htmlfor="novasAlergias_restricoes" className={styles.sectionComTextarea}>Alergias/restrições (mudar):</label>
+       <label className={styles.labels} htmlfor="novasAlergias_restricoes" className={styles.sectionComTextarea}>Alergias/restrições (mudar):</label>
 
        <br/>
 
-       <textarea required id="novasAlergias_restricoes" name="novo_alergias_restricoes_prato" onInput={e => despachar({tipo: "mudar alergias_restricoes", valor: e.target.value})}></textarea>
+       <textarea required id={styles.novasAlergias_restricoes} name="novo_alergias_restricoes_prato" onInput={e => despachar({tipo: "mudar alergias_restricoes", valor: e.target.value})}></textarea>
 
 
      </section>

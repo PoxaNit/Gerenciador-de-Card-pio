@@ -4,7 +4,7 @@ import styles from "./MensagemConfirmar.module.css";
  export default function MensagemConfirmar ({
     _mensagem = "",
     _fechar_mensagem_func, //esta função tem o objetivo de fechar esta mensagem, mas pode executar tarefas adicionais!
-    _confirmar_ok_func //e esta aqui tem o objetivo de confirmar, e também pode ser uaada para executar tarefas adicionais
+    _confirmar_ok_func //e esta aqui tem o objetivo de confirmar, e também pode ser usada para executar tarefas adicionais.
  }) {
 
 
@@ -14,9 +14,9 @@ import styles from "./MensagemConfirmar.module.css";
 
 	 <div id={styles.conteudo}>
 
-		<section>
+		<section id={styles.section1}>
 
-		    <h2>{_mensagem}</h2>
+		    <h2 id={styles.h2}>{_mensagem}</h2>
 
 		</section>
 

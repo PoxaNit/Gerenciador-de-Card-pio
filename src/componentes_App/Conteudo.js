@@ -20,7 +20,7 @@ import SincronizarPratos from "./Contexto_sincronizacao_pratos.js";
 }, []);
 
 
-  if (!cadastro && !lista && !relatorio) { return (<>
+  if (!cadastro && !lista && !relatorio) { return (<div id={styles.container}>
 
      <Topo />
 
@@ -59,7 +59,7 @@ import SincronizarPratos from "./Contexto_sincronizacao_pratos.js";
 
      </div>
 
-     </>
+     </div>
 
     )};
 

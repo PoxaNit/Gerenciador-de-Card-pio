@@ -59,13 +59,23 @@
 
  @media screen and (min-width: 900px) {
 
+   .header_pesquisa {
+     padding: 1.2%;
+  }
+
    .header_pesquisa input {
-     font-size: 3.5vw;
+     font-size: 1.4vw;
      border: solid black 4px !important;
   }
 
    .header_pesquisa button {
      border-width: 5px;
+     font-size: 2.5vw;
+     width: 13%;
+  }
+
+   .header_pesquisa label {
+     font-size: 2vw;
   }
 
 }

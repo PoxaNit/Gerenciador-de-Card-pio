@@ -36,3 +36,25 @@
    font-size: 7.4vw;
    text-align: center;
 }
+
+
+
+
+ @media screen and (min-width: 900px) {
+
+   #container {
+     width: 40%;
+     min-height: 12%;
+     height: 12%;
+     margin-left: 20%;
+  }
+
+   #mensagem {
+     font-size: 3vw;
+  }
+
+   #btns button {
+     font-size: 2.5vw;
+  }
+
+}

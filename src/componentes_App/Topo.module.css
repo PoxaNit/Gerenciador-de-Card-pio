@@ -103,3 +103,46 @@
  #conteudo p::-webkit-scrollbar {
    display: none;
 }
+
+
+
+
+
+ @media screen and (min-width: 900px) {
+
+   #conteudo {
+     width: 100%;
+     padding: 0;
+     border-width: 4px;
+     border-style: solid;
+     border-color: black;
+  }
+
+   .esconder_menu {
+     height: 3.9vh;
+  }
+
+   .mostrar_menu {
+     height: 10vh;
+  }
+
+   #conteudo section button img {
+     width: 6%;
+  }
+
+   #conteudo .section2 button {
+     height: 40%;
+  }
+
+   #contaImg {
+     width: 30%;
+  }
+
+   #conteudo section :is(p, button) {
+     font-size: 2.4vw;
+  }
+
+   hr {
+     width: 98%;
+  }
+}

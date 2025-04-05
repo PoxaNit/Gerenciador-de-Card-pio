@@ -92,3 +92,93 @@
 .form section input[type="number"] {
   width: 47%;
 }
+
+
+
+ @media screen and (min-width: 900px) {
+
+   .form {
+     width: 70%;
+     height: 6%;
+     padding: 3%;
+     margin-left: 8%;
+     display: grid;
+     grid-template-columns: repeat(2, 1fr);
+     grid-template-rows: auto;
+     column-gap: 1.2%;
+     grid-template-areas:
+       'titulo titulo'
+       'nome preco'
+       'descricao descricao'
+       'categoria imagem'
+       'ingredientes restricoes'
+       'botoes botoes';
+  }
+
+
+
+
+   .form #sectionNome {
+     grid-area: nome;
+  }
+
+   .form #sectionPreco {
+     grid-area: preco;
+  }
+
+   .form #sectionDescricao {
+     grid-area: descricao;
+  }
+
+   .form #sectionCategoria {
+     grid-area: categoria;
+  }
+
+   .form #sectionImagem {
+     grid-area: imagem;
+  }
+
+   .form #sectionIngredientes {
+     grid-area: ingredientes;
+  }
+
+   .form #sectionRestricoes {
+     grid-area: restricoes;
+  }
+
+   .form #sectionBotoes {
+     grid-area: botoes;
+  }
+
+
+
+   .form legend {
+     grid-area: titulo;
+     font-size: 3vw;
+  }
+
+
+
+
+   .form section label {
+     font-size: 2vw;
+     display: block;
+  }
+
+   .form section button {
+     font-size: 2vw;
+     height: 20%;
+  }
+
+   .form section :is(select, textarea, input) {
+     font-size: 1.8vw;
+     border-width: 5px;
+  }
+
+   .form section :has(select, textarea, input) {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+  }
+
+}
