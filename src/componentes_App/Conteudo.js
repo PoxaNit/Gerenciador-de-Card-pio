@@ -5,12 +5,14 @@ import styles from "./Conteudo.module.css";
 import RelatorioMenu from "./componentes_Conteudo/RelatorioMenu.js";
 import Topo from "./Topo.js";
 import SincronizarPratos from "./Contexto_sincronizacao_pratos.js";
+import Documentacao from "./componentes_Conteudo/Documentacao.js";
 
  export default function Conteudo () {
 
    const [cadastro, setCadastro] = React.useState(false);
    const [lista, setLista]       = React.useState(false);
    const [relatorio, setRelatorio] = React.useState(false);
+   const [doc, setDoc] = React.useState(false);
 
    const [eParaAtualizarOsFiltrados, setEParaAtualizarOsFiltrados] = React.useState(false);
 
@@ -20,7 +22,7 @@ import SincronizarPratos from "./Contexto_sincronizacao_pratos.js";
 }, []);
 
 
-  if (!cadastro && !lista && !relatorio) { return (<div id={styles.container}>
+  if (!cadastro && !lista && !relatorio && !doc) { return (<div id={styles.container}>
 
      <Topo />
 
@@ -33,7 +35,7 @@ import SincronizarPratos from "./Contexto_sincronizacao_pratos.js";
              <button onClick={() => setRelatorio(true)}
 	     className={styles.relatorio}>Relatório do menu</button>
 
-             <button className={styles.sobre}>Sobre esta aplicação</button>
+             <button className={styles.sobre} onClick={() => setDoc(true)}>Sobre esta aplicação</button>
 
          </header>
 
@@ -106,5 +108,8 @@ import SincronizarPratos from "./Contexto_sincronizacao_pratos.js";
       )};
 
   if (relatorio) { return (<RelatorioMenu setRelatorio={setRelatorio}/>)};
+
+
+  if (doc) { return (<Documentacao exibirDoc={setDoc}/>) }
 
 }

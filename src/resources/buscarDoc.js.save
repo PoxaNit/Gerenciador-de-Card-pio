@@ -1,0 +1,30 @@
+
+ async function buscarDoc () {
+
+     console.log("Buscando o conteúdo da documentação...");
+
+     const doc = sessionStorage.getItem("doc");
+
+     if (!doc) {
+
+         console.log("Fez requisição!");
+
+         const dados = await fetch("/documentacao/provedor/documentacao.php");
+
+         const json = await dados.json();
+
+         sessionStorage.setItem("doc", json.html);
+
+         return json.html;
+
+     } else {
+
+         console.log("Pegou do sessionStorage!");
+
+         return doc;
+
+     }
+
+}
+
+ export default buscarDoc;

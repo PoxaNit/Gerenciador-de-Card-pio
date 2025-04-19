@@ -1,0 +1,165 @@
+
+#Decisões Técnicas
+
+
+##Arquitetura e Tecnologias
+
+
+###Por que eu escolhi o PHP para o Back-End em vez de outra linguagem como Node.js ou Python?
+
+
+Porque o PHP é uma linguagem simples, fácil de aprender, 
+altamente compatível com servidores, e é natural para o 
+Desenvolvimento Web.
+
+
+###O que motivou a escolha do React para o Front-End?
+
+
+No momento em que escrevo esta documentação (e no momento 
+que pesquisei por Frameworks JavaScript) o React é o 
+FrameWork Front-End mais usado. Eu, como iniciante em 
+Desenvolvimento Web, quis aprender o que julguei ser mais 
+vantajoso.
+
+
+###Qual foi o critério para decidir entre SQLite, MySQL ou outro banco de dados?
+
+SQLite é mais portável, mais simples, com uma curva de 
+aprendizado menor, o que seria excelente para eu praticar 
+com meu primeiro projeto.
+
+
+###Considerei usar um Framework PHP como Laravel?
+
+
+Não, pois quis me familiarizar primeiro com o PHP e me 
+consolidar em seus fundamentos.
+
+
+##Estrutura do Código
+
+
+###Como organizei os arquivos e pastas do Back-End e Front-End?
+
+*Front-End:*
+
+Cada componente tem seu próprio diretório de filhos e 
+recursos (funções, módulos CSS). Exemplo: o componente 
+App.js tem o diretório componentes_App", onde estão seus 
+filhos. Os componentes de contexto (Context API) ficam em 
+"componentes_App" para uma "globalização" dos contextos. 
+Toda a fonte está em "src", seguindo a convenção.
+
+*Back-End:*
+
+No diretório raíz estão os scripts de CRUD, o 
+arquivo binário do banco de dados, e as outras 
+pastas, como o diretório dos scripts de 
+autenticação.
+
+
+###Como separei as responsabilidades entre o Back-End e o Front-End?
+
+
+O Back-End cuida do gerenciamento do banco de 
+dados, da proteção das rotas e dados, e da lógica 
+de negócios. O Front-End cuida da renderização da 
+página, das requisições ao servidor, e da lógica e 
+validações do cliente.
+
+
+##Segurança e Autenticação
+
+
+###Como decidi implementar a autenticação (cookies, tokens, sessions)?
+
+
+Implementei autenticação e log-in via sessões, 
+para evitar que dados sejam descobertos por meio 
+dos cookies, e deixar a autenticação mais simples 
+dinâmica.
+
+
+###Quais medidias de segurança apliquei no Back-End para evitar SQL Injection e XSS?
+
+
+Usei declarações preparadas (Prepared Statements) 
+em PHP para evitar injeção de SQL (SQL Injection), 
+e usei a função htmlspecialchars para evitar 
+código malicioso vindo das entradas de usuário.
+
+
+###Como protegi as rotas que exigem autenticação?
+
+
+Fiz redirecionamentos condicionais para a página 
+de log-in, sempre validando a autenticação do 
+usuário.
+
+
+##Experiência de Usuário e Performance
+
+
+###Quais otimizações fiz para melhorar a performance da aplicação?
+
+
+Usei Hooks do React como useMemo e useCallback 
+para evitar re-renderizações desnecessárias, e 
+usei Memo para componentes.
+
+
+###Como lidei com a responsividade e adaptação para diferentes dispositivos?
+
+
+Usei medidas CSS relativas e Media Queries para 
+dispositivos com tamanhos de tela diferentes.
+
+
+##API e Comunicação Backend-Frontend
+
+
+###Como estruturei as requisições entre Back-End e Front-End?
+
+
+O cliente faz requisições via Fetch para as rotas 
+definidas no Back-End, e então os scripts PHP são 
+executados, fazendo as tarefas necessárias e 
+retornando uma resposta em formato JSON.
+
+
+###Implementei cache ou alguma estratégia para reduzir requisições desnecessárias?
+
+
+Implementei cache guardando as respostas das 
+requisições no armazenamento da sessão de usuário 
+(sessionStorage), para que os dados estejam 
+disponíveis enquanto o usuário estiver usando a 
+aplicação, e que não persistam após o log-out.
+
+###Como gerencio erros e respostas do Back-End para o Front-End?
+
+
+O cliente trata as respostas com base em condições 
+definidas.
+
+
+##Testes e Versionamento
+
+
+###Fiz testes automatizados ou testes manuais?
+
+
+Fiz bastante teste manual, implementei validações 
+e ações condicionais para aumentar a segurança.
+
+
+###Como organizei o versionamento do código com Git
+
+
+Há branches específicas para ajustes. Quando quero 
+implementar algo novo sem comprometer o que já 
+tenho, eu crio uma nova branch específica para 
+isso. Quando a funcionalidade ou ajuste está 
+pronto, levo as modificações para a branch 
+principal e testo.

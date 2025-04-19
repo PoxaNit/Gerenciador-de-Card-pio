@@ -1,0 +1,6 @@
+
+#Tecnologias Usadas
+
+
+HTML, CSS, JavaScript, React.js, PHP e SQLite3.
+
