@@ -3,8 +3,9 @@
 # dependencies
 node_modules
 package-lock.json
-./src/backend/restaurante.db
-./src/backend/imagens/
+src/backend/restaurante.db
+src/backend/imagens/
+src/backend/testes
 /.pnp
 .pnp.js
 
