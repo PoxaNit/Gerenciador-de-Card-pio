@@ -27,8 +27,8 @@ import styles from "./Documentacao.module.css";
    return (
     <div>
 
-        <header>
-            <button onClick={() => exibirDoc(false)}>Sair</button>
+        <header id={styles.header}>
+            <button onClick={() => { window.scrollTo(0, 0); exibirDoc(false); }}>Sair</button>
             <strong>Documentação</strong>
         </header>
 

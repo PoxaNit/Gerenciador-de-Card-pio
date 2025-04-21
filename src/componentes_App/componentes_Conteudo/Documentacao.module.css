@@ -1,4 +1,26 @@
 
+ #header {
+   display: flex;
+   justify-content: space-between;
+   font-size: 4vw;
+   position: fixed;
+   background-color: white;
+   box-shadow: 1px 2px 6px -2px black;
+   top: 0;
+   width: 100%;
+   padding: 2% 0;
+}
+
+ #header button {
+   font-size: 4.3vw;
+   padding: 0 3%;
+   font-weight: 600;
+   color: white;
+   background-color: #3D90B2;
+   border-radius: 7px;
+}
+
  #main {
    padding: 0 2%;
+   margin-top: 15%;
 }
