@@ -124,25 +124,6 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 
 /*------------------------ Mandando os dados para o back-end -------------------------*/
 
-  let executarTimeout = false; //Evita de o alerta ainda estar sendo exibido depois de fechar o componente e abrir denovo
-  let deveFechar = false; //Evita o componente de fechar após exportar os dados, fechar o componente e abrir denovo ( sem isso, o componente buga ).
-
-  function fecharCadastro (fechouPeloBotaoSair = false) {
-
-      if (!fechouPeloBotaoSair && executarTimeout && deveFechar) {
-
-          executarTimeout = false;
-          setCadastro(false);
-
-      } else if (fechouPeloBotaoSair) {
-
-	    setCadastro(false);
-
-        };
-
-
-  }
-
   async function exportar () { //função para armazenar os dados no banco de dados
 
 	try {
@@ -185,22 +166,11 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 		   if (resposta_json.sucesso) {
 		       await sessionStorage.setItem("pratos_" + session_id, JSON.stringify(resposta_json));
 		       setDispararAlerta({disparar: true, tempo: 2300, msg: resposta_json.msg});
-		   };
-//		   await sessionStorage.setItem("pratos_" + session_id, resposta_json);
-/*
-		   executarTimeout = true;
+		   } else {
 
-		   deveFechar = true;
+		       setDispararAlerta({disparar: true, tempo: 2300, msg: resposta_json.msg});
 
-		   setTimeout(() => {
-
-			if (deveFechar) {
-
-			    fecharCadastro();
-
-			}
-		   }, 2300);
-*/
+		   }
 
             };
 
@@ -283,7 +253,7 @@ return (
    </section>
 
    <section className={estilos.sb} id={estilos.sectionBotoes}>
-     <button onClick={() => fecharCadastro(true)}>Sair</button>
+     <button onClick={() => setCadastro(false)}>Sair</button>
      <button disabled={dispararAlerta.disparar} onClick={() => {exportar()}} type="submit">Salvar</button>
    </section>
 

@@ -1,5 +1,7 @@
 <?php
 
+ require_once "verificarSePratoExiste.php";
+
  session_start();
 
  $db = new SQLite3("restaurante.db");
@@ -15,6 +17,16 @@
     $ingredientes_prato = $_POST["ingredientes_prato"];
     $alergias_restricoes_prato = $_POST["alergias/restricoes"];
     $usuario_email = $_SESSION["autenticado"];
+
+    if (verificarSePratoExiste($nome_prato, $usuario_email)):
+
+        echo json_encode(["msg" => "Prato já existente!",
+			  "sucesso" => false]);
+        $db->close();
+
+        exit;
+
+    endif;
 
     $imagem_prato = $_FILES["imagem_prato"];
     $nome_imagem = $imagem_prato["name"];
