@@ -8,7 +8,7 @@ src/backend/imagens/
 src/backend/testes
 /.pnp
 .pnp.js
-
+.env
 # testing
 /coverage
 
