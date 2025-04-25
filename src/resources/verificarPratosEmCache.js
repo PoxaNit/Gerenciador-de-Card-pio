@@ -12,8 +12,6 @@
 
      if (pratos) {
 
-         console.log(`Há pratos no cache: ${pratos}`);
-
          const json = JSON.parse(pratos);
 
          tratamento();
@@ -21,8 +19,6 @@
          return json;
 
      } else {
-
-         console.log('Não há pratos em cache!');
 
          executarTratamentoEmCasoNegativo && tratamento();
 

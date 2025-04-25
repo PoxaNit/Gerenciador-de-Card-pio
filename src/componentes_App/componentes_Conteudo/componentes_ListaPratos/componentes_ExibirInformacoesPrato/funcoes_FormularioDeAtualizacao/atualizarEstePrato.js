@@ -6,7 +6,7 @@ async function atualizarEstePrato (
    setPratos = () => {},
    session_id,
    informacoes_antigas) {
-console.log(`SessionStorage antes: ${sessionStorage.getItem('pratos_' + session_id)}`)
+
     const corpoDaRequisicao = new FormData(formulario.current);
     corpoDaRequisicao.append("informacoes_antigas", JSON.stringify(informacoes_antigas));
 
@@ -29,8 +29,6 @@ console.log(`SessionStorage antes: ${sessionStorage.getItem('pratos_' + session_
                body: corpoDaRequisicao
            }).then(r => r.json());
 
-console.log("Dados retornados em json: " + dados);
-
 //Chave para os dados em cache
      const chave = 'pratos_' + session_id;
 
@@ -42,7 +40,6 @@ console.log("Dados retornados em json: " + dados);
 
      setPratos(dados);
 
-console.log(`sessionStorage agora: ${sessionStorage.getItem('pratos_' + session_id)}`);
  };
 
  export default atualizarEstePrato;

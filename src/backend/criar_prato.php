@@ -18,7 +18,7 @@
     $alergias_restricoes_prato = $_POST["alergias/restricoes"];
     $usuario_email = $_SESSION["autenticado"];
 
-    if (verificarSePratoExiste($nome_prato, $usuario_email)):
+/*    if (verificarSePratoExiste($nome_prato, $usuario_email)):
 
         echo json_encode(["msg" => "Prato já existente!",
 			  "sucesso" => false]);
@@ -26,7 +26,7 @@
 
         exit;
 
-    endif;
+    endif;*/
 
     $imagem_prato = $_FILES["imagem_prato"];
     $nome_imagem = $imagem_prato["name"];

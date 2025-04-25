@@ -9,15 +9,11 @@
 
      if (pratos.sucesso) {
 
-         console.log("Pratos buscados: " + pratos.msg);
-
          tratamento();
 
          return pratos;
 
      } else {
-
-         console.log("Não foi possível retornar os pratos: " + pratos.msg);
 
          executarTratamentoEmCasoDeFalha && tratamento();
 

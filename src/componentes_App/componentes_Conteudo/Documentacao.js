@@ -12,7 +12,7 @@ import styles from "./Documentacao.module.css";
        if (executar.current)
            setConteudo(await buscarDoc());
 
-   }, [executar.current]);
+   }, []);
 
    React.useEffect(() => {
 

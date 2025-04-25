@@ -41,7 +41,7 @@ import styles from "./ItemDeLista.module.css";
 
          }
 
-     }, []);
+     }, [mql.matches, executarUseEffect]);
 
 
 

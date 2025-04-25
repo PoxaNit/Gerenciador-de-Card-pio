@@ -136,11 +136,18 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
 
 
   function tratarImagem(arquivo) {
+
      const leitor = new FileReader();
 
      leitor.onload = () => {
-
+// AVISO: por algum motivo, no momento em que desenvolvo este projeto, imagens
+//        que têm cabeçalhos EXIF (que foram tiradas usando flash, por exemplo)
+//        são corrompidas ao chegar no servidor (eu uso o PHP -S, servidor embutido de desenvolvimento).
+//        Então se a imagem que você carregar tanto na criação quanto na
+//        atualização de pratos não estiver sendo retornada corretamente
+//        do servidor, provavelmente é isso.
 	const arquivoBase64 = leitor.result;
+
 	despachar({tipo: "mudar imagem", valor: arquivoBase64});
 	setImagem_prato_novo(arquivoBase64); //arquivo de imagem que será mandada separadamente em uma futura requisição
 	setNovaImagemCarregada(leitor.result);
@@ -222,11 +229,11 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
      <section className={styles.sectionDescricao}>
 
 
-       <label className={styles.labels} htmlfor="novaDescricao" className={styles.sectionComTextarea}>Nova descrição:</label>
+       <label htmlfor="novaDescricao" className={`${styles.sectionComTextarea} ${styles.labels}`}>Nova descrição:</label>
 
        <br/>
 
-       <textarea id={styles.novaDescricao} name="novo_descricao_prato" onInput={e => despachar({tipo: "mudar descricao", valor: e.target.value})} /*value={novosDados_prato.novo_descricao_prato}*/ required id="novaDescricao"></textarea>
+       <textarea id={styles.novaDescricao} name="novo_descricao_prato" onInput={e => despachar({tipo: "mudar descricao", valor: e.target.value})} /*value={novosDados_prato.novo_descricao_prato}*/ required></textarea>
 
 
      </section>
@@ -292,7 +299,7 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
      <section className={styles.sectionIngredientes}>
 
 
-       <label className={styles.labels} htmlfor="novosIngredientes" className={styles.sectionComTextarea}>Novos ingredientes:</label>
+       <label htmlfor="novosIngredientes" className={`${styles.sectionComTextarea} ${styles.labels}`}>Novos ingredientes:</label>
 
        <br/>
 
@@ -307,7 +314,7 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
      <section className={styles.sectionRestricoes}>
 
 
-       <label className={styles.labels} htmlfor="novasAlergias_restricoes" className={styles.sectionComTextarea}>Alergias/restrições (mudar):</label>
+       <label htmlfor="novasAlergias_restricoes" className={`${styles.sectionComTextarea} ${styles.labels}`}>Alergias/restrições (mudar):</label>
 
        <br/>
 

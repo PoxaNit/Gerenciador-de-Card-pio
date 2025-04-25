@@ -70,6 +70,8 @@
 
 //TRATANDO AS IMAGENS
 
+//teste
+
  shell_exec("rm $imagem_prato_antigo"); //já contém o caminho
 
 //nova imagem
@@ -79,8 +81,6 @@
  $caminho  = "imagens/$novoNome";
 
  move_uploaded_file($imagem_prato_novo["tmp_name"], $caminho);
-
-
 
 //ÁREA DAS OPERAÇÕES COM BANCO DE DADOS -> INÍCIO
 
