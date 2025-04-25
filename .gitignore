@@ -13,7 +13,7 @@ src/backend/testes
 /coverage
 
 # production
-/build
+#/build
 
 # misc
 .DS_Store
