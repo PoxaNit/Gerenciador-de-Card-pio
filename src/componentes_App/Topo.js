@@ -46,7 +46,7 @@ import Confirmacao from "./componentes_Conteudo/Confirmacao";
 
          const dados = JSON.stringify({email: session_id});
 
-         const resposta = await fetch("/autenticacao/deletar_conta.php", {method: "POST", body: dados});
+         const resposta = await fetch("http://0.0.0.0:8000/autenticacao/deletar_conta.php", {method: "POST", body: dados});
 
          const json = await resposta.json();
 
