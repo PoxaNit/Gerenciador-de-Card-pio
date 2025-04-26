@@ -26,7 +26,7 @@ import Autenticado from "../../Autenticado.js";
   const [componente, setComponente] = React.useState(); //armazena as cordenadas de tela passadas pelo componente pai (ListaPratos.js).
   const [precoPrato, setPrecoPrato] = React.useState(); //armazena o preço formatado do prato para exibir
   const [controle_useCallback, setControle_useCallback] = React.useState(true); //controla a execução das operações iniciais
-  const [confirmar_deletar, setConfirmar_deletar] = React.useState(false); //controla quando o o alerta de condirmação deve aparecer, para confirmar se o usuário vai mesmo deletar este prato do menu
+  const [confirmar_deletar, setConfirmar_deletar] = React.useState(false); //controla quando o o alerta de confirmação deve aparecer, para confirmar se o usuário vai mesmo deletar este prato do menu
   const [exibirMenuOpcoes, setExibirMenuOpcoes] = React.useState(false); //controla quando o menu com as opções de deletar e atualizar este prato deve ser exibido
   const [dispararFormularioAtualizacao, setDispararFormularioAtualizacao] = React.useState(false); //controla quando o formulário usado para alterar as informações deste prato deve ser renderizado
 
@@ -99,7 +99,7 @@ import Autenticado from "../../Autenticado.js";
 
 	try {
 	    const dados = await JSON.stringify(infos_prato);
-	    const deletou = await fetch("http://0.0.0.0:8000/deletarPrato", {
+	    const deletou = await fetch("/deletarPrato", {
 					method: "POST",
 					body: dados
 					}).then(resposta => resposta.json());
@@ -189,7 +189,7 @@ import Autenticado from "../../Autenticado.js";
 
    return (
  <div id={styles.corpo}>
-  {exibirMenuOpcoes  && <MenuOpcoes deletarEstePrato={setConfirmar_deletar} fecharMenu={setExibirMenuOpcoes} dispararFormularioAtualizacao={setDispararFormularioAtualizacao} />}
+  {exibirMenuOpcoes === true  && <MenuOpcoes deletarEstePrato={setConfirmar_deletar} fecharMenu={setExibirMenuOpcoes} dispararFormularioAtualizacao={setDispararFormularioAtualizacao} />}
   {confirmar_deletar && <MensagemConfirmar _mensagem={"Deseja tirar este prato do menu?"} _fechar_mensagem_func={fecharMensagem_deletarConfirmacao_cancelar} _confirmar_ok_func={fecharMensagem_deletarConfirmacao_ok} />}
   <header className={styles.header97}>
 
@@ -204,7 +204,12 @@ import Autenticado from "../../Autenticado.js";
  }}>Voltar</button>
 
 
-      <button className={styles.botaoDeOpcoes} onTouchEnd={() => setExibirMenuOpcoes(true)}>
+      <button className={styles.botaoDeOpcoes} onTouchEnd={() => {
+
+          if (confirmar_deletar === true) return 0;
+          if (exibirMenuOpcoes === false) setExibirMenuOpcoes(true);
+
+      }}>
 
 	 <img src="images.png" alt="foto de menu" />
       </button>

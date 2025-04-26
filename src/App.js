@@ -10,7 +10,8 @@ function App() {
 
     async function verificarAutenticacao() {
 
-        const autenticacao = await fetch("http://0.0.0.0:8000/autenticacao/session_id.php").then(r => r.json());
+        const autenticacao = await fetch("/autenticacao/session_id.php").then(r => r.json());
+
 
         if (!autenticacao.sucesso) {
 
@@ -22,7 +23,7 @@ function App() {
 
    	    const corpo = JSON.stringify({"id": id}); //Corpo da requisição.
 
-	    const usuario_nome = await fetch("http://0.0.0.0:8000/autenticacao/retornar_nome_usuario.php", {
+	    const usuario_nome = await fetch("/autenticacao/retornar_nome_usuario.php", {
 		   			      method: "POST",
 					      body: corpo
 					    });
@@ -40,17 +41,21 @@ function App() {
 
     };
 
+    const executar = React.useRef(true);
+
     React.useEffect(() => {
 
-        (function () {
+        if (executar.current) {
 
 	     verificarAutenticacao();
 
              sessionStorage.clear();
 
-        })();
+             executar.current = false;
 
-    },[]);
+        }
+
+    }, []);
 
 
 

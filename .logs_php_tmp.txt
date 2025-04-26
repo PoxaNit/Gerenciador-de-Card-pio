@@ -1,0 +1,323 @@
+[Sat Apr 26 12:17:57 2025] PHP 8.4.2 Development Server (http://0.0.0.0:8000) started
+[Sat Apr 26 12:19:11 2025] 127.0.0.1:56590 Accepted
+[Sat Apr 26 12:19:11 2025] 127.0.0.1:56590 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 12:19:11 2025] 127.0.0.1:56590 Closing
+[Sat Apr 26 12:19:11 2025] 127.0.0.1:56592 Accepted
+[Sat Apr 26 12:19:11 2025] 127.0.0.1:56592 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 12:19:11 2025] 127.0.0.1:56592 Closing
+[Sat Apr 26 12:19:11 2025] 127.0.0.1:56594 Accepted
+[Sat Apr 26 12:19:11 2025] 127.0.0.1:56594 [200]: GET /autenticacao/login.php
+[Sat Apr 26 12:19:11 2025] 127.0.0.1:56594 Closing
+[Sat Apr 26 12:19:11 2025] 127.0.0.1:56608 Accepted
+[Sat Apr 26 12:19:11 2025] 127.0.0.1:56608 [200]: GET /autenticacao/css/login.css
+[Sat Apr 26 12:19:11 2025] 127.0.0.1:56608 Closing
+[Sat Apr 26 12:29:55 2025] 127.0.0.1:56806 Accepted
+[Sat Apr 26 12:29:55 2025] 127.0.0.1:56806 [200]: GET /autenticacao/login.php
+[Sat Apr 26 12:29:55 2025] 127.0.0.1:56806 Closing
+[Sat Apr 26 12:30:11 2025] 127.0.0.1:56846 Accepted
+[Sat Apr 26 12:30:12 2025] 127.0.0.1:56846 [302]: POST /autenticacao/login.php
+[Sat Apr 26 12:30:12 2025] 127.0.0.1:56846 Closing
+[Sat Apr 26 12:30:12 2025] 127.0.0.1:56854 Accepted
+[Sat Apr 26 12:30:12 2025] 127.0.0.1:56854 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 12:30:12 2025] 127.0.0.1:56854 Closing
+[Sat Apr 26 12:30:12 2025] 127.0.0.1:56856 Accepted
+[Sat Apr 26 12:30:12 2025] 127.0.0.1:56856 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 12:30:12 2025] 127.0.0.1:56856 Closing
+[Sat Apr 26 12:34:55 2025] 127.0.0.1:56892 Accepted
+[Sat Apr 26 12:34:55 2025] 127.0.0.1:56892 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 12:34:55 2025] 127.0.0.1:56892 Closing
+[Sat Apr 26 12:34:55 2025] 127.0.0.1:56896 Accepted
+[Sat Apr 26 12:34:55 2025] 127.0.0.1:56896 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 12:34:55 2025] 127.0.0.1:56896 Closing
+[Sat Apr 26 12:34:58 2025] 127.0.0.1:56906 Accepted
+[Sat Apr 26 12:34:58 2025] 127.0.0.1:56906 [302]: GET /autenticacao/logout.php
+[Sat Apr 26 12:34:58 2025] 127.0.0.1:56906 Closing
+[Sat Apr 26 12:34:58 2025] 127.0.0.1:56908 Accepted
+[Sat Apr 26 12:34:58 2025] 127.0.0.1:56908 [200]: GET /autenticacao/login.php
+[Sat Apr 26 12:34:58 2025] 127.0.0.1:56908 Closing
+[Sat Apr 26 12:34:58 2025] 127.0.0.1:56910 Accepted
+[Sat Apr 26 12:34:58 2025] 127.0.0.1:56910 [200]: GET /autenticacao/css/login.css
+[Sat Apr 26 12:34:58 2025] 127.0.0.1:56910 Closing
+[Sat Apr 26 12:35:26 2025] 127.0.0.1:56922 Accepted
+[Sat Apr 26 12:35:27 2025] 127.0.0.1:56922 [302]: POST /autenticacao/login.php
+[Sat Apr 26 12:35:27 2025] 127.0.0.1:56922 Closing
+[Sat Apr 26 12:35:28 2025] 127.0.0.1:56930 Accepted
+[Sat Apr 26 12:35:28 2025] 127.0.0.1:56930 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 12:35:28 2025] 127.0.0.1:56930 Closing
+[Sat Apr 26 12:35:28 2025] 127.0.0.1:56932 Accepted
+[Sat Apr 26 12:35:28 2025] 127.0.0.1:56932 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 12:35:28 2025] 127.0.0.1:56932 Closing
+[Sat Apr 26 12:35:28 2025] 127.0.0.1:56938 Accepted
+[Sat Apr 26 12:35:28 2025] 127.0.0.1:56938 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 12:35:28 2025] 127.0.0.1:56938 Closing
+[Sat Apr 26 12:35:28 2025] 127.0.0.1:56940 Accepted
+[Sat Apr 26 12:35:28 2025] 127.0.0.1:56940 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 12:35:28 2025] 127.0.0.1:56940 Closing
+[Sat Apr 26 12:51:51 2025] 127.0.0.1:57086 Accepted
+[Sat Apr 26 12:51:51 2025] 127.0.0.1:57086 [200]: GET /retornar_dados
+[Sat Apr 26 12:51:51 2025] 127.0.0.1:57086 Closing
+[Sat Apr 26 12:57:00 2025] 127.0.0.1:57150 Accepted
+[Sat Apr 26 12:57:00 2025] 127.0.0.1:57150 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 12:57:00 2025] 127.0.0.1:57150 Closing
+[Sat Apr 26 12:57:00 2025] 127.0.0.1:57154 Accepted
+[Sat Apr 26 12:57:00 2025] 127.0.0.1:57154 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 12:57:00 2025] 127.0.0.1:57154 Closing
+[Sat Apr 26 12:57:09 2025] 127.0.0.1:57170 Accepted
+[Sat Apr 26 12:57:09 2025] 127.0.0.1:57170 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 12:57:09 2025] 127.0.0.1:57170 Closing
+[Sat Apr 26 12:57:09 2025] 127.0.0.1:57174 Accepted
+[Sat Apr 26 12:57:09 2025] 127.0.0.1:57174 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 12:57:09 2025] 127.0.0.1:57174 Closing
+[Sat Apr 26 12:57:30 2025] 127.0.0.1:57192 Accepted
+[Sat Apr 26 12:57:30 2025] 127.0.0.1:57192 [200]: GET /retornar_dados
+[Sat Apr 26 12:57:30 2025] 127.0.0.1:57192 Closing
+[Sat Apr 26 12:57:35 2025] 127.0.0.1:57198 Accepted
+[Sat Apr 26 12:57:37 2025] 127.0.0.1:57198 [200]: GET /documentacao/provedor/documentacao.php
+[Sat Apr 26 12:57:37 2025] 127.0.0.1:57198 Closing
+[Sat Apr 26 12:58:23 2025] 127.0.0.1:57252 Accepted
+[Sat Apr 26 12:58:23 2025] 127.0.0.1:57252 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 12:58:23 2025] 127.0.0.1:57252 Closing
+[Sat Apr 26 12:58:23 2025] 127.0.0.1:57258 Accepted
+[Sat Apr 26 12:58:23 2025] 127.0.0.1:57258 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 12:58:23 2025] 127.0.0.1:57258 Closing
+[Sat Apr 26 12:58:53 2025] 127.0.0.1:57298 Accepted
+[Sat Apr 26 12:58:53 2025] 127.0.0.1:57298 [200]: GET /retornar_dados
+[Sat Apr 26 12:58:53 2025] 127.0.0.1:57298 Closing
+[Sat Apr 26 12:59:19 2025] 127.0.0.1:57308 Accepted
+[Sat Apr 26 12:59:19 2025] 127.0.0.1:57308 [200]: POST /criar_prato
+[Sat Apr 26 12:59:19 2025] 127.0.0.1:57308 Closing
+[Sat Apr 26 13:01:13 2025] 127.0.0.1:57330 Accepted
+[Sat Apr 26 13:01:13 2025] 127.0.0.1:57330 [200]: POST /criar_prato
+[Sat Apr 26 13:01:13 2025] 127.0.0.1:57330 Closing
+[Sat Apr 26 13:01:16 2025] 127.0.0.1:57332 Accepted
+[Sat Apr 26 13:01:16 2025] 127.0.0.1:57332 [200]: POST /criar_prato
+[Sat Apr 26 13:01:16 2025] 127.0.0.1:57332 Closing
+[Sat Apr 26 13:02:55 2025] 127.0.0.1:57344 Accepted
+[Sat Apr 26 13:02:55 2025] 127.0.0.1:57344 [200]: POST /criar_prato
+[Sat Apr 26 13:02:55 2025] 127.0.0.1:57344 Closing
+[Sat Apr 26 13:03:03 2025] 127.0.0.1:57356 Accepted
+[Sat Apr 26 13:03:03 2025] 127.0.0.1:57356 [200]: GET /imagens/680d11bf8919c.jpg
+[Sat Apr 26 13:03:03 2025] 127.0.0.1:57356 Closing
+[Sat Apr 26 13:03:14 2025] 127.0.0.1:57366 Accepted
+[Sat Apr 26 13:03:14 2025] 127.0.0.1:57366 [200]: POST /deletarPrato
+[Sat Apr 26 13:03:14 2025] 127.0.0.1:57366 Closing
+[Sat Apr 26 13:07:19 2025] 127.0.0.1:57386 Accepted
+rm: cannot remove 'imagens/680d11bf8919c.jpg': No such file or directory
+[Sat Apr 26 13:07:20 2025] 127.0.0.1:57386 [200]: POST /deletarPrato
+[Sat Apr 26 13:07:20 2025] 127.0.0.1:57386 Closing
+[Sat Apr 26 13:10:26 2025] 127.0.0.1:57428 Accepted
+[Sat Apr 26 13:10:26 2025] 127.0.0.1:57428 [200]: POST /criar_prato
+[Sat Apr 26 13:10:26 2025] 127.0.0.1:57428 Closing
+[Sat Apr 26 13:11:48 2025] 127.0.0.1:57472 Accepted
+[Sat Apr 26 13:11:48 2025] 127.0.0.1:57472 [200]: GET /imagens/680d13827bb4f.jpg
+[Sat Apr 26 13:11:48 2025] 127.0.0.1:57472 Closing
+[Sat Apr 26 13:22:12 2025] 127.0.0.1:57566 Accepted
+[Sat Apr 26 13:22:12 2025] 127.0.0.1:57566 [200]: POST /deletarPrato
+[Sat Apr 26 13:22:12 2025] 127.0.0.1:57566 Closing
+[Sat Apr 26 13:24:30 2025] 127.0.0.1:57666 Accepted
+[Sat Apr 26 13:24:30 2025] 127.0.0.1:57666 [200]: POST /criar_prato
+[Sat Apr 26 13:24:30 2025] 127.0.0.1:57666 Closing
+[Sat Apr 26 13:24:34 2025] 127.0.0.1:57670 Accepted
+[Sat Apr 26 13:24:34 2025] 127.0.0.1:57670 [200]: GET /imagens/680d16ce935d4.jpg
+[Sat Apr 26 13:24:34 2025] 127.0.0.1:57670 Closing
+[Sat Apr 26 13:25:40 2025] 127.0.0.1:57694 Accepted
+[Sat Apr 26 13:25:40 2025] 127.0.0.1:57694 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 13:25:40 2025] 127.0.0.1:57694 Closing
+[Sat Apr 26 13:25:40 2025] 127.0.0.1:57698 Accepted
+[Sat Apr 26 13:25:40 2025] 127.0.0.1:57698 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 13:25:40 2025] 127.0.0.1:57698 Closing
+[Sat Apr 26 13:25:49 2025] 127.0.0.1:57712 Accepted
+[Sat Apr 26 13:25:49 2025] 127.0.0.1:57712 [200]: GET /retornar_dados
+[Sat Apr 26 13:25:49 2025] 127.0.0.1:57712 Closing
+[Sat Apr 26 13:25:49 2025] 127.0.0.1:57716 Accepted
+[Sat Apr 26 13:25:49 2025] 127.0.0.1:57716 [200]: GET /imagens/680d16ce935d4.jpg
+[Sat Apr 26 13:25:49 2025] 127.0.0.1:57716 Closing
+[Sat Apr 26 13:30:02 2025] 127.0.0.1:57738 Accepted
+[Sat Apr 26 13:30:02 2025] 127.0.0.1:57738 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 13:30:02 2025] 127.0.0.1:57738 Closing
+[Sat Apr 26 13:30:02 2025] 127.0.0.1:57742 Accepted
+[Sat Apr 26 13:30:02 2025] 127.0.0.1:57742 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 13:30:02 2025] 127.0.0.1:57742 Closing
+[Sat Apr 26 13:30:03 2025] 127.0.0.1:57750 Accepted
+[Sat Apr 26 13:30:03 2025] 127.0.0.1:57750 [200]: GET /retornar_dados
+[Sat Apr 26 13:30:03 2025] 127.0.0.1:57750 Closing
+[Sat Apr 26 13:30:03 2025] 127.0.0.1:57752 Accepted
+[Sat Apr 26 13:30:03 2025] 127.0.0.1:57752 [200]: GET /imagens/680d16ce935d4.jpg
+[Sat Apr 26 13:30:03 2025] 127.0.0.1:57752 Closing
+[Sat Apr 26 13:31:24 2025] 127.0.0.1:57770 Accepted
+[Sat Apr 26 13:31:24 2025] 127.0.0.1:57770 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 13:31:24 2025] 127.0.0.1:57770 Closing
+[Sat Apr 26 13:31:24 2025] 127.0.0.1:57774 Accepted
+[Sat Apr 26 13:31:24 2025] 127.0.0.1:57774 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 13:31:24 2025] 127.0.0.1:57774 Closing
+[Sat Apr 26 13:31:25 2025] 127.0.0.1:57782 Accepted
+[Sat Apr 26 13:31:25 2025] 127.0.0.1:57782 [200]: GET /retornar_dados
+[Sat Apr 26 13:31:25 2025] 127.0.0.1:57782 Closing
+[Sat Apr 26 13:31:25 2025] 127.0.0.1:57784 Accepted
+[Sat Apr 26 13:31:25 2025] 127.0.0.1:57784 [200]: GET /imagens/680d16ce935d4.jpg
+[Sat Apr 26 13:31:25 2025] 127.0.0.1:57784 Closing
+[Sat Apr 26 13:37:10 2025] 127.0.0.1:57810 Accepted
+[Sat Apr 26 13:37:10 2025] 127.0.0.1:57810 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 13:37:10 2025] 127.0.0.1:57810 Closing
+[Sat Apr 26 13:37:10 2025] 127.0.0.1:57814 Accepted
+[Sat Apr 26 13:37:10 2025] 127.0.0.1:57814 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 13:37:10 2025] 127.0.0.1:57814 Closing
+[Sat Apr 26 13:37:13 2025] 127.0.0.1:57822 Accepted
+[Sat Apr 26 13:37:13 2025] 127.0.0.1:57822 [200]: GET /retornar_dados
+[Sat Apr 26 13:37:13 2025] 127.0.0.1:57822 Closing
+[Sat Apr 26 13:37:13 2025] 127.0.0.1:57824 Accepted
+[Sat Apr 26 13:37:13 2025] 127.0.0.1:57824 [200]: GET /imagens/680d16ce935d4.jpg
+[Sat Apr 26 13:37:13 2025] 127.0.0.1:57824 Closing
+[Sat Apr 26 13:38:28 2025] 127.0.0.1:57842 Accepted
+[Sat Apr 26 13:38:28 2025] 127.0.0.1:57842 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 13:38:28 2025] 127.0.0.1:57842 Closing
+[Sat Apr 26 13:38:28 2025] 127.0.0.1:57846 Accepted
+[Sat Apr 26 13:38:28 2025] 127.0.0.1:57846 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 13:38:28 2025] 127.0.0.1:57846 Closing
+[Sat Apr 26 13:38:30 2025] 127.0.0.1:57854 Accepted
+[Sat Apr 26 13:38:30 2025] 127.0.0.1:57854 [200]: GET /retornar_dados
+[Sat Apr 26 13:38:30 2025] 127.0.0.1:57854 Closing
+[Sat Apr 26 13:38:30 2025] 127.0.0.1:57856 Accepted
+[Sat Apr 26 13:38:30 2025] 127.0.0.1:57856 [200]: GET /imagens/680d16ce935d4.jpg
+[Sat Apr 26 13:38:30 2025] 127.0.0.1:57856 Closing
+[Sat Apr 26 13:54:29 2025] 127.0.0.1:57978 Accepted
+[Sat Apr 26 13:54:29 2025] 127.0.0.1:57978 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 13:54:29 2025] 127.0.0.1:57978 Closing
+[Sat Apr 26 13:54:29 2025] 127.0.0.1:57986 Accepted
+[Sat Apr 26 13:54:29 2025] 127.0.0.1:57986 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 13:54:29 2025] 127.0.0.1:57986 Closing
+[Sat Apr 26 13:54:29 2025] 127.0.0.1:57990 Accepted
+[Sat Apr 26 13:54:29 2025] 127.0.0.1:57990 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 13:54:29 2025] 127.0.0.1:57990 Closing
+[Sat Apr 26 13:54:29 2025] 127.0.0.1:57994 Accepted
+[Sat Apr 26 13:54:29 2025] 127.0.0.1:57994 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 13:54:29 2025] 127.0.0.1:57994 Closing
+[Sat Apr 26 13:54:30 2025] 127.0.0.1:58000 Accepted
+[Sat Apr 26 13:54:30 2025] 127.0.0.1:58000 [200]: GET /retornar_dados
+[Sat Apr 26 13:54:30 2025] 127.0.0.1:58000 Closing
+[Sat Apr 26 13:54:46 2025] 127.0.0.1:58012 Accepted
+[Sat Apr 26 13:54:46 2025] 127.0.0.1:58012 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 13:54:46 2025] 127.0.0.1:58012 Closing
+[Sat Apr 26 13:54:46 2025] 127.0.0.1:58014 Accepted
+[Sat Apr 26 13:54:46 2025] 127.0.0.1:58014 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 13:54:46 2025] 127.0.0.1:58014 Closing
+[Sat Apr 26 13:54:46 2025] 127.0.0.1:58020 Accepted
+[Sat Apr 26 13:54:46 2025] 127.0.0.1:58020 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 13:54:46 2025] 127.0.0.1:58020 Closing
+[Sat Apr 26 13:54:46 2025] 127.0.0.1:58022 Accepted
+[Sat Apr 26 13:54:46 2025] 127.0.0.1:58022 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 13:54:46 2025] 127.0.0.1:58022 Closing
+[Sat Apr 26 13:55:01 2025] 127.0.0.1:58036 Accepted
+[Sat Apr 26 13:55:01 2025] 127.0.0.1:58036 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 13:55:01 2025] 127.0.0.1:58036 Closing
+[Sat Apr 26 13:55:01 2025] 127.0.0.1:58040 Accepted
+[Sat Apr 26 13:55:01 2025] 127.0.0.1:58040 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 13:55:01 2025] 127.0.0.1:58040 Closing
+[Sat Apr 26 13:55:01 2025] 127.0.0.1:58046 Accepted
+[Sat Apr 26 13:55:01 2025] 127.0.0.1:58046 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 13:55:01 2025] 127.0.0.1:58046 Closing
+[Sat Apr 26 13:55:01 2025] 127.0.0.1:58048 Accepted
+[Sat Apr 26 13:55:01 2025] 127.0.0.1:58048 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 13:55:01 2025] 127.0.0.1:58048 Closing
+[Sat Apr 26 13:56:53 2025] 127.0.0.1:58070 Accepted
+[Sat Apr 26 13:56:53 2025] 127.0.0.1:58070 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 13:56:53 2025] 127.0.0.1:58070 Closing
+[Sat Apr 26 13:56:53 2025] 127.0.0.1:58074 Accepted
+[Sat Apr 26 13:56:53 2025] 127.0.0.1:58074 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 13:56:53 2025] 127.0.0.1:58074 Closing
+[Sat Apr 26 13:56:54 2025] 127.0.0.1:58082 Accepted
+[Sat Apr 26 13:56:54 2025] 127.0.0.1:58082 [200]: GET /retornar_dados
+[Sat Apr 26 13:56:54 2025] 127.0.0.1:58082 Closing
+[Sat Apr 26 13:56:54 2025] 127.0.0.1:58084 Accepted
+[Sat Apr 26 13:56:54 2025] 127.0.0.1:58084 [200]: GET /imagens/680d16ce935d4.jpg
+[Sat Apr 26 13:56:54 2025] 127.0.0.1:58084 Closing
+[Sat Apr 26 13:57:05 2025] 127.0.0.1:58108 Accepted
+[Sat Apr 26 13:57:05 2025] 127.0.0.1:58108 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 13:57:05 2025] 127.0.0.1:58108 Closing
+[Sat Apr 26 13:57:05 2025] 127.0.0.1:58112 Accepted
+[Sat Apr 26 13:57:05 2025] 127.0.0.1:58112 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 13:57:05 2025] 127.0.0.1:58112 Closing
+[Sat Apr 26 13:57:11 2025] 127.0.0.1:58132 Accepted
+[Sat Apr 26 13:57:11 2025] 127.0.0.1:58132 [200]: GET /retornar_dados
+[Sat Apr 26 13:57:11 2025] 127.0.0.1:58132 Closing
+[Sat Apr 26 13:57:11 2025] 127.0.0.1:58134 Accepted
+[Sat Apr 26 13:57:11 2025] 127.0.0.1:58134 [200]: GET /imagens/680d16ce935d4.jpg
+[Sat Apr 26 13:57:11 2025] 127.0.0.1:58134 Closing
+[Sat Apr 26 13:57:48 2025] 127.0.0.1:58158 Accepted
+[Sat Apr 26 13:57:48 2025] 127.0.0.1:58158 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 13:57:48 2025] 127.0.0.1:58158 Closing
+[Sat Apr 26 13:57:48 2025] 127.0.0.1:58162 Accepted
+[Sat Apr 26 13:57:48 2025] 127.0.0.1:58162 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 13:57:48 2025] 127.0.0.1:58162 Closing
+[Sat Apr 26 13:57:53 2025] 127.0.0.1:58176 Accepted
+[Sat Apr 26 13:57:53 2025] 127.0.0.1:58176 [200]: GET /retornar_dados
+[Sat Apr 26 13:57:53 2025] 127.0.0.1:58176 Closing
+[Sat Apr 26 13:57:53 2025] 127.0.0.1:58178 Accepted
+[Sat Apr 26 13:57:53 2025] 127.0.0.1:58178 [200]: GET /imagens/680d16ce935d4.jpg
+[Sat Apr 26 13:57:53 2025] 127.0.0.1:58178 Closing
+[Sat Apr 26 13:58:15 2025] 127.0.0.1:58190 Accepted
+[Sat Apr 26 13:58:17 2025] 127.0.0.1:58190 [200]: GET /documentacao/provedor/documentacao.php
+[Sat Apr 26 13:58:17 2025] 127.0.0.1:58190 Closing
+[Sat Apr 26 13:59:10 2025] 127.0.0.1:58202 Accepted
+[Sat Apr 26 13:59:10 2025] 127.0.0.1:58202 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 13:59:10 2025] 127.0.0.1:58202 Closing
+[Sat Apr 26 13:59:10 2025] 127.0.0.1:58206 Accepted
+[Sat Apr 26 13:59:10 2025] 127.0.0.1:58206 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 13:59:10 2025] 127.0.0.1:58206 Closing
+[Sat Apr 26 13:59:12 2025] 127.0.0.1:58214 Accepted
+[Sat Apr 26 13:59:13 2025] 127.0.0.1:58214 [200]: GET /documentacao/provedor/documentacao.php
+[Sat Apr 26 13:59:13 2025] 127.0.0.1:58214 Closing
+[Sat Apr 26 13:59:32 2025] 127.0.0.1:58226 Accepted
+[Sat Apr 26 13:59:32 2025] 127.0.0.1:58226 [200]: GET /retornar_dados
+[Sat Apr 26 13:59:32 2025] 127.0.0.1:58226 Closing
+[Sat Apr 26 13:59:34 2025] 127.0.0.1:58228 Accepted
+[Sat Apr 26 13:59:34 2025] 127.0.0.1:58228 [200]: GET /imagens/680d16ce935d4.jpg
+[Sat Apr 26 13:59:34 2025] 127.0.0.1:58228 Closing
+[Sat Apr 26 14:00:04 2025] 127.0.0.1:58242 Accepted
+[Sat Apr 26 14:00:04 2025] 127.0.0.1:58242 [200]: POST /atualizarPrato
+[Sat Apr 26 14:00:04 2025] 127.0.0.1:58242 Closing
+[Sat Apr 26 14:00:04 2025] 127.0.0.1:58246 Accepted
+[Sat Apr 26 14:00:04 2025] 127.0.0.1:58246 [200]: GET /imagens/680d1f24290f9.jpg
+[Sat Apr 26 14:00:04 2025] 127.0.0.1:58246 Closing
+[Sat Apr 26 14:08:02 2025] 127.0.0.1:58336 Accepted
+[Sat Apr 26 14:08:03 2025] 127.0.0.1:58336 [200]: GET /documentacao/provedor/documentacao.php
+[Sat Apr 26 14:08:03 2025] 127.0.0.1:58336 Closing
+[Sat Apr 26 14:10:12 2025] 127.0.0.1:58346 Accepted
+[Sat Apr 26 14:10:12 2025] 127.0.0.1:58346 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 14:10:12 2025] 127.0.0.1:58346 Closing
+[Sat Apr 26 14:10:12 2025] 127.0.0.1:58350 Accepted
+[Sat Apr 26 14:10:12 2025] 127.0.0.1:58350 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 14:10:12 2025] 127.0.0.1:58350 Closing
+[Sat Apr 26 14:10:17 2025] 127.0.0.1:58358 Accepted
+[Sat Apr 26 14:10:17 2025] 127.0.0.1:58358 [200]: GET /retornar_dados
+[Sat Apr 26 14:10:17 2025] 127.0.0.1:58358 Closing
+[Sat Apr 26 14:10:22 2025] 127.0.0.1:58362 Accepted
+[Sat Apr 26 14:10:22 2025] 127.0.0.1:58362 [200]: GET /autenticacao/session_id.php
+[Sat Apr 26 14:10:22 2025] 127.0.0.1:58362 Closing
+[Sat Apr 26 14:10:22 2025] 127.0.0.1:58366 Accepted
+[Sat Apr 26 14:10:22 2025] 127.0.0.1:58366 [200]: POST /autenticacao/retornar_nome_usuario.php
+[Sat Apr 26 14:10:22 2025] 127.0.0.1:58366 Closing
+[Sat Apr 26 14:12:01 2025] 127.0.0.1:58418 Accepted
+[Sat Apr 26 14:12:02 2025] 127.0.0.1:58418 [200]: POST /criar_prato
+[Sat Apr 26 14:12:02 2025] 127.0.0.1:58418 Closing
+[Sat Apr 26 14:12:04 2025] 127.0.0.1:58422 Accepted
+[Sat Apr 26 14:12:04 2025] 127.0.0.1:58422 [200]: POST /criar_prato
+[Sat Apr 26 14:12:04 2025] 127.0.0.1:58422 Closing
+[Sat Apr 26 14:12:06 2025] 127.0.0.1:58428 Accepted
+[Sat Apr 26 14:12:06 2025] 127.0.0.1:58428 [200]: GET /imagens/680d21f1eb26a.jpg
+[Sat Apr 26 14:12:06 2025] 127.0.0.1:58428 Closing
+[Sat Apr 26 14:12:06 2025] 127.0.0.1:58430 Accepted
+[Sat Apr 26 14:12:06 2025] 127.0.0.1:58430 [200]: GET /imagens/680d1f24290f9.jpg
+[Sat Apr 26 14:12:06 2025] 127.0.0.1:58430 Closing
+[Sat Apr 26 14:12:29 2025] 127.0.0.1:58450 Accepted
+[Sat Apr 26 14:12:29 2025] 127.0.0.1:58450 [200]: POST /atualizarPrato
+[Sat Apr 26 14:12:29 2025] 127.0.0.1:58450 Closing
+[Sat Apr 26 14:12:30 2025] 127.0.0.1:58454 Accepted
+[Sat Apr 26 14:12:30 2025] 127.0.0.1:58454 [200]: GET /imagens/680d220dd3ddf.jpg
+[Sat Apr 26 14:12:30 2025] 127.0.0.1:58454 Closing
+[Sat Apr 26 14:12:42 2025] 127.0.0.1:58476 Accepted
+[Sat Apr 26 14:12:42 2025] 127.0.0.1:58476 [200]: POST /atualizarPrato
+[Sat Apr 26 14:12:42 2025] 127.0.0.1:58476 Closing
+[Sat Apr 26 14:12:42 2025] 127.0.0.1:58480 Accepted
+[Sat Apr 26 14:12:42 2025] 127.0.0.1:58480 [200]: GET /imagens/680d221aa2fdf.jpg
+[Sat Apr 26 14:12:42 2025] 127.0.0.1:58480 Closing
