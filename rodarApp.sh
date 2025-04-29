@@ -84,7 +84,6 @@
 
      php -S 0.0.0.0:8000 -t . >> "${localCorreto}/.logs_php_tmp.txt" 2>&1 &
 
-
 }
 
 
@@ -229,6 +228,12 @@
 
 }
 
+ function ativarLimpezaPeriodicaDaPastaImagens {
+
+   # Previne contra o acúmulo de lixo na pasta das imagens
+     ./orquesraLimparPastaImagens.sh "./src/backend" "./src/backend" "./src/backend/imagens" &
+
+}
 
 
 # Para quando o usuário fizer ^C para parar o programa
@@ -250,3 +255,4 @@
    ajustarLocalizacao
    ligarServidores
    ajustarInterface
+   ativarLimpezaPeriodicaDaPastaImagens
