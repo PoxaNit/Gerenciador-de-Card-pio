@@ -38,6 +38,12 @@
    fi
 
 
+# Criando a pasta temporária para armazenar os IDs dos processos
+   mkdir -p "${HOME}/tmp/rodarApp_pid"
+
+
+# Previne contra o acúmulo de lixo na pasta das imagens
+   ./src/backend/orquestraLimparPastaImagens.sh &
 
 
 
@@ -63,7 +69,6 @@
 
 
 
-
 #Roda o projeto
  function ligarServidores {
 
@@ -73,7 +78,7 @@
 
 
    # Ligando o servidor de desenvolvimento do React
-     npm start &> .logs_react_tmp.txt &
+     npm start &> .logs_react_tmp.txt & echo $! > ${HOME}/tmp/rodarApp_pid/node.pid
 
 
 
@@ -82,7 +87,7 @@
 
      cd "$caminhoBackend"
 
-     php -S 0.0.0.0:8000 -t . >> "${localCorreto}/.logs_php_tmp.txt" 2>&1 &
+     php -S 0.0.0.0:8000 -t . >> "${localCorreto}/.logs_php_tmp.txt" 2>&1 & echo $! > ${HOME}/tmp/rodarApp_pid/php.pid
 
 }
 
@@ -118,9 +123,19 @@
      rm "${localCorreto}/.logs_php_tmp.txt"
 
 
-   # Matando os processos dos servidores
-     pkill node
-     pkill php
+
+
+   # Matando os processos dos criados nesse programa
+     pkill -P $$
+
+     for f in ${HOME}/tmp/rodarApp_pid/*.pid; do
+
+         kill $(cat $f) &> /dev/null
+
+     done
+
+     kill $(ps | grep "/node" | grep -v grep | awk '{print $1}') &> /dev/null
+
 
 
      echo -e "\033[1;33mServidores desligados!\033[0m"
@@ -196,11 +211,11 @@
 
      if [[ $1 = "r" ]]; then
 
-         tail -f "${localCorreto}/.logs_react_tmp.txt" &
+         tail -f "${localCorreto}/.logs_react_tmp.txt" & echo $! > ${HOME}/tmp/rodarApp_pid/tail_logReact.pid
 
      elif [[ $1 = "p" ]]; then
 
-         tail -f "${localCorreto}/.logs_php_tmp.txt" &
+         tail -f "${localCorreto}/.logs_php_tmp.txt" & echo $! > ${HOME}/tmp/rodarApp_pid/tail_logPhp.pid
 
      fi
 
@@ -220,7 +235,11 @@
 
  function voltarAoMenu {
 
-     pkill tail
+     for f in ${HOME}/tmp/rodarApp_pid/tail*.pid; do
+
+         kill $(cat $f) &> /dev/null
+
+     done
 
      clear
 
@@ -228,12 +247,7 @@
 
 }
 
- function ativarLimpezaPeriodicaDaPastaImagens {
 
-   # Previne contra o acúmulo de lixo na pasta das imagens
-     ./orquesraLimparPastaImagens.sh "./src/backend" "./src/backend" "./src/backend/imagens" &
-
-}
 
 
 # Para quando o usuário fizer ^C para parar o programa
@@ -255,4 +269,5 @@
    ajustarLocalizacao
    ligarServidores
    ajustarInterface
-   ativarLimpezaPeriodicaDaPastaImagens
+
+
