@@ -139,7 +139,7 @@
 	     <footer>
 
 	         <nav>
-	             <a href="http://0.0.0.0:8000/autenticacao/login.php">Já tem uma conta?</a>
+	             <a href="http://gerenciadormenu.free.nf/autenticacao/login.php">Já tem uma conta?</a>
 	         </nav>
   	             <?php if (!empty($erros)): ?>
 
@@ -165,7 +165,7 @@
 
   	         <?php
 
-		     echo "<a href=http://0.0.0.0:8000/autenticacao/login.php>Entrar</a>";
+		     echo "<a href=http://gerenciadormenu.free.nf/autenticacao/login.php>Entrar</a>";
 
 	         ?>
 

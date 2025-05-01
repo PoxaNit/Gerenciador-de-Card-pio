@@ -4,7 +4,7 @@
 
  if (!isset($_SESSION["autenticado"])):
 
-     header("Location: http://0.0.0.0:8000/autenticacao/login.php");
+     header("Location: http://gerenciadormenu.free.nf/autenticacao/login.php");
 
      exit;
 
