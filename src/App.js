@@ -1,9 +1,9 @@
-import React from "react";
-import Conteudo from "./componentes_App/Conteudo.js";
-import Autenticado from "./componentes_App/Autenticado.js"; //Contexto de autenticação
+//import React from "react";
+//import Conteudo from "./componentes_App/Conteudo.js";
+//import Autenticado from "./componentes_App/Autenticado.js"; //Contexto de autenticação
 
 function App() {
-return <div>Testando...</div>;
+return <div>Testando...</div>;/*
     const [autenticado, setAutenticado] = React.useState(false);
     const [session_id, setSession_id] = React.useState("");
     const [usuario_nome, setUsuario_nome] = React.useState("");
@@ -67,6 +67,6 @@ return <div>Testando...</div>;
             </div>
         </Autenticado.Provider>
     );
-}
+*/}
 
 export default App;
