@@ -15,7 +15,7 @@ function App() {
 
         if (!autenticacao.sucesso) {
 
-            window.location = "http://0.0.0.0:8000/autenticacao/login.php";
+            window.location = "http://gerenciadormenu.free.nf/autenticacao/login.php";
 
         } else {
 
