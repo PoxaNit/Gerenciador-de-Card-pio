@@ -54,7 +54,7 @@
      elseif (!empty($senha)): //Para a senha não estar vazia, o email e a senha devem estar corretos
 
 	 $_SESSION["autenticado"] = $_POST["email"];
-	 header("Location: http://0.0.0.0:3000"); //Redireciona o usuário para meu aplicativo web react
+	 header("Location: https://gerenciadormenu.netlify.app"); //Redireciona o usuário para meu aplicativo web react
 	 exit;
 
      endif;
@@ -119,7 +119,7 @@
 		 </section>
 
 		 <nav>
-		     <a href="http://0.0.0.0:8000/autenticacao/cadastro.php">Não tem uma conta?</a>
+		     <a href="http://gerenciadormenu.free.nf/autenticacao/cadastro.php">Não tem uma conta?</a>
 		 </nav>
 
 		 <?php if (!empty($erros)): ?>
