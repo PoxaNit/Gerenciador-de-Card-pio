@@ -23,7 +23,7 @@ function App() {
 
    	    const corpo = JSON.stringify({"id": id}); //Corpo da requisição.
 
-	    const usuario_nome = await fetch("/autenticacao/retornar_nome_usuario.php", {
+	    const usuario_nome = await fetch("http://gerenciadormenu.free.nf/autenticacao/retornar_nome_usuario.php", {
 		   			      method: "POST",
 					      body: corpo
 					    });
