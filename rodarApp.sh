@@ -41,10 +41,8 @@
 # Criando a pasta temporária para armazenar os IDs dos processos
    mkdir -p "${HOME}/tmp/rodarApp_pid"
 
-
 # Previne contra o acúmulo de lixo na pasta das imagens
-   ./src/backend/orquestraLimparPastaImagens.sh &
-
+   ./src/backend/orquestraLimparPastaImagens.sh & echo $! > "${HOME}/tmp/rodarApp_pid/orquestraLimpeza.pid"
 
 
 

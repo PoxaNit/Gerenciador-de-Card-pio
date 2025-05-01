@@ -13,7 +13,7 @@
 
      $resultado = $stmt->execute();
 
-     if ($a = $resultado->fetchArray(SQLITE3_ASSOC)):
+     if ($resultado->fetchArray(SQLITE3_ASSOC)):
       // Se a imagem estiver sendo usada (está no banco), não é lixo. Deixa como está.
          exit;
 
@@ -23,6 +23,7 @@
 
      endif;
 
+     $db->close();
 }
 
  limparPastaImagens($argv[1], $argv[2]);

@@ -5,21 +5,33 @@
 
 
 
-# [[ $# -ne 1 ]] && echo "Deve se passar um argumento!" && exit 1
+ if [[ $# -gt 0 ]]; then
+
+     clear
+
+     echo "Este programa não aceita parâmetros!"
+
+     sleep 5
+
+     exit 1
+
+ fi
 
 
 
  while true; do
 
-     cd ~/projetos/cadastro_produtos_restaurante/src/backend
+   # Para isso funcionar, esse script deve ser executado
+   # por rodarApp.sh, na raíz do projeto.
+     cd src/backend
 
      imagens=$(ls imagens)
 
      for img in $imagens; do
 
-         php ./limparPastaImagens.php \
-             ./restaurante.db         \
-             ./imagens/"${img}"
+         php "limparPastaImagens.php" \
+             "restaurante.db"         \
+             "imagens/${img}"
 
      done
 
