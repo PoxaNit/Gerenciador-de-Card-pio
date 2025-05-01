@@ -9,7 +9,7 @@ function App() {
     const [usuario_nome, setUsuario_nome] = React.useState("");
 
     async function verificarAutenticacao() {
-
+window.location = "http://gerenciadormenu.free.nf";
         const autenticacao = await fetch("http://gerenciadormenu.free.nf/autenticacao/session_id.php").then(r => r.json());
 
 
