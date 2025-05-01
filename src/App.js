@@ -10,7 +10,7 @@ function App() {
 
     async function verificarAutenticacao() {
 
-        const autenticacao = await fetch("/autenticacao/session_id.php").then(r => r.json());
+        const autenticacao = await fetch("http://gerenciadormenu.free.nf/autenticacao/session_id.php").then(r => r.json());
 
 
         if (!autenticacao.sucesso) {

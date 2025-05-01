@@ -99,7 +99,7 @@ import Autenticado from "../../Autenticado.js";
 
 	try {
 	    const dados = await JSON.stringify(infos_prato);
-	    const deletou = await fetch("/deletarPrato", {
+	    const deletou = await fetch("http://gerenciadormenu.free.nf/deletarPrato", {
 					method: "POST",
 					body: dados
 					}).then(resposta => resposta.json());

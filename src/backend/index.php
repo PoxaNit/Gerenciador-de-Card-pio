@@ -17,10 +17,13 @@
 	include "atualizarPrato.php";
  exit;
 
+ else:
+
+     header("Content-Type: application/json");
+
+     echo json_encode(["msg" => "Zona Proibida!", "sucesso" => false]);
+
  endif;
 
 
 
-
-
-?>

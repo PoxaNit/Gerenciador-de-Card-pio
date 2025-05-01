@@ -156,7 +156,7 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 
 		   const dados = new FormData(form.current);
 
-		   const resposta = await fetch("/criar_prato", {
+		   const resposta = await fetch("http://gerenciadormenu.free.nf/criar_prato", {
 		     method: "POST",
 		     body: dados
 		  });
