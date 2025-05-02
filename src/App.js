@@ -8,11 +8,13 @@ function App() {
 
  async function a () {
 
+     let req = "str padrão";
+
      alert("Dentro da função async...");
 
-     alert("Vai fazer requirição...");
+     alert("Vai fazer requisição...");
 
-     const req = await fetch("http://gerenciadormenu.free.nf");
+     req = await fetch("http://gerenciadormenu.free.nf");
 
      alert(req);
 
