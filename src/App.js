@@ -10,6 +10,12 @@ function App() {
 
      alert("Dentro da função async...");
 
+     alert("Vai fazer requirição...");
+
+     const req = await fetch("http://gerenciadormenu.free.nf");
+
+     alert(req);
+
      alert("Saindo...");
 
  }
