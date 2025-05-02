@@ -8,8 +8,7 @@ function App() {
   const resposta = fetch("http://gerenciadormenu.free.nf/autenticacao/login.php");
   const json = resposta.json();
 
-  setTimeout(() => alert(json), 5000);
-
+  return <div>Conteúdo: {json}</div>
 
 
 /*
