@@ -14,7 +14,7 @@ function App() {
 
      alert("Vai fazer requisição...");
 
-     req = await fetch("http://gerenciadormenu.free.nf");
+     req = await fetch("https://gerenciadormenu.free.nf");
 
      alert(req);
 
