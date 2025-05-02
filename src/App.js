@@ -3,12 +3,12 @@
 //import Autenticado from "./componentes_App/Autenticado.js"; //Contexto de autenticação
 
 function App() {
-
-
-  const resposta = fetch("http://gerenciadormenu.free.nf/autenticacao/login.php");
-  const json = resposta.json();
-
-  return <div>Conteúdo: {json}</div>
+alert("Início do Programa!");
+ setTimeout(() => alert(resposta.json()));
+  var resposta = fetch("http://gerenciadormenu.free.nf/autenticacao/login.php");
+  var json = resposta.json();
+alert("Fim do programa!");
+  return <div>Conteúdo: {json}</div>;
 
 
 /*
