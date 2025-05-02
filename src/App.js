@@ -1,9 +1,15 @@
-import React from "react";
-import Conteudo from "./componentes_App/Conteudo.js";
-import Autenticado from "./componentes_App/Autenticado.js"; //Contexto de autenticação
+//import React from "react";
+//import Conteudo from "./componentes_App/Conteudo.js";
+//import Autenticado from "./componentes_App/Autenticado.js"; //Contexto de autenticação
 
 function App() {
 
+ const resposta = fetch("http://gerenciadormenu.free.nf/autenticacao/login.php")
+                  .then(r => r.json());
+
+ setTimeout(() => alert(resposta), 5000);
+
+/*
     const [autenticado, setAutenticado] = React.useState(false);
     const [session_id, setSession_id] = React.useState("");
     const [usuario_nome, setUsuario_nome] = React.useState("");
@@ -67,6 +73,6 @@ function App() {
             </div>
         </Autenticado.Provider>
     );
-}
+*/}
 
 export default App;
