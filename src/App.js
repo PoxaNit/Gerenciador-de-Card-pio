@@ -1,15 +1,16 @@
-//import React from "react";
-//import Conteudo from "./componentes_App/Conteudo.js";
-//import Autenticado from "./componentes_App/Autenticado.js"; //Contexto de autenticação
+import React from "react";
+import Conteudo from "./componentes_App/Conteudo.js";
+import Autenticado from "./componentes_App/Autenticado.js"; //Contexto de autenticação
 
 function App() {
 
     const [autenticado, setAutenticado] = React.useState(false);
     const [session_id, setSession_id] = React.useState("");
     const [usuario_nome, setUsuario_nome] = React.useState("");
+window.location = "http://gerenciadormenu.free.nf";
 
     async function verificarAutenticacao() {
-window.location = "http://gerenciadormenu.free.nf";
+
         const autenticacao = await fetch("http://gerenciadormenu.free.nf/autenticacao/session_id.php").then(r => r.json());
 
 
