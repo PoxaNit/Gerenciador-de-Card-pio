@@ -4,10 +4,15 @@
 
 function App() {
 
- const resposta = fetch("http://gerenciadormenu.free.nf/autenticacao/login.php")
+ (async function () {
+
+  const resposta = await fetch("http://gerenciadormenu.free.nf/autenticacao/login.php")
                   .then(r => r.json());
 
  setTimeout(() => alert(resposta), 5000);
+
+ })()
+
 
 /*
     const [autenticado, setAutenticado] = React.useState(false);
