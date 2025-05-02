@@ -3,10 +3,6 @@
 //import Autenticado from "./componentes_App/Autenticado.js"; //Contexto de autenticação
 
 function App() {
-alert("Início do Programa!");
- setTimeout(() => alert("Fez requisição"), 5000);
-  var resposta = fetch("http://gerenciadormenu.free.nf/autenticacao/login.php");
-alert("Fim do programa!");
   return <div>Conteúdo: olá, mundo!</div>;
 
 
