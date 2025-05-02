@@ -4,27 +4,7 @@
 
 function App() {
 
- alert("Início do Programa!")
-
- async function a () {
-
-     let req = "str padrão";
-
-     alert("Dentro da função async...");
-
-     alert("Vai fazer requisição...");
-
-     req = await fetch("https://gerenciadormenu.free.nf");
-
-     alert(req);
-
-     alert("Saindo...");
-
- }
-a();
- alert("Fim do Programa!");
-
- return <h1>Olá, mundo!</h1>
+ fetch("http://gerenciadormenu.free.nf").then(r => alert(r.json()));
 
 /*
     const [autenticado, setAutenticado] = React.useState(false);
