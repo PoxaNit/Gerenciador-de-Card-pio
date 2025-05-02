@@ -7,7 +7,6 @@ function App() {
     const [autenticado, setAutenticado] = React.useState(false);
     const [session_id, setSession_id] = React.useState("");
     const [usuario_nome, setUsuario_nome] = React.useState("");
-window.location = "http://gerenciadormenu.free.nf";
 
     async function verificarAutenticacao() {
 
