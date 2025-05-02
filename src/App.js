@@ -3,8 +3,20 @@
 //import Autenticado from "./componentes_App/Autenticado.js"; //Contexto de autenticação
 
 function App() {
-  return <div>Conteúdo: olá, mundo!</div>;
 
+ alert("Início do Programa!")
+
+ async function a () {
+
+     alert("Dentro da função async...");
+
+     alert("Saindo...");
+
+ }
+a();
+ alert("Fim do Programa!");
+
+ return <h1>Olá, mundo!</h1>
 
 /*
     const [autenticado, setAutenticado] = React.useState(false);
