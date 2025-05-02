@@ -3,13 +3,13 @@
 //import Autenticado from "./componentes_App/Autenticado.js"; //Contexto de autenticação
 
 function App() {
-return <div>Olá, mundo!</div>;/*
+
     const [autenticado, setAutenticado] = React.useState(false);
     const [session_id, setSession_id] = React.useState("");
     const [usuario_nome, setUsuario_nome] = React.useState("");
 
     async function verificarAutenticacao() {
-
+window.location = "http://gerenciadormenu.free.nf";
         const autenticacao = await fetch("http://gerenciadormenu.free.nf/autenticacao/session_id.php").then(r => r.json());
 
 
@@ -67,6 +67,6 @@ return <div>Olá, mundo!</div>;/*
             </div>
         </Autenticado.Provider>
     );
-*/}
+}
 
 export default App;
