@@ -4,16 +4,12 @@
 
 function App() {
 
- async function requi () {
 
-  const resposta = await fetch("http://gerenciadormenu.free.nf/autenticacao/login.php");
-  const json = await resposta.json();
+  const resposta = fetch("http://gerenciadormenu.free.nf/autenticacao/login.php");
+  const json = resposta.json();
 
   setTimeout(() => alert(json), 5000);
 
- }
-
- requi();
 
 
 /*
