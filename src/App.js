@@ -4,8 +4,13 @@
 
 function App() {
 
- fetch("http://gerenciadormenu.free.nf").then(r => alert(r.json()));
+ async function a () {
 
+     const resp = await fetch("http://gerenciadormenu.free.nf").then(r => alert(r.json()));
+     alert(resp);
+
+}
+a();
 /*
     const [autenticado, setAutenticado] = React.useState(false);
     const [session_id, setSession_id] = React.useState("");
