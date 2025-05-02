@@ -4,11 +4,10 @@
 
 function App() {
 alert("Início do Programa!");
- setTimeout(() => alert(resposta.json()), 5000);
+ setTimeout(() => alert("Fez requisição"), 5000);
   var resposta = fetch("http://gerenciadormenu.free.nf/autenticacao/login.php");
-  var json = resposta.json();
 alert("Fim do programa!");
-  return <div>Conteúdo: {json}</div>;
+  return <div>Conteúdo: olá, mundo!</div>;
 
 
 /*
