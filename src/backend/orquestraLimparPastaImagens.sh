@@ -19,11 +19,15 @@
 
 
 
+
+
+#Para isso funcionar, esse script deve ser executado
+#por rodarApp.sh, na raíz do projeto.
+ cd src/backend
+
+
  while true; do
 
-   # Para isso funcionar, esse script deve ser executado
-   # por rodarApp.sh, na raíz do projeto.
-     cd src/backend
 
      imagens=$(ls imagens)
 
@@ -35,8 +39,7 @@
 
      done
 
-     cd ../../
-
-     sleep 20
+   # Espera de 10 minutos
+     sleep 600
 
  done
