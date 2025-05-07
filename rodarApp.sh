@@ -85,7 +85,13 @@
 
      cd "$caminhoBackend"
 
-     php -S 0.0.0.0:8000 -t . >> "${localCorreto}/.logs_php_tmp.txt" 2>&1 & echo $! > ${HOME}/tmp/rodarApp_pid/php.pid
+     php -S 0.0.0.0:8080 -t . >> "${localCorreto}/.logs_php_tmp.txt" 2>&1 & echo $! > ${HOME}/tmp/rodarApp_pid/php.pid || echo "Porta 8080 não disponível para rodar o php. Você pode mudar a porta escrevendo no próprio script" && pararProjeto
+
+     ngrok http 8080 &> /dev/null & echo $! > "${HOME}/tmp/rodarApp_pid/ngrok.pid"
+
+     sleep 3
+
+     ./atualizarGist_urlBackend.sh > /dev/null
 
 }
 
