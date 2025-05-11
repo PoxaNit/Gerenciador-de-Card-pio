@@ -18,7 +18,7 @@
  fi
 
 
-
+ trap "pkill sleep" SIGINT
 
 
 #Para isso funcionar, esse script deve ser executado

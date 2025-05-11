@@ -1,8 +1,8 @@
 <?php
 
- header("Access-Control-Allow-Origin: https://gerenciadormenu.netlify.app");
+ header("Access-Control-Allow-Origin: *");
  header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
- header("Access-Control-Allow-Headers: Content-Type, Authorization");
+ header("Access-Control-Allow-Headers: Content-Type, Authorization, ngrok-skip-browser-warning");
 
 
  if ($_SERVER["REQUEST_METHOD"] === "OPTIONS"):
@@ -14,6 +14,16 @@
  endif;
 
 
+
+ if ($_SERVER["REQUEST_URI"] === "/autenticacao/session_id"):
+
+     echo json_encode(["uri" => $_SERVER["REQUEST_URI"]]);
+
+     exit;
+
+ endif;
+
+/*
  if ($_SERVER["REQUEST_URI"] === "/retornar_dados"):
 	require_once "retornar_dados.php";
  exit;
@@ -38,5 +48,6 @@
 
  endif;
 
+*/
 
-
+ echo json_encode(["msg" => "Testando..."]);

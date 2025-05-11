@@ -1,39 +1,60 @@
-//import React from "react";
-//import Conteudo from "./componentes_App/Conteudo.js";
-//import Autenticado from "./componentes_App/Autenticado.js"; //Contexto de autenticação
+import React from "react";
+import Conteudo from "./componentes_App/Conteudo.js";
+import Autenticado from "./componentes_App/Autenticado.js"; //Contexto de autenticação
+import buscarUrlDoBackend from "./resources/buscarUrlDoBackend.js";
 
 function App() {
 
- async function a () {
-
-     const resp = await fetch("http://gerenciadormenu.free.nf").then(r => alert(r.json()));
-     alert(resp);
-
-}
-a();
-/*
+    const [urlBackend, setUrlBackend] = React.useState("");
     const [autenticado, setAutenticado] = React.useState(false);
     const [session_id, setSession_id] = React.useState("");
     const [usuario_nome, setUsuario_nome] = React.useState("");
 
+
+
+
+    React.useEffect(() => {
+
+        if (!urlBackend) buscarUrlDoBackend(url => setUrlBackend(url));
+
+/*        if (urlBackend) {
+
+            fetch(urlBackend + "/autenticacao/session_id.php", {headers:{"ngrok-skip-browser-warning":"true"}}).
+            then(r => r.text()).then(t => alert(t))
+
+        }
+*/
+    }, [urlBackend]);
+
+
+
+
+
+
     async function verificarAutenticacao() {
 
-        const autenticacao = await fetch("http://gerenciadormenu.free.nf/autenticacao/session_id.php").then(r => r.json());
+        const autenticacao = await fetch(urlBackend + "/autenticacao/session_id.php",
+        {
+         headers:{
+           "ngrok-skip-browser-warning":"true"
+         }
+        }).then(r => r.json());
 
 
         if (!autenticacao.sucesso) {
 
-            window.location = "http://gerenciadormenu.free.nf/autenticacao/login.php";
+            window.location = urlBackend + "/autenticacao/login.php";
 
         } else {
 
 	    const id = autenticacao.id;
 
-   	    const corpo = JSON.stringify({"id": id}); //Corpo da requisição.
+   	    const corpo = JSON.stringify({"id": id}); //Corpo da próxima requisição.
 
-	    const usuario_nome = await fetch("http://gerenciadormenu.free.nf/autenticacao/retornar_nome_usuario.php", {
+	    const usuario_nome = await fetch(urlBackend + "/autenticacao/retornar_nome_usuario.php", {
 		   			      method: "POST",
-					      body: corpo
+					      body: corpo,
+         				      headers:{"ngrok-skip-browser-warning":"true"}
 					    });
 
 	    const json = await usuario_nome.json();
@@ -49,11 +70,15 @@ a();
 
     };
 
+
+
     const executar = React.useRef(true);
+
+
 
     React.useEffect(() => {
 
-        if (executar.current) {
+        if (urlBackend && executar.current) {
 
 	     verificarAutenticacao();
 
@@ -63,18 +88,18 @@ a();
 
         }
 
-    }, []);
+    }, [urlBackend]);
 
 
 
 
     return autenticado && (
-        <Autenticado.Provider value={{autenticado, session_id, usuario_nome}}>
+        <Autenticado.Provider value={{autenticado, session_id, usuario_nome, urlBackend}}>
             <div className="App">
    	        <Conteudo />
             </div>
         </Autenticado.Provider>
     );
-*/}
+}
 
 export default App;
