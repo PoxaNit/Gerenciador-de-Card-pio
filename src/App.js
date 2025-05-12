@@ -15,6 +15,7 @@ function App() {
 
     React.useEffect(() => {
 
+   // Guardando a URL no estado 'urlBackend'
         if (!urlBackend) buscarUrlDoBackend(url => setUrlBackend(url));
 
     }, [urlBackend]);
@@ -24,7 +25,7 @@ function App() {
 
 
 
-    async function verificarAutenticacao() {
+    const verificarAutenticacao = React.useCallback(async () => {
 
         const autenticacao = await fetch(urlBackend + "/autenticacao/session_id.php",
         {
@@ -61,7 +62,7 @@ function App() {
 
 
 
-    };
+    }, [urlBackend]);
 
 
 
@@ -81,7 +82,7 @@ function App() {
 
         }
 
-    }, [urlBackend]);
+    }, [urlBackend, verificarAutenticacao]);
 
 
 
