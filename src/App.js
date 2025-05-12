@@ -37,7 +37,7 @@ function App() {
 
         if (!autenticacao.sucesso) {
 
-            window.location = urlBackend + "/autenticacao/login.php";
+            window.location = urlBackend + "/autenticacao/login.php?ngrok-skip-browser-warning=true";
 
         } else {
 
