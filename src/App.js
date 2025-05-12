@@ -17,13 +17,6 @@ function App() {
 
         if (!urlBackend) buscarUrlDoBackend(url => setUrlBackend(url));
 
-/*        if (urlBackend) {
-
-            fetch(urlBackend + "/autenticacao/session_id.php", {headers:{"ngrok-skip-browser-warning":"true"}}).
-            then(r => r.text()).then(t => alert(t))
-
-        }
-*/
     }, [urlBackend]);
 
 
