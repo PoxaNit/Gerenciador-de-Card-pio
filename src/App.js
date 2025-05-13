@@ -41,7 +41,7 @@ function App() {
 
         if (!autenticacao.sucesso) {
 
-            window.location = urlBackend + "/autenticacao/login.php" + "?ngrok-skip-browser-warning=any";
+            window.location = urlBackend + "/autenticacao/login.php?ngrok-skip-browser-warning=any";
 
         } else {
 
