@@ -16,7 +16,11 @@ function App() {
     React.useEffect(() => {
 
    // Guardando a URL no estado 'urlBackend'
-        if (!urlBackend) buscarUrlDoBackend(url => setUrlBackend(url));
+        if (!urlBackend) {
+
+            buscarUrlDoBackend(url => setUrlBackend(url));
+
+        }
 
     }, [urlBackend]);
 
@@ -37,7 +41,7 @@ function App() {
 
         if (!autenticacao.sucesso) {
 
-            window.location = urlBackend + "/autenticacao/login.php?ngrok-skip-browser-warning=true";
+            window.location = urlBackend + "/autenticacao/login.php" + "?ngrok-skip-browser-warning=any";
 
         } else {
 

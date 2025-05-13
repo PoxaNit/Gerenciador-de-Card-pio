@@ -6,6 +6,7 @@
  # meu projeto em tempo real.
 
 
+
  if [[ $# -gt 1 ]]; then
 
      echo "Este script só aceita uma opção. Uso: atualizarGist_urlBackend.sh [-OPÇÃO]"
@@ -71,6 +72,7 @@
  "${url_gist}"
 )
 
+
  [[ $# -eq 0 ]] && echo -e "\033[1;32mAtualização feita!\033[0m"
 
 
@@ -87,13 +89,14 @@
 
    # Retornar a URL do backend
 
-     echo "$dados" | jq -r .files.[].raw_url | xargs curl -s |
-     jq -r .backend_url
+     echo "$dados" | jq -r .files.[].raw_url | xargs curl -s | jq -r .backend_url
 
      exit 0
 
  else
 
      echo -e "\033[1;33mArgumento inválido: $1\033[0m"
+
+     exit 1
 
  fi

@@ -89,6 +89,8 @@
 
      ngrok http 8080 &> /dev/null & echo $! > "${HOME}/tmp/rodarApp_pid/ngrok.pid"
 
+     cd ../../
+
      sleep 3
 
      ./atualizarGist_urlBackend.sh > /dev/null
