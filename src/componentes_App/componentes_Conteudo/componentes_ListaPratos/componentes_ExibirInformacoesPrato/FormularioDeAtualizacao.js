@@ -23,7 +23,7 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
 
    const formulario = React.useRef(); //Faz referência ao formulário de atualização deste componente.
 
-   const { session_id } = React.useContext(Autenticado);
+   const { session_id, urlBackend } = React.useContext(Autenticado);
 
 
    const [novosDados_prato, despachar] = React.useReducer(reducer, { //local de armazenamento dos novos dados
@@ -165,6 +165,7 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
    if (novosDadosPreenchidos) {
 
         await atualizarEstePrato(
+	      urlBackend,
               formulario,
               novaImagemCarregada,
               imagem_prato_novo,

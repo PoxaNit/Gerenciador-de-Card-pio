@@ -27,7 +27,7 @@ export default function ListaPratos ({setLista}) {
 
   const { eParaAtualizarOsFiltrados } = React.useContext(SincronizarPratos);
 
-  const { session_id } = React.useContext(Autenticado);
+  const { session_id, urlBackend } = React.useContext(Autenticado);
 
   const [componenteExibir, setComponenteExibir] = React.useState({ //controla quando e quais informações exibir do prato clicado.
     renderizar: false,
@@ -228,7 +228,7 @@ export default function ListaPratos ({setLista}) {
 
                    setDispararAlerta({mensagem: "carregando...", tempo: 20000, exibir: true});
 
-		   const pratosBuscados = await buscarPratos();
+		   const pratosBuscados = await buscarPratos(urlBackend);
 
 
 	           if (pratosBuscados) {
@@ -239,7 +239,12 @@ export default function ListaPratos ({setLista}) {
 
 	               setPratos(pratosBuscados);
 
-	           }
+	           } else {
+		   // Se a função buscarPratos retorna falsey é porque o usuário não
+          	   // está autenticado (logado).
+                       setDispararAlerta({mensagem: "Usuário(a) não logado(a)!", tempo: 20000, exibir: true});
+		       return null;
+                   }
 
 
                    setDispararAlerta({mensagem: "", tempo: 0, exibir: false});
@@ -316,7 +321,7 @@ export default function ListaPratos ({setLista}) {
 
              >
 
-                 <img src={"/ePZfIIUTjEcAAAAASUVORK5CYII_-removebg-preview.png"} alt="Ícone de lupa" />
+                 <img src={urlBackend + "/imagens.php?img=ePZfIIUTjEcAAAAASUVORK5CYII_-removebg-preview.png"} alt="Ícone de lupa" />
 
              </button>
 

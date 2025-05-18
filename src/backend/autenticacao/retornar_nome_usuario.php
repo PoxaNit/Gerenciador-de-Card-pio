@@ -2,19 +2,6 @@
 
  //Este programa retorna o nome de usuário que corresponde ao seu email ( id ) de autenticação guardado no banco de dados.
 
- header("Access-Control-Allow-Origin: *");
- header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
- header("Access-Control-Allow-Headers: Content-Type, ngrok-skip-browser-warning");
-
-
- if ($_SERVER["REQUEST_METHOD"] === "OPTIONS"):
-
-     http_response_code(200);
-     exit;
-
- endif;
-
-
  header("Content-Type: application/json");
 
  $erros = [];

@@ -1,53 +1,52 @@
 <?php
 
- header("Access-Control-Allow-Origin: *");
- header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
- header("Access-Control-Allow-Headers: Content-Type, Authorization, ngrok-skip-browser-warning");
+// Se o navegador pedir o arquivo js
+ if (preg_match("/\/static\/js\/main\.[a-f0-9]+\.js$/", $_SERVER["REQUEST_URI"])):
 
+     $arquivoJs = glob(__DIR__ . "/../../build/static/js/main.*.js");
 
- if ($_SERVER["REQUEST_METHOD"] === "OPTIONS"):
+     if ($arquivoJs && count($arquivoJs) > 0):
 
-     http_response_code(200);
+         header("Content-Type: application/javascript");
 
-     exit;
+         readfile($arquivoJs[0]);
 
- endif;
+         exit;
 
+     else:
 
+         http_response_code(404);
 
- if ($_SERVER["REQUEST_URI"] === "/autenticacao/session_id"):
+         echo "Arquivo JavaScript não encontrado!";
 
-     echo json_encode(["uri" => $_SERVER["REQUEST_URI"]]);
+         exit;
 
-     exit;
+     endif;
+// Se pedir o css
+ elseif (preg_match("/\/static\/css\/main\.[a-f0-9]+\.css$/", $_SERVER["REQUEST_URI"])):
 
- endif;
+     $arquivoCss = glob(__DIR__ . "/../../build/static/css/main.*.css");
 
-/*
- if ($_SERVER["REQUEST_URI"] === "/retornar_dados"):
-	require_once "retornar_dados.php";
- exit;
+     if ($arquivoCss && count($arquivoCss) > 0):
 
-   elseif ($_SERVER["REQUEST_URI"] === "/criar_prato"):
-	include "criar_prato.php";
- exit;
+         header("Content-Type: text/css");
 
-   elseif ($_SERVER["REQUEST_URI"] === "/deletarPrato"):
-	include "deletarPrato.php";
- exit;
+         readfile($arquivoCss[0]);
 
-   elseif ($_SERVER["REQUEST_URI"] === "/atualizarPrato"):
-	include "atualizarPrato.php";
- exit;
+         exit;
+
+     else:
+
+         http_response_code(404);
+
+         echo "Arquivo CSS não encontrado!";
+
+         exit;
+
+     endif;
 
  else:
-
-     header("Content-Type: application/json");
-
-     echo json_encode(["msg" => "Zona Proibida!", "sucesso" => false]);
+// Serve o html por padrão
+     readfile(__DIR__ . "/../../build/index.html");
 
  endif;
-
-*/
-
- echo json_encode(["msg" => "Testando..."]);

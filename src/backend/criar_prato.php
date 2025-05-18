@@ -4,6 +4,18 @@
 
  session_start();
 
+ if (!isset($_SESSION["autenticado"])):
+
+     http_response_code(401);
+
+     header("Content-Type: application/json");
+
+     echo json_encode(["sucesso" => false, "msg" => "Usuário(a) não logado(a)!"]);
+
+     exit;
+
+ endif;
+
  $db = new SQLite3("restaurante.db");
 
  if ($_SERVER["REQUEST_METHOD"] === "POST"):

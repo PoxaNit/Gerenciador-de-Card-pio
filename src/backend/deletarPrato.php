@@ -2,6 +2,18 @@
 
   session_start();
 
+  if (!isset($_SESSION["autenticado"])):
+
+      http_response_status(401);
+
+      header("Content-Type: application/json");
+
+      echo json_encode(["sucesso" => false, "msg" => "Usuário(a) não logado(a)!"]);
+
+      exit;
+
+  endif;
+
   $usuario_email = $_SESSION["autenticado"];
 
   $db = new SQLite3("restaurante.db");

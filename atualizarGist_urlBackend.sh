@@ -89,13 +89,17 @@
 
    # Retornar a URL do backend
 
-     echo "$dados" | jq -r .files.[].raw_url | xargs curl -s | jq -r .backend_url
+     urlBackend=$(echo "$dados" | jq -r .files.[].raw_url | xargs curl -s | jq -r .backend_url)
+
+     sed -i -e "s#^urlBackend=.*#urlBackend=\"${urlBackend}\"#" .env
+
+     echo "$urlBackend"
 
      exit 0
 
  else
 
-     echo -e "\033[1;33mArgumento inválido: $1\033[0m"
+     echo -e "\033[1;33mO Gist foi atualizado, mas o argumento $1 é inválido!\033[0m"
 
      exit 1
 

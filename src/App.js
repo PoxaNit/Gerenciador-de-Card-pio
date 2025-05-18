@@ -41,7 +41,7 @@ function App() {
 
         if (!autenticacao.sucesso) {
 
-            window.location = urlBackend + "/autenticacao/login.php?ngrok-skip-browser-warning=any";
+            window.location = urlBackend + "/autenticacao/login.php?ngrok-skip-browser-warning=any&AppjsAqui=true";
 
         } else {
 
@@ -92,12 +92,16 @@ function App() {
 
 
 
-    return autenticado && (
+    return autenticado ? (
         <Autenticado.Provider value={{autenticado, session_id, usuario_nome, urlBackend}}>
             <div className="App">
    	        <Conteudo />
             </div>
         </Autenticado.Provider>
+    ) : (
+
+        <div><h1>Carregando...</h1></div>
+
     );
 }
 

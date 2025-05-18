@@ -3,7 +3,7 @@ import styles from "./RelatorioMenu.module.css";
 import Autenticado from "../Autenticado.js";
 import buscarPratos from "../../resources/buscarPratos.js";
 import verificarPratosEmCache from "../../resources/verificarPratosEmCache.js";
-
+import MensagemAlerta from "../MensagemAlerta.js";
 
 
  export default function RelatorioMenu ({ setRelatorio }) {
@@ -11,9 +11,12 @@ import verificarPratosEmCache from "../../resources/verificarPratosEmCache.js";
    React.useEffect(() => window.scrollTo(0, 0), []);
 
 
-   const { session_id } = React.useContext(Autenticado);
+   const { session_id, urlBackend } = React.useContext(Autenticado);
 
    const [informacoes, setInformacoes] = React.useState([]); //guarda as informações dos pratos do menu
+
+   const [dispararAlerta, setDispararAlerta] = React.useState({mensagem: "", tempo: 0, exibir: false});
+
 
 
 //                       Separação das categorias
@@ -224,7 +227,7 @@ import verificarPratosEmCache from "../../resources/verificarPratosEmCache.js";
 
                } else {
 
-                   const resposta = await buscarPratos();
+                   const resposta = await buscarPratos(urlBackend);
 
                    const status = resposta?.sucesso;
 
@@ -238,6 +241,10 @@ import verificarPratosEmCache from "../../resources/verificarPratosEmCache.js";
                        sessionStorage.setItem(chave, valor); //Para acesso global dos dados na aplicação
 
 	               setInformacoes(info);
+
+                   } else if (!status) {
+
+                       setDispararAlerta({mensagem: "Usuário(a) não logado(a)!", tempo: 20000, exibir: true});
 
                    }
 
@@ -259,11 +266,13 @@ import verificarPratosEmCache from "../../resources/verificarPratosEmCache.js";
 
       <div className={styles.conteudo}>
 
+          {dispararAlerta.exibir && <MensagemAlerta setDispararAlerta={setDispararAlerta} exibir={dispararAlerta.exibir} tempo={dispararAlerta.tempo} mensagem={dispararAlerta.mensagem} />}
+
           <header>
 
 	      <button id={styles.headBut} onClick={() => setRelatorio(false)}>
 
-		   <img src="/SetaBranca.png" alt="Voltar" />
+		   <img src={urlBackend + "/imagens.php?img=SetaBranca.png"} alt="Voltar" />
 
 	      </button>
 

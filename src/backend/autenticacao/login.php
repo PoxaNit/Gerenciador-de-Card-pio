@@ -4,6 +4,8 @@
 
  session_start();
 
+ $urlBackend = trim(shell_exec('source ../../../.env && echo ${urlBackend}'));
+
  if (isset($_POST["email"]) && isset($_POST["senha"])):
 
      $erros = [];
@@ -54,7 +56,7 @@
      elseif (!empty($senha)): //Para a senha não estar vazia, o email e a senha devem estar corretos
 
 	 $_SESSION["autenticado"] = $_POST["email"];
-	 header("Location: https://gerenciadormenu.netlify.app"); //Redireciona o usuário para meu aplicativo web react
+	 header("Location: $urlBackend"); //Redireciona o usuário para meu aplicativo web react
 	 exit;
 
      endif;
@@ -119,7 +121,7 @@
 		 </section>
 
 		 <nav>
-		     <a href="http://gerenciadormenu.free.nf/autenticacao/cadastro.php">Não tem uma conta?</a>
+		     <a href=<?php echo $urlBackend . "/autenticacao/cadastro.php"?>>Não tem uma conta?</a>
 		 </nav>
 
 		 <?php if (!empty($erros)): ?>
@@ -137,4 +139,3 @@
          </form>
      </body>
  </html>
-

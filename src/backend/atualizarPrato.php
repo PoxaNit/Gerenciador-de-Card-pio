@@ -2,6 +2,18 @@
 
  session_start();
 
+ if (!isset($_SESSION["autenticado"])):
+
+     http_response_status(401);
+
+     header("Content-Type: application/json");
+
+     echo json_encode(["sucesso" => false, "msg" => "Usuário(a) não logado(a)!"]);
+
+     exit;
+
+ endif;
+
  $email = $_SESSION["autenticado"];
 
  //ESTE ARQUIVO PHP ATUALIZA AS INFORMAÇÕES DO PRATO, TROCANDO AS INFORNAÇÕEA ANTIGAS PELAS NOVAS

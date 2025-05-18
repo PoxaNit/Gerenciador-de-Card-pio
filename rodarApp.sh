@@ -93,7 +93,7 @@
 
      sleep 3
 
-     ./atualizarGist_urlBackend.sh > /dev/null
+     ./atualizarGist_urlBackend.sh -R > /dev/null
 
 }
 
@@ -133,6 +133,10 @@
 
    # Matando os processos dos criados nesse programa
      pkill -P $$
+
+     pkill ngrok # Temporário, deve ser ajustado
+
+     pkill sleep # Temporário, deve ser ajustado
 
      for f in ${HOME}/tmp/rodarApp_pid/*.pid; do
 

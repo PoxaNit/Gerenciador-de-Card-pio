@@ -64,6 +64,7 @@
 
  endif;
 
+ $urlBackend = trim(shell_exec('source ../../../.env && echo ${urlBackend}'));
 
 ?>
 
@@ -139,7 +140,7 @@
 	     <footer>
 
 	         <nav>
-	             <a href="http://gerenciadormenu.free.nf/autenticacao/login.php">Já tem uma conta?</a>
+	             <a href= <?php echo $urlBackend . "/autenticacao/login.php" ?>>Já tem uma conta?</a>
 	         </nav>
   	             <?php if (!empty($erros)): ?>
 
@@ -165,7 +166,7 @@
 
   	         <?php
 
-		     echo "<a href=http://gerenciadormenu.free.nf/autenticacao/login.php>Entrar</a>";
+		     echo "<a href=$urlBackend/autenticacao/login.php>Entrar</a>";
 
 	         ?>
 

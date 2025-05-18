@@ -21,7 +21,7 @@ import Autenticado from "../../Autenticado.js";
 
 
   const { eParaAtualizarOsFiltrados, setAtualizar, setPratos } = React.useContext(Contexto); //quando usada, esta função de estado serve para re-fazer a requisição dos pratos no componente pai e exibir a lista atualizada
-  const { session_id } = React.useContext(Autenticado);
+  const { session_id, urlBackend } = React.useContext(Autenticado);
 
   const [componente, setComponente] = React.useState(); //armazena as cordenadas de tela passadas pelo componente pai (ListaPratos.js).
   const [precoPrato, setPrecoPrato] = React.useState(); //armazena o preço formatado do prato para exibir
@@ -99,7 +99,7 @@ import Autenticado from "../../Autenticado.js";
 
 	try {
 	    const dados = await JSON.stringify(infos_prato);
-	    const deletou = await fetch("http://gerenciadormenu.free.nf/deletarPrato", {
+	    const deletou = await fetch(urlBackend + "/deletarPrato.php", {
 					method: "POST",
 					body: dados
 					}).then(resposta => resposta.json());
@@ -211,7 +211,7 @@ import Autenticado from "../../Autenticado.js";
 
       }}>
 
-	 <img src="images.png" alt="foto de menu" />
+	 <img src={urlBackend + "/imagens.php?img=images.png"} alt="foto de menu" />
       </button>
 
     </section>

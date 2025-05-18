@@ -1,5 +1,21 @@
 <?php
 
+ session_start();
+
+
+
+ if (!isset($_SESSION["autenticado"])):
+
+     http_response_status(401);
+
+     echo json_encode(["sucesso" => false, "msg" => "Usuário(a) não logado(a)!"]);
+
+     exit;
+
+ endif;
+
+
+
  $erros = array();
 
  if ($_SERVER["REQUEST_METHOD"] === "POST"):

@@ -12,7 +12,7 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 
  const form = React.useRef(); //irá fazer referência ao formulário
 
- const { session_id } = React.useContext(Autenticado);
+ const { session_id, urlBackend } = React.useContext(Autenticado);
 
 // const [desativarBotao, setDesativarBotao] = React.useState({status: false}); //controla quando o botão de salvar deve ficar desabilitado, para evitar conflito com a mensagem de alerta
 
@@ -156,7 +156,7 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 
 		   const dados = new FormData(form.current);
 
-		   const resposta = await fetch("http://gerenciadormenu.free.nf/criar_prato", {
+		   const resposta = await fetch(urlBackend + "/criar_prato.php", {
 		     method: "POST",
 		     body: dados
 		  });

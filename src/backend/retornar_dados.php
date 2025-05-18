@@ -4,7 +4,11 @@
 
  if (!isset($_SESSION["autenticado"])):
 
-     header("Location: http://gerenciadormenu.free.nf/autenticacao/login.php");
+     http_response_code(401);
+
+     header("Content-Type: application/json");
+
+     echo json_encode(["sucesso" => false, "msg" => "Usuário(a) não logado(a)!"]);
 
      exit;
 

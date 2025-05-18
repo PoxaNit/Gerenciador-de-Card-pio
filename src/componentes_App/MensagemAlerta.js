@@ -21,10 +21,13 @@ exibir //booleano indicando quando o alerta está ativo
 const tratarAlerta = React.useCallback(() => {
 
         if (exibir) {
-          setTimeout(() => {
-		setDispararAlerta({disparar: false, msg: "", tempo: 0});
-    }, parseInt(tempo));
-  };
+
+            setTimeout(() => {
+
+                 setDispararAlerta({disparar: false, msg: "", tempo: 0});
+
+            }, parseInt(tempo));
+        };
 
  }, [exibir, setDispararAlerta, tempo]);
 
