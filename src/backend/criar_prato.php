@@ -10,7 +10,7 @@
 
      header("Content-Type: application/json");
 
-     echo json_encode(["sucesso" => false, "msg" => "Usuário(a) não logado(a)!"]);
+     echo json_encode(["sucesso" => false, "msg" => "Usuário(a) não logado(a)!", "status" => 401]);
 
      exit;
 
@@ -31,6 +31,8 @@
     $usuario_email = $_SESSION["autenticado"];
 
     if (verificarSePratoExiste($nome_prato, $usuario_email)):
+
+        http_response_code(409);
 
         echo json_encode(["msg" => "Prato já existente!",
 			  "sucesso" => false]);

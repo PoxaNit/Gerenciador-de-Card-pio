@@ -8,7 +8,7 @@
      const pratos = await fetch(urlBackend + "/retornar_dados.php")
                               .then(resposta => resposta.json());
 
-     if (pratos.sucesso) {
+     if (((pratos.sucesso) || (!pratos.sucesso)) && pratos?.status_code !== 401) {
 
          tratamento();
 

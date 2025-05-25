@@ -2,6 +2,7 @@ import React from "react";
 import Conteudo from "./componentes_App/Conteudo.js";
 import Autenticado from "./componentes_App/Autenticado.js"; //Contexto de autenticação
 import buscarUrlDoBackend from "./resources/buscarUrlDoBackend.js";
+//import styles from "./App.css";
 
 function App() {
 
@@ -9,7 +10,7 @@ function App() {
     const [autenticado, setAutenticado] = React.useState(false);
     const [session_id, setSession_id] = React.useState("");
     const [usuario_nome, setUsuario_nome] = React.useState("");
-
+//    const [carregando, setCarregando] = React.useState(true);
 
 
 
@@ -41,9 +42,11 @@ function App() {
 
         if (!autenticacao.sucesso) {
 
-            window.location = urlBackend + "/autenticacao/login.php?ngrok-skip-browser-warning=any&AppjsAqui=true";
+            window.location = urlBackend + "/autenticacao/login.php?ngrok-skip-browser-warning=any";
 
         } else {
+
+  //          setTimeout(() => setCarregando(false), 3000);
 
 	    const id = autenticacao.id;
 
@@ -93,16 +96,22 @@ function App() {
 
 
     return autenticado ? (
-        <Autenticado.Provider value={{autenticado, session_id, usuario_nome, urlBackend}}>
+        <Autenticado.Provider value={{autenticado, setAutenticado, session_id, usuario_nome, urlBackend}}>
             <div className="App">
    	        <Conteudo />
             </div>
         </Autenticado.Provider>
     ) : (
 
-        <div><h1>Carregando...</h1></div>
+        <>
 
-    );
+            <h1>Carregando...</h1>
+            <p>Se não der certo, recarregue a página</p>
+
+        </>
+
+    )
+
 }
 
 export default App;

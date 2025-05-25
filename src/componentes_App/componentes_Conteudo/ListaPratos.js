@@ -242,7 +242,10 @@ export default function ListaPratos ({setLista}) {
 	           } else {
 		   // Se a função buscarPratos retorna falsey é porque o usuário não
           	   // está autenticado (logado).
-                       setDispararAlerta({mensagem: "Usuário(a) não logado(a)!", tempo: 20000, exibir: true});
+                       setDispararAlerta({mensagem: "Usuário(a) não logado(a)!", tempo: 5000, exibir: true});
+
+                       setTimeout(() => window.location.reload(), 5000);
+
 		       return null;
                    }
 

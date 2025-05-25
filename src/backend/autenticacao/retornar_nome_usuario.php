@@ -2,6 +2,22 @@
 
  //Este programa retorna o nome de usuário que corresponde ao seu email ( id ) de autenticação guardado no banco de dados.
 
+ session_start();
+
+ $urlBackend = trim(shell_exec('cd ../../../ && source .env && echo $urlBackend'));
+
+
+
+ if (!isset($_SESSION["autenticado"])):
+
+     header("Location: $urlBackend/autenticacao/login.php");
+
+     exit;
+
+ endif;
+
+
+
  header("Content-Type: application/json");
 
  $erros = [];

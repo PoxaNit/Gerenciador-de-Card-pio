@@ -93,7 +93,7 @@
 
      sleep 3
 
-     ./atualizarGist_urlBackend.sh -R > /dev/null
+     urlBackend=$(./atualizarGist_urlBackend.sh -R)
 
 }
 
@@ -113,8 +113,6 @@
      stty echo
 
      clear
-
-     echo -e "\033[1;33mApp Rodando em localhost:3000!\033[0m"
 
      menu
 }
@@ -160,6 +158,8 @@
 
 
  function menu {
+
+     echo -e "\033[1;33mApp Rodando em ${urlBackend}\033[0m\n"
 
      echo -e "\033[1;36m
  O que gostaria de fazer?

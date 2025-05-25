@@ -14,9 +14,9 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 
  const { session_id, urlBackend } = React.useContext(Autenticado);
 
-// const [desativarBotao, setDesativarBotao] = React.useState({status: false}); //controla quando o botão de salvar deve ficar desabilitado, para evitar conflito com a mensagem de alerta
-
  const [informacoesCompletas, setInformacoesCompletas] = React.useState(null); //diz se os dados do prato estão preenchidos
+
+ const [estaAutenticado, setEstaAutenticado] = React.useState(true);
 
  const [dispararAlerta, setDispararAlerta] = React.useState({disparar: false, msg: "", tempo: 0});
 
@@ -127,6 +127,13 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
   async function exportar () { //função para armazenar os dados no banco de dados
 
 	try {
+
+
+                if (!estaAutenticado) return null;
+
+		setDispararAlerta({disparar: true, tempo: 2300, msg: "Aguarde..."});
+
+
 		if(!informacoesCompletas) {
 
 		if (isNaN(estados.preco) || estados.preco === 0) { //o retorno de string para number pode variar de NaN a 0 dependendo do ambiente e configuração de onde se usa o js
@@ -164,13 +171,24 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 		   const resposta_json = await resposta.json();
 
 		   if (resposta_json.sucesso) {
+
 		       await sessionStorage.setItem("pratos_" + session_id, JSON.stringify(resposta_json));
+
 		       setDispararAlerta({disparar: true, tempo: 2300, msg: resposta_json.msg});
+
+		   } else if (resposta?.status === 401) {
+
+                       setEstaAutenticado(false);
+
+		       setDispararAlerta({disparar: true, tempo: 2300, msg: resposta_json.msg});
+
+                       setTimeout(() => window.location.reload(), 1000);
+
 		   } else {
 
 		       setDispararAlerta({disparar: true, tempo: 2300, msg: resposta_json.msg});
 
-		   }
+                   }
 
             };
 

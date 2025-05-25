@@ -11,6 +11,7 @@ src/backend/testes
 /.pnp
 .pnp.js
 .env
+tarefas
 # testing
 /coverage
 

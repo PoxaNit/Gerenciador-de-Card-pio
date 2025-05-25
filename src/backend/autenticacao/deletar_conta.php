@@ -6,9 +6,11 @@
 
  if (!isset($_SESSION["autenticado"])):
 
-     http_response_status(401);
+     http_response_code(401);
 
-     echo json_encode(["sucesso" => false, "msg" => "Usuário(a) não logado(a)!"]);
+     header("Content-Type: application/json");
+
+     echo json_encode(["sucesso" => false, "msg" => "Usuário(a) não logado(a)!", "status" => 401]);
 
      exit;
 

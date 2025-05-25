@@ -229,22 +229,19 @@ import MensagemAlerta from "../MensagemAlerta.js";
 
                    const resposta = await buscarPratos(urlBackend);
 
-                   const status = resposta?.sucesso;
-
-                   const info = resposta?.info;
-
-
-                   if (status && info) {
+                   if (resposta) {
 
 	               const valor = JSON.stringify(resposta);
 
                        sessionStorage.setItem(chave, valor); //Para acesso global dos dados na aplicação
 
-	               setInformacoes(info);
+	               setInformacoes(resposta.info);
 
-                   } else if (!status) {
+                   } else if (!resposta) {
 
-                       setDispararAlerta({mensagem: "Usuário(a) não logado(a)!", tempo: 20000, exibir: true});
+                       setDispararAlerta({mensagem: "Usuário(a) não logado(a)!", tempo: 5000, exibir: true});
+
+                       setTimeout(() => window.location.reload(), 5000);
 
                    }
 
