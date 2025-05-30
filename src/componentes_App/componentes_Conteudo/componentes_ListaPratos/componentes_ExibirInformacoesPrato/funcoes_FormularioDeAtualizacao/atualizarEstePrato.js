@@ -38,7 +38,7 @@ async function atualizarEstePrato (
      const valor = JSON.stringify(dados);
 
 //Deixando os pratos disponíveis globalmente na aplicação.
-     await sessionStorage.clear();
+     await sessionStorage.removeItem(chave);
      await sessionStorage.setItem(chave, valor);
 
      setPratos(dados);

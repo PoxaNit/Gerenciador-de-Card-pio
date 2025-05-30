@@ -4,7 +4,7 @@
 
  if (!isset($_SESSION["autenticado"])):
 
-     http_response_status(401);
+     http_response_code(401);
 
      header("Content-Type: application/json");
 

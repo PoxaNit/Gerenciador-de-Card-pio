@@ -113,7 +113,7 @@ import Autenticado from "../../Autenticado.js";
 			este_componente_fechou(true);
 			controle({renderizar: false, infos: null})
 
-			await sessionStorage.clear();
+			await sessionStorage.removeItem(chave);
 			await sessionStorage.setItem(chave, valor);
 
 			setPratos(deletou);
