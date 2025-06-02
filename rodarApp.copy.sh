@@ -181,21 +181,23 @@ Está conectado(a) à internet mas o script dá erro? Tente:
 
      if [[ -z "${updateGist_urlBackend}" ]]; then
 
-         echo -e "Erro: A variável de ambiente 'updateGist_urlBackend' está vazia em .env!\
- Ela deve conter o token de autenticação do GitHub com permissão Gist\
+         echo -e "\033[1;31mErro\033[0m: A variável de ambiente \033[0;33m'updateGist_urlBackend' \033[0mestá vazia em \033[0;36m.env\033[0m!\
+ Ela deve conter o token de autenticação do GitHub com permissão \033[1;32mGist\033[0m\
  para fazer as operações internas." >&2
 
          exit 5
 
      elif [[ -z "${porta}" ]]; then
 
-         echo -e "\033[1;31mErro: \033[0mA variável de ambiente \033[0;33m'porta' \033[0mestá vazia em \033[0;36m.env\033[0m!\
+         echo -e "\033[1;31mErro\033[0m: A variável de ambiente \033[0;33m'porta' \033[0mestá vazia em \033[0;36m.env\033[0m!\
  Ela deve conter a porta onde o app vai rodar na sua máquina. Exemplo:\
  \033[0;33m8080\033[0m." >&2
 
          exit 5
 
      fi
+
+     return 0
 
  }
 
