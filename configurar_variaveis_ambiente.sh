@@ -10,7 +10,7 @@
 
 
  echo "\
-updateGist_urlBackend=$([[ -z "${updateGist_urlBackend}" ]] && echo "'Token GitHub com permissão Gist aqui!'" || echo "'${updateGist_urlBackend}'")
+token_gist=$([[ -z "${token_gist}" ]] && echo "'Token GitHub com permissão Gist aqui!'" || echo "'${token_gist}'")
 urlBackend=$([[ -z "${urlBackend}" ]] && echo "'Preenchida pelo sistema automaticamente.'" || echo "'${urlBackend}'")
 porta=8080
 caminho_logs_react=tmp/.logs_react_tmp.txt

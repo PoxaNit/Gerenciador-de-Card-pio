@@ -116,6 +116,8 @@
 
      verificarConexaoInternet
 
+     validar_env_vars
+
      ajustarLocalizacao
 
      criarPasta_PIDs
@@ -141,9 +143,10 @@
      echo -e "\033[1;36mVerificando conexão à internet...\033[0m"
 
 
-     local hosts=("8.8.8.8" "brasil.gov.br" "google.com" "www.bing.com")
+     local hosts=("8.8.8.8" "google.com")
 
 
+  # Se qualquer um desses hosts responder, o usuário está conectado
      for host in "${hosts[@]}"; do
 
          if { ping "${host}" & a=$!; sleep 1; kill $a; } &> /dev/null; then
@@ -156,6 +159,22 @@
 
      done
 
+
+
+  # Validando a declaração da variável no .env
+     if ! grep -e "^tentativas_sem_conexao=" .env &> /dev/null; then
+
+         echo "tentativas_sem_conexao=0" >> .env
+
+     elif [[ -z "${tentativas_sem_conexao}" ]]; then
+
+         echo "tentativas_sem_conexao=0" >> .env
+
+     fi
+
+
+  # Verificando quantas vezes o usuário tentou executar o sript conectado
+  # mas o sript deu erro, para dar a mensagem.
      [[ "${tentativas_sem_conexao}" = 2 ]] &&
      sed -i -e "s|^tentativas_sem_conexao=.*|tentativas_sem_conexao=0|" .env ||
      sed -i -e "s|^tentativas_sem_conexao=.*|tentativas_sem_conexao=$((tentativas_sem_conexao + 1))|" .env
@@ -179,17 +198,17 @@ Está conectado(a) à internet mas o script dá erro? Tente:
 
  function validar_env_vars { # Valida se o arquivo .env está como o esperado
 
-     if [[ -z "${updateGist_urlBackend}" ]]; then
+     if [[ -z "${token_gist}" ]]; then
 
-         echo -e "Erro: A variável de ambiente 'updateGist_urlBackend' está vazia em .env!\
- Ela deve conter o token de autenticação do GitHub com permissão Gist\
+         echo -e "\033[1;31mErro\033[0m: A variável de ambiente \033[0;33m'token_gist' \033[0mestá vazia em \033[0;36m.env\033[0m!\
+ Ela deve conter o token de autenticação do GitHub com permissão \033[1;32mGist\033[0m\
  para fazer as operações internas." >&2
 
          exit 5
 
      elif [[ -z "${porta}" ]]; then
 
-         echo -e "\033[1;31mErro: \033[0mA variável de ambiente \033[0;33m'porta' \033[0mestá vazia em \033[0;36m.env\033[0m!\
+         echo -e "\033[1;31mErro\033[0m: A variável de ambiente \033[0;33m'porta' \033[0mestá vazia em \033[0;36m.env\033[0m!\
  Ela deve conter a porta onde o app vai rodar na sua máquina. Exemplo:\
  \033[0;33m8080\033[0m." >&2
 
@@ -197,13 +216,26 @@ Está conectado(a) à internet mas o script dá erro? Tente:
 
      fi
 
+
+
+     [[ -z "${rodarApp_pid}" ]] &&
+     rodarApp_pid=tmp/rodarApp_pid
+
+     [[ -z "${caminho_logs_react}" ]] &&
+     caminho_logs_react=tmp/.logs_react_tmp.txt
+
+     [[ -z "${caminho_logs_php}" ]] &&
+     caminho_logs_php=tmp/.logs_php_tmp.txt
+
+     return 0
+
  }
 
 
  function criarPasta_PIDs { # Cria a pasta onde os PIDs dos subprocessos vão ficar
 
    # Criando a pasta temporária para armazenar os IDs dos processos
-     mkdir -p "${localCorreto}/${rodarApp_pid}"
+     mkdir -p "${localCorreto}/$([[ -z ${rodarApp_pid} ]] && echo rodarApp_pid || echo ${rodarApp_pid})"
 
  }
 
@@ -214,7 +246,7 @@ Está conectado(a) à internet mas o script dá erro? Tente:
  function iniciar_limpeza_imagens {
 
    # Previne contra o acúmulo de lixo na pasta das imagens
-     ./src/backend/orquestraLimparPastaImagens.sh & echo $! > "${HOME}/tmp/rodarApp_pid/orquestraLimpeza.pid"
+     ./src/backend/orquestraLimparPastaImagens.sh & echo $! > "$([[ -z ${rodarApp_pid} ]] && echo rodarApp_pid || echo ${rodarApp_pid})/orquestraLimpeza.pid"
 
  }
 
@@ -282,7 +314,7 @@ Está conectado(a) à internet mas o script dá erro? Tente:
 
      echo -e "\033[1;32mAtualizando Gist e pegando a URL do Backend...\033[0m"
 
-     urlBackend=$(./atualizarGist_urlBackend.sh -R)
+     urlBackend=$(./atualizarGist_urlBackend.sh -R || exit 4)
 
 }
 

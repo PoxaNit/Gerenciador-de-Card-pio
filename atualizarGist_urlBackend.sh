@@ -60,13 +60,13 @@
 
 
  # Pegando a URL do gist a ser atualizado
- url_gist=$(curl -s -H "Authorization: token ${updateGist_urlBackend}" "{$url_api}" | jq -r .[0].url)
+ url_gist=$(curl -s -H "Authorization: token ${token_gist}" "{$url_api}" | jq -r .[0].url)
 
 
  # Atualizando o gist com a URL do backend
  dados=$(
  curl -s -X PATCH \
- -H "Authorization: token ${updateGist_urlBackend}" \
+ -H "Authorization: token ${token_gist}" \
  -H "Content-Type: application/json" \
  -d "${json}" \
  "${url_gist}"
