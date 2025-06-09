@@ -45,8 +45,19 @@
 
 # Pegando a URL gerada pelo Ngrok
  url=$(curl -s http://localhost:4040/api/tunnels |
- jq -r ".tunnels[0].public_url")
+ jq -r ".tunnels[0].public_url" 2> /dev/null)
 
+
+
+# Verificando se o .env não tem sintaxe maliciosa
+
+ if grep -Pv "^\s*([a-zA-Z_][a-zA-Z0-9_]*=.*|#.*)?$" .env &> /dev/null; then
+
+     echo "Erro de sintaxe em .env!"
+
+     exit 1
+
+ fi
 
 # Preparando os dados para fazer a requisição
  source .env
@@ -60,7 +71,8 @@
 
 
  # Pegando a URL do gist a ser atualizado
- url_gist=$(curl -s -H "Authorization: token ${token_gist}" "{$url_api}" | jq -r .[0].url)
+ url_gist=$(curl -s -H "Authorization: token ${token_gist}" "{$url_api}" | jq -r .[0].url 2> /dev/null)
+
 
 
  # Atualizando o gist com a URL do backend
@@ -69,7 +81,7 @@
  -H "Authorization: token ${token_gist}" \
  -H "Content-Type: application/json" \
  -d "${json}" \
- "${url_gist}"
+ "${url_gist}" 2> /dev/null
 )
 
 
@@ -89,9 +101,11 @@
 
    # Retornar a URL do backend
 
-     urlBackend=$(echo "$dados" | jq -r .files.[].raw_url | xargs curl -s | jq -r .backend_url)
+     urlBackend=$(echo "$dados" | jq -r .files.[].raw_url 2> /dev/null | xargs curl -s 2> /dev/null | jq -r .backend_url 2> /dev/null)
 
      sed -i -e "s#^urlBackend=.*#urlBackend=\"${urlBackend}\"#" .env
+
+     [[ -z "$urlBackend" ]] && exit 1
 
      echo "$urlBackend"
 

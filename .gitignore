@@ -12,6 +12,7 @@ src/backend/testes
 .pnp.js
 .env
 tarefas
+tmp
 # testing
 /coverage
 
