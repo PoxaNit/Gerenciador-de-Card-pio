@@ -143,6 +143,18 @@ Verifique se o \033[0;36m.env\033[0m está escrito corretamente!"
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 # <--------------------- Declarando as funções ------------------------------>
 
 
@@ -151,6 +163,8 @@ Verifique se o \033[0;36m.env\033[0m está escrito corretamente!"
  function iniciar {
 
    # Executando as funções
+
+     verificar_dependencias
 
      ajustarLocalizacao
 
@@ -164,9 +178,11 @@ Verifique se o \033[0;36m.env\033[0m está escrito corretamente!"
 
      criarPasta_PIDs
 
-     iniciar_limpeza_imagens
-
      verificarConexaoInternet
+
+     declarar_ngrok
+
+     iniciar_limpeza_imagens
 
      ligarServidores
 
@@ -179,11 +195,12 @@ Verifique se o \033[0;36m.env\033[0m está escrito corretamente!"
 
 
 
+ function verificar_dependencias {
 
+     ./verificar_dependencias.sh ||
+     exit 1
 
-
-
-
+ }
 
 
 
@@ -216,8 +233,6 @@ Verifique se o \033[0;36m.env\033[0m está escrito corretamente!"
 
   # Validando a declaração da variável no .env
      if ! grep -P "^\s*tentativas_sem_conexao=[0-2]" .env &> /dev/null; then
-
-#         echo "tentativas_sem_conexao=0" >> .env
 
          ./configurar_variaveis_ambiente.sh
 
@@ -260,10 +275,48 @@ Está conectado(a) à internet mas o script dá erro? Tente:
 
 
 
+#previne erros se o usuário não estiver no local certo na raíz do projeto
+ function ajustarLocalizacao {
+
+     localAtual=$(pwd)
+
+     localCorreto=$(pwd | grep -o ".*/cadastro_produtos_restaurante")
+
+     [[ -z "$localCorreto" ]] && echo "Venha até a raíz do projeto para rodá-lo. Use cd ~/.../cadastro_produtos_restaurante e execute este script novamente!" && exit 1
+
+     if [[ ! "${localAtual}" = "${localCorreto}" ]]; then
+
+         echo "Você precisa ir para a raíz do projeto antes de rodá-lo. Navegue para ${localCorreto} e execute este script novamente!"
+
+         exit 1
+
+     fi
+}
 
 
 
+ function declarar_ngrok {
 
+     arquitetura=$(uname -m)
+
+     case "$arquitetura" in
+
+       x86_64)  comando_ngrok="${localCorreto}/bin/ngrokx86_64"         ; ;;
+       aarch64) comando_ngrok="${localCorreto}/bin/ngrokARM64"          ; ;;
+       armv7l)  comando_ngrok="${localCorreto}/bin/ngrokARM"            ; ;;
+
+       *) echo -e "\033[1;33mArquitetura não suportada!\033[0m"; exit 1 ; ;;
+
+     esac
+
+ }
+
+
+ function ngrok {
+
+     eval "$comando_ngrok $1 $2"
+
+ }
 
 
 
@@ -443,23 +496,6 @@ de \033[0;36m4\033[0m \033[0;33mdígitos\033[0m! Atualmente ela é: \
 
 
 
-#previne erros se o usuário não estiver no local certo na raíz do projeto
- function ajustarLocalizacao {
-
-     localAtual=$(pwd)
-
-     localCorreto=$(pwd | grep -o ".*/cadastro_produtos_restaurante")
-
-     [[ -z "$localCorreto" ]] && echo "Venha até a raíz do projeto para rodá-lo. Use cd ~/.../cadastro_produtos_restaurante e execute este script novamente!" && exit 1
-
-     if [[ ! "${localAtual}" = "${localCorreto}" ]]; then
-
-         echo "Você precisa ir para a raíz do projeto antes de rodá-lo. Navegue para ${localCorreto} e execute este script novamente!"
-
-         exit 1
-
-     fi
-}
 
 
 

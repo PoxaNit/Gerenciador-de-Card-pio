@@ -61,9 +61,6 @@
 
 
  dependencias_necessarias=("php"
-                           "wget"
-                           "unzip"
-                           "ngrok"
                            "npm"
                            "nodejs"
                            "curl"
@@ -365,67 +362,17 @@ para ${roxo_claro}não${ciano_claro})${neutro}
 
      done
 
+     exit 0
 
  }
 
 
- function func_instalar_wget {
-
-     local comando="${gerenciador_pacotes} install -y wget"
-
-     echo -e "${ciano_claro}Instalando wget...${neutro}"
-
-     eval "$comando"
-
-     echo -e "${verde_claro}Instalação concluída!${neutro}"
-
- }
-
- function func_instalar_unzip {
-
-     local comando="${gerenciador_pacotes} install -y unzip"
-
-     echo -e "${ciano_claro}Instalando unzip...${neutro}"
-
-     eval "$comando"
-
-     echo -e "${verde_claro}Instalação concluída!${neutro}"
-
- }
 
  function func_instalar_curl {
 
      local comando="${gerenciador_pacotes} install -y curl"
 
      echo -e "${ciano_claro}Instalando curl...${neutro}"
-
-     eval "$comando"
-
-     echo -e "${verde_claro}Instalação concluída!${neutro}"
-
- }
-
- function func_instalar_ngrok {
-
-     arquitetura=$(uname -m)
-
-
-
-     case "$arquitetura" in
-       x86_64) url_ngrok="" ;;
-
-     esac
-
-
-
-     local comando="
-     wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-stable-linux-arm.zip; \
-     unzip ngrok-stable-linux-arm.zip; \
-     mv ngrok ./bin; \
-     rm ngrok-stable-linux-arm.zip
-     "
-
-     echo -e "${ciano_claro}Instalando Ngrok...${neutro}"
 
      eval "$comando"
 
