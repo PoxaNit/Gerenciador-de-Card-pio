@@ -71,7 +71,7 @@
 
 
  # Pegando a URL do gist a ser atualizado
- url_gist=$(curl -s -H "Authorization: token ${token_gist}" "{$url_api}" | jq -r .[0].url 2> /dev/null)
+ url_gist=$(curl -s -H "Authorization: token ${token_gist}" "${url_api}" | jq -r .[0].url 2> /dev/null)
 
 
 

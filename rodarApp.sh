@@ -168,7 +168,7 @@ Verifique se o \033[0;36m.env\033[0m está escrito corretamente!"
 
      ajustarLocalizacao
 
-     validar_env_local # Verifica se o arquivo .env existe na raíz do projeto
+     validar_env_local # Verifica se o arquivo .env existe na raiz do projeto
 
      pegar_env_vars
 
@@ -275,18 +275,18 @@ Está conectado(a) à internet mas o script dá erro? Tente:
 
 
 
-#previne erros se o usuário não estiver no local certo na raíz do projeto
+#previne erros se o usuário não estiver no local certo na raiz do projeto
  function ajustarLocalizacao {
 
      localAtual=$(pwd)
 
      localCorreto=$(pwd | grep -o ".*/cadastro_produtos_restaurante")
 
-     [[ -z "$localCorreto" ]] && echo "Venha até a raíz do projeto para rodá-lo. Use cd ~/.../cadastro_produtos_restaurante e execute este script novamente!" && exit 1
+     [[ -z "$localCorreto" ]] && echo "Venha até a raiz do projeto para rodá-lo. Use cd ~/.../cadastro_produtos_restaurante e execute este script novamente!" && exit 1
 
      if [[ ! "${localAtual}" = "${localCorreto}" ]]; then
 
-         echo "Você precisa ir para a raíz do projeto antes de rodá-lo. Navegue para ${localCorreto} e execute este script novamente!"
+         echo "Você precisa ir para a raiz do projeto antes de rodá-lo. Navegue para ${localCorreto} e execute este script novamente!"
 
          exit 1
 
@@ -320,11 +320,11 @@ Está conectado(a) à internet mas o script dá erro? Tente:
 
 
 
- function validar_env_local { # Valida se o arquivo .env está na raíz do projeto
+ function validar_env_local { # Valida se o arquivo .env está na raiz do projeto
 
      ls "${localCorreto}/.env" &> /dev/null || {
 
-         echo -e "\033[0;31mErro\033[0m: arquivo \033[0;36m.env\033[0m não foi encontrado na raíz do projeto!"
+         echo -e "\033[0;31mErro\033[0m: arquivo \033[0;36m.env\033[0m não foi encontrado na raiz do projeto!"
 
          exit 1
 
@@ -735,10 +735,10 @@ de \033[0;36m4\033[0m \033[0;33mdígitos\033[0m! Atualmente ela é: \
      echo -e "
  Para uma visualização completa dos logs, dê uma olhada no arquivo
  \033[1;33m'${caminho_logs_php}'\033[0m\
- a partir da raíz do projeto para ver os logs do servidor, e
+ a partir da raiz do projeto para ver os logs do servidor, e
  no arquivo \033[1;33m'${caminho_logs_react}'\033[0m\
  para ver os logs do React, também a partir da
- raíz do projeto (este só aparecerá se você tiver executado este script com a flag
+ raiz do projeto (este só aparecerá se você tiver executado este script com a flag
  \033[1;35m--logs-react\033[0m ou \033[1;35m-r\033[0m).
 "
 

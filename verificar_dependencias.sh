@@ -20,7 +20,7 @@
 
 
  cinza_escuro="\033[0;30m"
- cinza_claro="\033[0;30m"
+ cinza_claro="\033[1;30m"
 
  vermelho_escuro="\033[0;31m"
  vermelho_claro="\033[1;31m"
@@ -118,7 +118,7 @@
  function func_tratar_argumentos {
 
      [[ $# -gt 0 ]] && echo "Este script não aceita argumentos!" &&
-     return 1
+     exit 1
 
 
      return 0
@@ -154,115 +154,45 @@
 
      for dep in "${dependencias_necessarias[@]}"; do
 
-         comando="func_verificar_${dep}"
-
-         eval "$comando"
+         func_verificar_dependencia "${dep}"
 
      done
 
- }
-
-
- function func_verificar_wget {
-
-     if ! command -v wget &> /dev/null; then
-
-         dependencias_faltando[n]=$((dependencias_faltando[n] + 1))
-
-         dependencias_faltando[wget]=wget
-
-         echo -e "${vermelho_claro}wget está faltando!${neutro}"
-
-     fi
+     [[ "${dependencias_faltando[n]}" -eq 0 ]] && return 0 || return 1
 
  }
 
- function func_verificar_unzip {
 
-     if ! command -v unzip &> /dev/null; then
+ function func_verificar_dependencia {
 
-         dependencias_faltando[n]=$((dependencias_faltando[n] + 1))
+     dependencia=$1
 
-         dependencias_faltando[unzip]=unzip
-
-         echo -e "${vermelho_claro}Unzip não foi encontrado!${neutro}"
-     fi
-
- }
-
- function func_verificar_curl {
-
-     if ! command -v curl &> /dev/null; then
+     if ! command -v "$dependencia" &> /dev/null; then
 
          dependencias_faltando[n]=$((dependencias_faltando[n] + 1))
+         dependencias_faltando["$dependencia"]="$dependencia"
 
-         dependencias_faltando[curl]=curl
+         echo -e "${vermelho_claro}${dependencia} não encontrado!${neutro}"
 
-         echo -e "${vermelho_claro}Curl não encontrado!${neutro}"
+         return 1
 
-     fi
+     else
 
- }
+         if [[ "${dependencias_faltando[n]}" -gt 0 ]] && [[ ! -z "${dependencias_faltando[$dependencia]}" ]]; then
 
- function func_verificar_ngrok {
+             dependencias_faltando[n]=$((dependencias_faltando[n] - 1))
 
-     if ! command -v ngrok &> /dev/null; then
+             dependencias_faltando["$dependencia"]=""
 
-         dependencias_faltando[n]=$((dependencias_faltando[n] + 1))
+         fi
 
-         dependencias_faltando[ngrok]=ngrok
-
-         echo "${vermelho_claro}Ngrok não foi encontrado!${neutro}"
+         return 0
 
      fi
 
  }
 
 
- function func_verificar_php {
-
-     if ! command -v php &> /dev/null; then
-
-         dependencias_faltando[n]=$((dependencias_faltando[n] + 1))
-
-         dependencias_faltando[php]=php
-
-         echo -e "${vermelho_claro}PHP não encontrado!${neutro}"
-
-     fi
-
- }
-
-
- function func_verificar_nodejs {
-
-     if ! command -v node &> /dev/null; then
-
-         dependencias_faltando[n]=$((dependencias_faltando[n] + 1))
-
-         dependencias_faltando[nodejs]=nodejs
-
-         echo -e "${vermelho_claro}mNode.js não encontrado!${neutro}"
-
-     fi
-
- }
-
-
-
- function func_verificar_npm {
-
-     if ! command -v npm &> /dev/null; then
-
-         dependencias_faltando[n]=$((dependencias_faltando[n] + 1))
-
-         dependencias_faltando[npm]=npm
-
-         echo -e "${vermelho_claro}NPM não encontrado!${neutro}"
-
-     fi
-
- }
 
 
  function func_verificar_ambiente_cli {
@@ -352,69 +282,71 @@ para ${roxo_claro}não${ciano_claro})${neutro}
 
  function func_instalar_dependencias {
 
-     for dep in "${dependencias_faltando[@]}"; do
+     for chave in "${!dependencias_faltando[@]}"; do
 
-         [[ "$dep" =~ ^[0-7]$ ]] && continue
+         [[ "$chave" = "n" ]] && continue # Previne que não seja o campo 'n'
 
-         local comando="func_instalar_${dep}"
-
-         eval "$comando"
+         func_instalar_dependencia "${dep}"
 
      done
 
-     exit 0
+     func_verificar_dependencias
+
+     if [[ "${dependencias_faltando[n]}" -eq 0 ]]; then
+
+         echo -e "${verde_claro}Todas as dependências foram instaladas!${neutro}"
+
+         exit 0
+
+     else
+
+         echo -e "${amarelo_claro}Algumas dependências não puderam ser instaladas!${neutro}"
+
+         exit 1
+
+     fi
 
  }
 
 
+ function func_instalar_dependencia {
 
- function func_instalar_curl {
+     local dependencia="$1"
+     local tentativas=0 # Guarda quantas vezes esta função foi executada
+     local max_tentativas=2
 
-     local comando="${gerenciador_pacotes} install -y curl"
 
-     echo -e "${ciano_claro}Instalando curl...${neutro}"
+     while [[ "$tentativas" -lt "$max_tentativas" ]]; do
 
-     eval "$comando"
 
-     echo -e "${verde_claro}Instalação concluída!${neutro}"
+         echo -e "${ciano_claro}Instalando $1...${neutro}"
 
- }
+         "${gerenciador_pacotes}" install -y "${dependencia}"
 
- function func_instalar_php {
 
-     comando="${gerenciador_pacotes} install -y php"
 
-     echo -e "${ciano_claro}Instalando php...${neutro}"
+         if func_verificar_dependencia "${dependencia}"; then
 
-     eval "$comando"
+             echo -e "${verde_claro}Instalação de ${ciano_claro}$1${verde_claro} concluída!${neutro}"
 
-     echo -e "${verde_claro}Instalação concluída!${neutro}"
+             return 0
 
- }
+         else
 
- function func_instalar_npm {
+             tentativas=$((tentativas + 1))
 
-     comando="${gerenciador_pacotes} install -y npm"
+         fi
 
-     echo -e "${ciano_claro}Instalando npm...${neutro}"
+     done
 
-     eval "$comando"
-
-     echo -e "${verde_claro}Instalação concluída!${neutro}"
-
- }
-
- function func_instalar_nodejs {
-
-     comando="${gerenciador_pacotes} install -y node"
-
-     echo -e "${ciano_claro}Instalando node...${neutro}"
-
-     eval "$comando"
-
-     echo -e "${verde_claro}Instalação concluída!${neutro}"
+     echo -e "
+${vermelho_claro}Algo deu errado: ${amarelo_claro}não foi possível instalar ${dependencia}! \
+${ciano_claro}Você está conectado(a) à internet?${neutro}
+"
+     return 1
 
  }
+
 
 # <------------ Instalações _ Fim --------------------------------->
 
