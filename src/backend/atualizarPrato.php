@@ -18,7 +18,9 @@
 
  //ESTE ARQUIVO PHP ATUALIZA AS INFORMAÇÕES DO PRATO, TROCANDO AS INFORNAÇÕEA ANTIGAS PELAS NOVAS
 
- $db = new SQLite3("restaurante.db");
+ $caminho_banco = trim(shell_exec("pwd")) . '../../' . trim(shell_exec('source ../../.env && echo $caminho_banco'));
+
+ $db = new SQLite3($caminho_banco);
 
  header("Content-Type: application/json");
 

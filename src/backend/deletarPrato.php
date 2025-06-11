@@ -16,7 +16,9 @@
 
   $usuario_email = $_SESSION["autenticado"];
 
-  $db = new SQLite3("restaurante.db");
+  $caminho_banco = trim(shell_exec('pwd')) . '../../' . trim(shell_exec('source ../../.env && echo $caminho_banco'));
+
+  $db = new SQLite3($caminho_banco);
 
   if ($_SERVER["REQUEST_METHOD"] === "POST"):
 

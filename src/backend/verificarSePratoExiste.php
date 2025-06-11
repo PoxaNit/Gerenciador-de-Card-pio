@@ -4,7 +4,9 @@
  function verificarSePratoExiste ($nome, $usuario)
  {
 
-     $dataBase = new SQLite3("restaurante.db");
+     $caminho_banco = trim(shell_exec('pwd')) . '../../' . trim(shell_exec('source ../../.env && echo $caminho_banco'));
+
+     $dataBase = new SQLite3($caminho_banco);
 
      $stmt = $dataBase->prepare("SELECT nome_prato FROM menu_pratos WHERE nome_prato = :nome AND usuario_email = :usuario");
      $stmt->bindValue(":nome", $nome);

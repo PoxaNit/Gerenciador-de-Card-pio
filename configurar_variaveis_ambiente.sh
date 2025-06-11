@@ -280,7 +280,7 @@ porta=$([[ -z "$porta" ]] && echo 8080 || echo "$porta")
 caminho_logs_react=$([[ -z "$caminho_logs_react" ]] && echo "tmp/.logs_react_tmp.txt" || echo "$caminho_logs_react")
 caminho_logs_php=$([[ -z "$caminho_logs_php" ]] && echo "tmp/.logs_php_tmp.txt" || echo "$caminho_logs_php")
 caminho_rodarApp_pid=$([[ -z "$caminho_rodarApp_pid" ]] && echo "tmp/caminho_rodarApp_pid" || echo "$caminho_rodarApp_pid")
-caminho_banco=$([[ -z "$caminho_banco" ]] && echo "src/backend" || echo "$caminho_banco")
+caminho_banco=$([[ -z "$caminho_banco" ]] && echo "src/backend/restaurante.db" || echo "$caminho_banco")
 
 
 
@@ -321,7 +321,7 @@ porta=8080
 caminho_logs_react=tmp/.logs_react_tmp.txt
 caminho_logs_php=tmp/.logs_php_tmp.txt
 caminho_rodarApp_pid=tmp/caminho_rodarApp_pid
-caminho_banco=src/backend
+caminho_banco=src/backend/restaurante.db
 
 
 #Esta variável armazena quantas vezes o usuário tentou executar ./rodarApp.sh e

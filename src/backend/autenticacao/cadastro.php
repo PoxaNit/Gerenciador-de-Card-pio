@@ -14,7 +14,9 @@
 
 	 endif;
 
-         $db = new SQLite3('../restaurante.db');
+         $caminho_banco = trim(shell_exec('pwd')) . '../../' . trim(shell_exec('source ../../../.env && echo $caminho_banco'));
+
+         $db = new SQLite3($caminho_banco);
 
 	 $stmt = $db->prepare("SELECT usuario_email FROM usuarios WHERE usuario_email = :email");
          $stmt->bindValue(":email", $_POST["email"]);

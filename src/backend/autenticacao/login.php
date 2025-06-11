@@ -23,7 +23,9 @@
 
  // Verificando se a senha existe para o email, e consequentemente se o email existe
 
-     $db = new SQLite3("../restaurante.db");
+     $caminho_banco = trim(shell_exec('pwd')) . '../../' . trim(shell_exec('source ../../../.env && echo $caminho_banco'));
+
+     $db = new SQLite3($caminho_banco);
 
      $stmt = $db->prepare("SELECT usuario_senha FROM usuarios WHERE usuario_email = :email");
 
