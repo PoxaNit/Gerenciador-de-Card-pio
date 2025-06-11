@@ -4,7 +4,7 @@
  function verificarSePratoExiste ($nome, $usuario)
  {
 
-     $caminho_banco = trim(shell_exec('pwd')) . '../../' . trim(shell_exec('source ../../.env && echo $caminho_banco'));
+     $caminho_banco = trim(shell_exec('pwd')) . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_banco'));
 
      $dataBase = new SQLite3($caminho_banco);
 

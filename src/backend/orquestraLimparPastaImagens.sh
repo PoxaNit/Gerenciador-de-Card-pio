@@ -25,6 +25,9 @@
 #por rodarApp.sh, na raíz do projeto.
  cd src/backend
 
+ caminho_banco=$(grep -Po "^\s*caminho_banco=['\"]?\K[^'\"\s;]*")
+
+ caminho_completo="$(pwd)/../../${caminho_banco}"
 
  while true; do
 
@@ -34,7 +37,7 @@
      for img in $imagens; do
 
          php "limparPastaImagens.php" \
-             "restaurante.db"         \
+             "${caminho_completo}"    \
              "imagens/${img}"
 
      done

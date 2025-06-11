@@ -18,7 +18,7 @@
 
  //ESTE ARQUIVO PHP ATUALIZA AS INFORMAÇÕES DO PRATO, TROCANDO AS INFORNAÇÕEA ANTIGAS PELAS NOVAS
 
- $caminho_banco = trim(shell_exec("pwd")) . '../../' . trim(shell_exec('source ../../.env && echo $caminho_banco'));
+ $caminho_banco = trim(shell_exec("pwd")) . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_banco'));
 
  $db = new SQLite3($caminho_banco);
 
