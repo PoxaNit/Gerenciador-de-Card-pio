@@ -62,7 +62,7 @@
 
  dependencias_necessarias=("php"
                            "npm"
-                           "nodejs"
+                           "node"
                            "curl"
                           )
 

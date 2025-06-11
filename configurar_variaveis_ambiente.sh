@@ -280,6 +280,7 @@ porta=$([[ -z "$porta" ]] && echo 8080 || echo "$porta")
 caminho_logs_react=$([[ -z "$caminho_logs_react" ]] && echo "tmp/.logs_react_tmp.txt" || echo "$caminho_logs_react")
 caminho_logs_php=$([[ -z "$caminho_logs_php" ]] && echo "tmp/.logs_php_tmp.txt" || echo "$caminho_logs_php")
 caminho_rodarApp_pid=$([[ -z "$caminho_rodarApp_pid" ]] && echo "tmp/caminho_rodarApp_pid" || echo "$caminho_rodarApp_pid")
+caminho_banco=$([[ -z "$caminho_banco" ]] && echo "src/backend" || echo "$caminho_banco")
 
 
 
@@ -320,6 +321,7 @@ porta=8080
 caminho_logs_react=tmp/.logs_react_tmp.txt
 caminho_logs_php=tmp/.logs_php_tmp.txt
 caminho_rodarApp_pid=tmp/caminho_rodarApp_pid
+caminho_banco=src/backend
 
 
 #Esta variável armazena quantas vezes o usuário tentou executar ./rodarApp.sh e
@@ -355,6 +357,8 @@ tentativas_sem_conexao=0
          func_fornecer_caminho_logs_react
 
          func_fornecer_caminho_rodarApp_pid
+
+         func_fornecer_caminho_banco
 
          func_configuracao_filtrada
 
@@ -406,6 +410,7 @@ tentativas_sem_conexao=0
      caminho_logs_react=$(grep -Po "\s*caminho_logs_react=['\"]?\K[^'\"\s;]*" .env)
      caminho_logs_php=$(grep -Po "\s*caminho_logs_php=['\"]?\K[^'\";\s]*" .env)
      caminho_rodarApp_pid=$(grep -Po "\s*caminho_rodarApp_pid=['\"]?\K[^'\"\s;]*" .env)
+     caminho_banco=$(grep -Po "^\s*caminho_banco=['\"]?\K[^'\";\s]" .env)
      tentativas_sem_conexao=$(grep -Po "^\s*tentativas_sem_conexao=['\"]?\K[^'\";\s]*" .env)
 
  }
@@ -627,7 +632,7 @@ tentativas_sem_conexao=0
 
       a=$1
 
-      echo -e "Forneça um \033[0;32mnúmero\033[0m com \033[0;36m4\033[0m \033[0;33mdígitos\033[0m, sendo o primeiro \033[0;33mnão-zero\033[0m:"
+      echo -e "Forneça um \033[0;32mnúmero\033[0m com \033[0;36m4\033[0m \033[0;33mdígitos\033[0m para a \033[0;32mporta\033[0m, sendo o primeiro \033[0;33mnão-zero\033[0m:"
 
       [[ ! -z $a ]] && echo -e "\033[0;33mValor de entrada \033[1;31minválido\033[0m!"
 
@@ -686,6 +691,18 @@ tentativas_sem_conexao=0
      read caminho
 
      caminho_rodarApp_pid="$caminho"
+
+ }
+
+ function func_fornecer_caminho_banco {
+
+     clear
+
+     echo -e "Forneça um \033[0;32mcaminho\033[0m para o \033[0;33mbanco de dados\033[0m, relativo à \033[0;36mraiz do projeto\033[0m:"
+
+     read caminho
+
+     caminho_banco="$caminho"
 
  }
 
