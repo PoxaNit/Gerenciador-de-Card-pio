@@ -19,7 +19,7 @@
  if (!isset($_GET["img"])) exit;
 
 
-
+// Verifica se é uma imagem estática ou uma imagem dinâmica do usuário
  $tipo = $_GET["tipo"] ?? "";
 
 

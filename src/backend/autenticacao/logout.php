@@ -6,7 +6,7 @@
 
  setcookie("PHPSESSID", "", time() - 500, "/");
 
- $urlBackend = trim(shell_exec('source ../../../.env && echo ${urlBackend}'));
+ $urlBackend = trim(shell_exec('grep -Po "^\s*urlBackend=[\'"]?\K[^\'";\s]*" ../../../.env'));
 
  header("Location: $urlBackend/autenticacao/login.php");
 

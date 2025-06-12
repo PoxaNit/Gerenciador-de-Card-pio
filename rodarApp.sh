@@ -125,7 +125,7 @@
 
 
 
- if grep -Pv "^\s*([a-zA-Z_][a-zA-Z0-9_]*=.*[\n;&<>/]?|#.*)?$" .env &> /dev/null; then
+ if grep -Pv "^\s*([a-zA-Z_][a-zA-Z0-9_]*=[^;&\s]*|#.*)?$" .env &> /dev/null; then
 
      echo -e "\033[0;31mErro:\033[0m a \033[0;33msintaxe\033[0m no \033[0;36m.env\033[0m deve conter \
 apenas atribuições de variáveis como \033[0;36m'variavel=valor'\033[0m e \033[0;36mcomentários\033[0m! \

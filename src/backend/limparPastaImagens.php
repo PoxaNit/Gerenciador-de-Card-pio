@@ -9,7 +9,7 @@
      $db = new SQLite3($caminhoDoBanco);
 
      $stmt = $db->prepare('SELECT imagem_prato FROM menu_pratos WHERE imagem_prato = :caminhoImagem');
-     $stmt->bindValue(":caminhoImagem", $caminhoImagem);
+     $stmt->bindValue(":caminhoImagem", basename($caminhoImagem));
 
      $resultado = $stmt->execute();
 

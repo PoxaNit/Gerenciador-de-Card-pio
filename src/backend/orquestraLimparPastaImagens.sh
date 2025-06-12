@@ -11,21 +11,17 @@
 
      echo "Este programa não aceita parâmetros!"
 
-     sleep 5
-
      exit 1
 
  fi
 
 
- trap "pkill sleep" SIGINT
 
-
-#Para isso funcionar, esse script deve ser executado
+#Para isso funcionar, este script deve ser executado
 #por rodarApp.sh, na raíz do projeto.
  cd src/backend
 
- caminho_banco=$(grep -Po "^\s*caminho_banco=['\"]?\K[^'\"\s;]*")
+ caminho_banco=$(grep -Po "^\s*caminho_banco=['\"]?\K[^'\"\s;]*" ../../.env)
 
  caminho_completo="$(pwd)/../../${caminho_banco}"
 

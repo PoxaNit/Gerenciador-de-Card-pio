@@ -42,9 +42,11 @@
          $stmt->bindValue(':email', $email);
          $result = $stmt->execute();
 
+         $caminho_imagens = __DIR__ . '/../../../' . trim(shell_exec('source ../../../.env && echo $caminho_imagens'));
+
          while ($linha = $result->fetchArray(SQLITE3_ASSOC)):
 
-	     shell_exec("rm " . __DIR__ . "/../$linha[imagem_prato]");
+	     shell_exec("rm $caminho_imagens/$linha[imagem_prato]");
 
          endwhile;
 

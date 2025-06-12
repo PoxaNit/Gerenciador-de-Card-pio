@@ -84,17 +84,16 @@
 
 //TRATANDO AS IMAGENS
 
-//teste
+ $caminho_imagens  = __DIR__ . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_imagens'));
 
- shell_exec("rm $imagem_prato_antigo"); //já contém o caminho
+ shell_exec("rm $caminho_imagens/$imagem_prato_antigo");
 
 //nova imagem
 
  $extensao = pathinfo($imagem_prato_novo["name"], PATHINFO_EXTENSION);
- $novoNome = uniqid().".".$extensao;
- $caminho  = __DIR__ . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_imagens')) . "/$novoNome";
+ $novoNomePrato = uniqid().".".$extensao;
 
- move_uploaded_file($imagem_prato_novo["tmp_name"], $novoNome);
+ move_uploaded_file($imagem_prato_novo["tmp_name"], $caminho_imagens . '/' . $novoNomePrato);
 
 //ÁREA DAS OPERAÇÕES COM BANCO DE DADOS -> INÍCIO
 
@@ -113,7 +112,7 @@
  $stmt->bindValue(":novo_categoria_prato", $categoria_prato_novo);
  $stmt->bindValue(":novo_ingredientes_prato", $ingredientes_prato_novo);
  $stmt->bindValue(":novo_alergias_restricoes_prato", $alergias_restricoes_prato_novo);
- $stmt->bindValue(":novo_imagem_prato", $caminho);
+ $stmt->bindValue(":novo_imagem_prato", $novoNomePrato);
 
  $stmt->bindValue(":antigo_nome_prato", $nome_prato_antigo);
  $stmt->bindValue(":antigo_descricao_prato", $descricao_prato_antigo);
