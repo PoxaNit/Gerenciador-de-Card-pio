@@ -18,13 +18,35 @@
 // Se não especificar a imagem, não retorna nada
  if (!isset($_GET["img"])) exit;
 
- $caminho = __DIR__ . "/statics/" . $_GET["img"];
 
- if (!file_exists($caminho)) {
+
+ $tipo = $_GET["tipo"] ?? "";
+
+
+ if ($tipo === "nao-estatico"):
+
+     $caminho_pasta_imagens = __DIR__ . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_imagens'));
+
+     $nomeImagem = $_GET["img"];
+
+     $caminho_imagem = $caminho_pasta_imagens . '/' . $_GET["img"];
+     header("Content-Type: image/jpg");
+
+ else:
+
+     $caminho_imagem = __DIR__ . "/statics/" . $_GET["img"];
+     header("Content-Type: image/png");
+
+ endif;
+
+
+
+
+ if (!file_exists($caminho_imagem)) {
 
      http_response_code(404);
 
-     echo "Arquivo '$caminho' não encontrado!";
+     echo "Arquivo '$_GET[img]' não encontrado!";
 
      exit;
 
@@ -32,7 +54,6 @@
 
 // Previne que o navegador faça muitas requisições atrás da imagem
  header("Cache-Control: public, max-age=31536000, immutable");
- header("Content-Type: image/png");
 
- readfile($caminho);
+ readfile($caminho_imagem);
 

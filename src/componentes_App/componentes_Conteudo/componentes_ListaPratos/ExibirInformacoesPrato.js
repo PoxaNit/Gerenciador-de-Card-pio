@@ -219,7 +219,7 @@ import Autenticado from "../../Autenticado.js";
     <section className={styles.section2}>
 
       <h1 id={styles.h1}>{infos_prato.nome_prato}</h1>
-      <img src={"/" + infos_prato.imagem_prato} alt="Imagem do prato não carregada!" />
+      <img src={urlBackend + "/imagens.php?img=" + infos_prato.imagem_prato + "&&tipo=nao-estatico"} alt="Imagem do prato não carregada!" />
 
     </section>
 

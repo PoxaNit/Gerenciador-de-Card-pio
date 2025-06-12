@@ -29,16 +29,22 @@
 
  caminho_completo="$(pwd)/../../${caminho_banco}"
 
+ caminho_pasta_imagens=$(pwd)/../../$(grep -Po "^\s*caminho_imagens=['\"]?\K[^'\"\s;]*" ../../.env)
+
  while true; do
 
 
      imagens=$(ls imagens)
 
+
+
      for img in $imagens; do
+
+         caminho_imagem="$caminho_pasta_imagens/${img}"
 
          php "limparPastaImagens.php" \
              "${caminho_completo}"    \
-             "imagens/${img}"
+             "${caminho_imagem}"
 
      done
 

@@ -23,7 +23,7 @@
 
  // Verificando se a senha existe para o email, e consequentemente se o email existe
 
-     $caminho_banco = trim(shell_exec('pwd')) . '/../../../' . trim(shell_exec('source ../../../.env && echo $caminho_banco'));
+     $caminho_banco = __DIR__ . '/../../../' . trim(shell_exec('source ../../../.env && echo $caminho_banco'));
 
      $db = new SQLite3($caminho_banco);
 

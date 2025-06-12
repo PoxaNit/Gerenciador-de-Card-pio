@@ -819,7 +819,7 @@ de \033[0;36m4\033[0m \033[0;33mdígitos\033[0m! Atualmente ela é: \
 
          [[ $logs_react_ativo = 1 ]] && {
 
-             tail -f "${localCorreto}/${caminho_logs_react}" & echo $! > "${localCorreto}${caminho_rodarApp_pid}/tail_logReact.pid"
+             tail -f "${localCorreto}/${caminho_logs_react}" & echo $! > "${localCorreto}/${caminho_rodarApp_pid}/tail_logReact.pid"
 
          }
 

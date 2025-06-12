@@ -1,5 +1,6 @@
 import React from "react";
 import Contexto from "../../Contexto.js";
+import Autenticado from "../../Autenticado.js";
 import styles from "./ItemDeLista.module.css";
 
  function ItemDeLista ({nomeDoPrato, imagemDoPrato, descricaoImagem, indiceParaItem, prato}) {
@@ -7,6 +8,7 @@ import styles from "./ItemDeLista.module.css";
 
      const { setComponenteExibir } = React.useContext(Contexto);
 
+     const { urlBackend } = React.useContext(Autenticado);
 
      const [larguraDesktop, setLarguraDesktop] = React.useState(false);
 
@@ -82,10 +84,9 @@ import styles from "./ItemDeLista.module.css";
          {/*Verificando o tamanho da tela para exibir o elemento correto*/}
          {!larguraDesktop ? <strong>{nomeDoPrato}</strong> : <h2>{nomeDoPrato}</h2>}
         <br/>
-         <img alt={descricaoImagem} src={"/" + imagemDoPrato} />
+         <img alt={descricaoImagem} src={urlBackend + "/imagens.php?img=" + imagemDoPrato + "&&tipo=nao-estatico"} />
         <br/>
          <p>Clique para ver</p>
-
         </li>
   )
 

@@ -281,6 +281,7 @@ caminho_logs_react=$([[ -z "$caminho_logs_react" ]] && echo "tmp/.logs_react_tmp
 caminho_logs_php=$([[ -z "$caminho_logs_php" ]] && echo "tmp/.logs_php_tmp.txt" || echo "$caminho_logs_php")
 caminho_rodarApp_pid=$([[ -z "$caminho_rodarApp_pid" ]] && echo "tmp/caminho_rodarApp_pid" || echo "$caminho_rodarApp_pid")
 caminho_banco=$([[ -z "$caminho_banco" ]] && echo "src/backend/restaurante.db" || echo "$caminho_banco")
+caminho_imagens=$([[ -z "$caminho_imagens" ]] && echo "src/backend/imagens" || echo "$caminho_imagens")
 
 
 
@@ -322,6 +323,7 @@ caminho_logs_react=tmp/.logs_react_tmp.txt
 caminho_logs_php=tmp/.logs_php_tmp.txt
 caminho_rodarApp_pid=tmp/caminho_rodarApp_pid
 caminho_banco=src/backend/restaurante.db
+caminho_imagens=src/backend/imagens
 
 
 #Esta variável armazena quantas vezes o usuário tentou executar ./rodarApp.sh e
@@ -359,6 +361,8 @@ tentativas_sem_conexao=0
          func_fornecer_caminho_rodarApp_pid
 
          func_fornecer_caminho_banco
+
+         func_fornecer_caminho_imagens
 
          func_configuracao_filtrada
 
@@ -411,6 +415,7 @@ tentativas_sem_conexao=0
      caminho_logs_php=$(grep -Po "\s*caminho_logs_php=['\"]?\K[^'\";\s]*" .env)
      caminho_rodarApp_pid=$(grep -Po "\s*caminho_rodarApp_pid=['\"]?\K[^'\"\s;]*" .env)
      caminho_banco=$(grep -Po "^\s*caminho_banco=['\"]?\K[^'\";\s]" .env)
+     caminho_imagens=$(grep -Po "^\s*caminho_imagens=['\"]?\K[^'\";\s]*" .env)
      tentativas_sem_conexao=$(grep -Po "^\s*tentativas_sem_conexao=['\"]?\K[^'\";\s]*" .env)
 
  }
@@ -705,6 +710,19 @@ tentativas_sem_conexao=0
      caminho_banco="$caminho"
 
  }
+
+  function func_fornecer_caminho_imagens {
+
+     clear
+
+     echo -e "Forneça um \033[0;32mcaminho\033[0m para a pasta \033[0;33mimagens\033[0m, relativo à \033[0;36mraiz do projeto\033[0m:"
+
+     read caminho
+
+     caminho_imagens="$caminho"
+
+ }
+
 
  # <----------------------- Fornecimentos _ Fim --------------------------------->
 

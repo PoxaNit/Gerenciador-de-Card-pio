@@ -18,7 +18,7 @@
 
  //ESTE ARQUIVO PHP ATUALIZA AS INFORMAÇÕES DO PRATO, TROCANDO AS INFORNAÇÕEA ANTIGAS PELAS NOVAS
 
- $caminho_banco = trim(shell_exec("pwd")) . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_banco'));
+ $caminho_banco = __DIR__ . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_banco'));
 
  $db = new SQLite3($caminho_banco);
 
@@ -92,9 +92,9 @@
 
  $extensao = pathinfo($imagem_prato_novo["name"], PATHINFO_EXTENSION);
  $novoNome = uniqid().".".$extensao;
- $caminho  = "imagens/$novoNome";
+ $caminho  = __DIR__ . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_imagens')) . "/$novoNome";
 
- move_uploaded_file($imagem_prato_novo["tmp_name"], $caminho);
+ move_uploaded_file($imagem_prato_novo["tmp_name"], $novoNome);
 
 //ÁREA DAS OPERAÇÕES COM BANCO DE DADOS -> INÍCIO
 

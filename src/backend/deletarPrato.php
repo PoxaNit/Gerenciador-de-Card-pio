@@ -16,7 +16,7 @@
 
   $usuario_email = $_SESSION["autenticado"];
 
-  $caminho_banco = trim(shell_exec('pwd')) . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_banco'));
+  $caminho_banco = __DIR__ . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_banco'));
 
   $db = new SQLite3($caminho_banco);
 
@@ -28,7 +28,8 @@
 
    //Deletando o prato
       $imagem_prato = $dados["imagem_prato"];
-      shell_exec("rm $imagem_prato");
+      $caminho_imagem = __DIR__ . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_prato')) . $imagem_prato;
+      shell_exec("rm $caminho_imagem");
 
       $nome_prato = $dados['nome_prato'];
       $descricao_prato = $dados['descricao_prato'];
@@ -70,12 +71,6 @@
       header("Content-Type: application/json");
 
       echo json_encode($resposta);
-
-      exit;
-
-  else:
-
-      header("Location: http://gerenciadormenu.free.nf/autenticacao/login.php");
 
       exit;
 
