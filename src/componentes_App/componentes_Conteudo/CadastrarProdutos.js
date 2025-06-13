@@ -30,7 +30,7 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
  alergias_restricoes: ""
 });
 
-  function reducer (estados, acao) { //alert(estados.preco);
+  function reducer (estados, acao) {
       switch (acao.tipo) {
 	case "mudar nome":
 	  return {...estados, nome: acao.valor};
@@ -68,14 +68,20 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 
    React.useEffect(() => {
 
-	    if (estados.nome && estados.preco && estados.descricao && estados.imagem && estados.categoria && estados.alergias_restricoes && estados.ingredientes) {
-			setInformacoesCompletas(true);
-  } else {
-			setInformacoesCompletas(false);
+       if (estados.nome && estados.preco &&
+           estados.descricao && estados.imagem &&
+           estados.categoria && estados.alergias_restricoes &&
+           estados.ingredientes) {
 
-};
+           setInformacoesCompletas(true);
 
-}, [estados]);
+       } else {
+
+           setInformacoesCompletas(false);
+
+       };
+
+   }, [estados]);
 
 
 
@@ -94,14 +100,17 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 
  function lerArquivo (e) { //função para exibir a foto do prato que o usuário escolheu na página temporariamente
 
-   const leitor = new FileReader();
+     const leitor = new FileReader();
 
-   leitor.onload = () => {
 
-     despachar({tipo: "mudar foto", valor: leitor.result});
+     leitor.onload = () => {
 
-   };
-   leitor.readAsDataURL(e);
+         despachar({tipo: "mudar foto", valor: leitor.result});
+
+     };
+
+     leitor.readAsDataURL(e);
+
  };
 
 
@@ -193,13 +202,13 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
             };
 
 
-    } catch (exceção) {
-	const mensagem = exceção.message.replace("Error :", ""); //Para não dar json inválido
-	const erro = JSON.parse(mensagem);
-	setDispararAlerta(erro);
-    };
+        } catch (exceção) {
+	    const mensagem = exceção.message.replace("Error :", ""); //Para não dar json inválido
+    	    const erro = JSON.parse(mensagem);
+	    setDispararAlerta(erro);
+        };
 
-};
+  };
 
 
 
@@ -217,63 +226,99 @@ export default function CadastroPratos ({setCadastro, informacoes_prato, setHaPr
 
 return (
 <>
- {dispararAlerta.disparar ? <MensagemAlerta mensagem={dispararAlerta.msg} tempo={dispararAlerta.tempo} exibir={dispararAlerta.disparar} setDispararAlerta={setDispararAlerta} /> : null}
- <form ref={form} onSubmit={e => e.preventDefault()} className={estilos.form}>
+    {dispararAlerta.disparar ? <MensagemAlerta mensagem={dispararAlerta.msg} tempo={dispararAlerta.tempo} exibir={dispararAlerta.disparar} setDispararAlerta={setDispararAlerta} /> : null}
+    <form ref={form} onSubmit={e => e.preventDefault()} className={estilos.form}>
 
-   <legend>Cadastro de pratos</legend>
+        <legend>Cadastro de pratos</legend>
 
-   <section id={estilos.sectionNome}>
-     <label htmlfor="nome_prato">Nome do prato:</label>
-     <input onInput={e => despachar({tipo: "mudar nome", valor: e.target.value})} type="text" name="nome_prato" id="nome_prato" required />
-   </section>
+        <section id={estilos.sectionNome}>
 
-   <section className={estilos.st} id={estilos.sectionDescricao}>
-     <label htmlfor="descricao_prato">Descrição do produto:</label>
-   <br/>
-     <textarea cols="25" rows="6" id="descricao_prato" onInput={e => despachar({tipo: "mudar descricao", valor: e.target.value})} name="descricao_prato" required></textarea>
-   </section>
+            <label htmlfor="nome_prato">Nome do prato:</label>
 
-   <section id={estilos.sectionPreco}>
-     <label htmlfor="preco_prato">Preço do prato (R$):</label>
-     <input step="0.01" type="number" id="preco_prato" name="preco_prato" required onInput={e => {
+            <input onInput={e => despachar({tipo: "mudar nome", valor: e.target.value})} type="text" name="nome_prato" id="nome_prato" required />
 
-       	despachar({tipo: "mudar preco", valor: Number(e.target.value.toString())});
-}}/>
-   </section>
+        </section>
 
-   <section id={estilos.sectionCategoria}>
-     <label htmlfor="categoria_prato">Categoria:</label>
-     <select name="categoria_prato" id="categoria_prato" onInput={e => despachar({tipo: "mudar categoria", valor: e.target.value})} required>
-       <option selected disabled>Escolher</option>
-       <option value="pratos principais">Pratos principais</option>
-       <option value="lanches">Lanches</option>
-       <option value="sobremesas">Sobremesas</option>
-     </select>
-   </section>
+        <section className={estilos.st} id={estilos.sectionDescricao}>
 
-   <section id={estilos.sectionImagem}>
-     <label htmlfor="imagem_prato">Carregar imagem:</label>
-     <input type="file" onInput={e => lerArquivo(e.target.files[0])} id="imagem_prato" name="imagem_prato" />
-   <br/>
-     {estados.imagem && <img alt="foto do prato" src={estados.imagem} />}
-   </section>
+            <label htmlfor="descricao_prato">Descrição do produto:</label>
 
-   <section className={estilos.st} id={estilos.sectionIngredientes}>
-     <label htmlfor="ingredientes_prato">Ingredientes:</label>
-   <br/>
-     <textarea onInput={e => despachar({tipo: "mudar ingredientes", valor: e.target.value})} cols="25" rows="6" required id="ingredientes_prato" name="ingredientes_prato"></textarea>
-   </section>
+            <br/>
 
-   <section className={estilos.st} id={estilos.sectionRestricoes}>
-     <label htmlfor="alergias/restricoes">Alergias/restrições:</label>
-   <br/>
-     <textarea cols="25" rows="6" required id="alergias/restricoes" onInput={e => despachar({tipo: "mudar alergias/restricoes", valor: e.target.value})} name="alergias/restricoes"></textarea>
-   </section>
+            <textarea cols="25" rows="6" id="descricao_prato" onInput={e => despachar({tipo: "mudar descricao", valor: e.target.value})} name="descricao_prato" required></textarea>
 
-   <section className={estilos.sb} id={estilos.sectionBotoes}>
-     <button onClick={() => setCadastro(false)}>Sair</button>
-     <button disabled={dispararAlerta.disparar} onClick={() => {exportar()}} type="submit">Salvar</button>
-   </section>
+        </section>
+
+        <section id={estilos.sectionPreco}>
+
+            <label htmlfor="preco_prato">Preço do prato (R$):</label>
+
+            <input step="0.01" type="number" id="preco_prato" name="preco_prato" required onInput={e => {
+
+       	        despachar({tipo: "mudar preco", valor: Number(e.target.value.toString())});
+
+            }}/>
+
+        </section>
+
+        <section id={estilos.sectionCategoria}>
+
+            <label htmlfor="categoria_prato">Categoria:</label>
+
+            <select name="categoria_prato" id="categoria_prato" onInput={e => despachar({tipo: "mudar categoria", valor: e.target.value})} required>
+
+                <option selected disabled>Escolher</option>
+
+                <option value="pratos principais">Pratos principais</option>
+
+                <option value="lanches">Lanches</option>
+
+                <option value="sobremesas">Sobremesas</option>
+
+            </select>
+
+        </section>
+
+        <section id={estilos.sectionImagem}>
+
+            <label htmlfor="imagem_prato">Carregar imagem:</label>
+
+           <input type="file" onInput={e => lerArquivo(e.target.files[0])} id="imagem_prato" name="imagem_prato" />
+
+           <br/>
+
+           {estados.imagem && <img alt="foto do prato" src={estados.imagem} />}
+
+        </section>
+
+        <section className={estilos.st} id={estilos.sectionIngredientes}>
+
+            <label htmlfor="ingredientes_prato">Ingredientes:</label>
+
+            <br/>
+
+            <textarea onInput={e => despachar({tipo: "mudar ingredientes", valor: e.target.value})} cols="25" rows="6" required id="ingredientes_prato" name="ingredientes_prato"></textarea>
+
+        </section>
+
+        <section className={estilos.st} id={estilos.sectionRestricoes}>
+
+            <label htmlfor="alergias/restricoes">Alergias/restrições:</label>
+
+            <br/>
+
+            <textarea cols="25" rows="6" required id="alergias/restricoes" onInput={e => despachar({tipo: "mudar alergias/restricoes", valor: e.target.value})} name="alergias/restricoes"></textarea>
+
+        </section>
+
+        <section className={estilos.sb} id={estilos.sectionBotoes}>
+
+            <button onClick={() => setCadastro(false)}>Sair</button>
+
+            <button disabled={dispararAlerta.disparar} onClick={() => {exportar()}} type="submit">Salvar</button>
+
+        </section>
+
 
  </form>
 </>

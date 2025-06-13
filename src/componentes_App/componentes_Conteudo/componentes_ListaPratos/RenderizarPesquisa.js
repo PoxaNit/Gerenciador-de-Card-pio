@@ -9,6 +9,7 @@ export default function RenderizarPesquisa ({setModoPesquisarPratos, pratos, ter
     <div className={styles.header_pesquisa}>
 
 	<label>Pesquisa por nome:</label>
+
 	<input
 	type="text"
 	value={termoPesquisado}

@@ -47,19 +47,19 @@ import Autenticado from "../../Autenticado.js";
   const [coordenadas_tela_este_componente, setCoordenadas_tela_este_componente] = React.useState({x: 0, y: 0}); //armazena as coordenadas de tela deste componente no momento em que o componente do formulário de atualização for renderizado, para evitar bugs de tela.
 
 
-   const guardarCoordenadas = React.useCallback(function () {
+  const guardarCoordenadas = React.useCallback(function () {
 
-	setCoordenadas_tela_este_componente({x: window.scrollX, y: window.scrollY});
+      setCoordenadas_tela_este_componente({x: window.scrollX, y: window.scrollY});
 
-}, []);
+  }, []);
 
 
 
-    React.useEffect(function () {
+  React.useEffect(function () {
 
-	guardarCoordenadas();
+      guardarCoordenadas();
 
-}, [guardarCoordenadas]);
+  }, [guardarCoordenadas]);
 
 
 
@@ -86,9 +86,12 @@ import Autenticado from "../../Autenticado.js";
 
 
    function fecharMensagem_deletarConfirmacao_cancelar () { //função que irá fechar o alerta de confirmação sem deletar este prato
+
 	setConfirmar_deletar(false);
+
 	setExibirMenuOpcoes(true);
- };
+
+  b};
 
 
 
@@ -97,39 +100,52 @@ import Autenticado from "../../Autenticado.js";
 
 	async function deletar_este_prato () {
 
-	try {
-	    const dados = await JSON.stringify(infos_prato);
-	    const deletou = await fetch(urlBackend + "/deletarPrato.php", {
-					method: "POST",
-					body: dados
-					}).then(resposta => resposta.json());
+	    try {
+
+	        const dados = await JSON.stringify(infos_prato);
+
+	        const deletou = await fetch(urlBackend + "/deletarPrato.php", {
+		    			   method: "POST",
+					   body: dados
+					   }).then(resposta => resposta.json());
 
 		if (deletou.sucesso) {
 
-			const chave = "pratos_" + session_id;
-			const valor = JSON.stringify(deletou);
+                    const chave = "pratos_" + session_id;
 
-			setCoordenadasTela(componente);
-			este_componente_fechou(true);
-			controle({renderizar: false, infos: null})
+	            const valor = JSON.stringify(deletou);
 
-			await sessionStorage.removeItem(chave);
-			await sessionStorage.setItem(chave, valor);
+		    setCoordenadasTela(componente);
 
-			setPratos(deletou);
-			if (eParaAtualizarOsFiltrados) {setAtualizar(true)}
+		    este_componente_fechou(true);
 
-	} else {
-		throw new Error("Prato não foi deletado!");
-	 };
+		    controle({renderizar: false, infos: null})
 
-	} catch (exceção) {
+		    sessionStorage.removeItem(chave);
+
+		    sessionStorage.setItem(chave, valor);
+
+		    setPratos(deletou);
+
+		    if (eParaAtualizarOsFiltrados) setAtualizar(true);
+
+	        } else {
+
+		    throw new Error("Prato não foi deletado!");
+
+	        };
+
+	    } catch (exceção) {
+
 		alert(exceção);
-	};
 
-    }; deletar_este_prato();
+	    };
 
- };
+        };
+
+        deletar_este_prato();
+
+   };
 
 
 
@@ -149,31 +165,40 @@ import Autenticado from "../../Autenticado.js";
 
   const primeirasOperacoes = React.useCallback(() => {
 
-  if (controle_useCallback) {
-    setComponente(coordenadas_tela_componente_pai);
-    window.scrollTo(0, 0);
+      if (controle_useCallback) {
 
-    if (infos_prato.preco_prato.toString().includes(".")) {
+        setComponente(coordenadas_tela_componente_pai);
 
-	const preco_formatado = parseFloat(infos_prato.preco_prato).toFixed(2).toString().replace(".", ","); //formata o preço deste prato para uma melhor exibição
+        window.scrollTo(0, 0);
 
-	setPrecoPrato(preco_formatado);
-        setControle_useCallback(false);
+          if (infos_prato.preco_prato.toString().includes(".")) {
 
- } else {
+	      const preco_formatado = parseFloat(infos_prato.preco_prato).toFixed(2).toString().replace(".", ","); //formata o preço deste prato para uma melhor exibição
 
-	setPrecoPrato(infos_prato.preco_prato);
-        setControle_useCallback(false);
-};
-};
-}, [infos_prato.preco_prato, controle_useCallback, coordenadas_tela_componente_pai]);
+	      setPrecoPrato(preco_formatado);
+
+              setControle_useCallback(false);
+
+          } else {
+
+	      setPrecoPrato(infos_prato.preco_prato);
+
+              setControle_useCallback(false);
+
+          };
+
+      };
+
+  }, [infos_prato.preco_prato, controle_useCallback, coordenadas_tela_componente_pai]);
 
 
 
 
-   React.useEffect(() => {
-	primeirasOperacoes();
-}, [primeirasOperacoes]);
+  React.useEffect(() => {
+
+      primeirasOperacoes();
+
+  }, [primeirasOperacoes]);
 
 
 
@@ -187,82 +212,100 @@ import Autenticado from "../../Autenticado.js";
 
  if (!dispararFormularioAtualizacao) {
 
-   return (
- <div id={styles.corpo}>
-  {exibirMenuOpcoes === true  && <MenuOpcoes deletarEstePrato={setConfirmar_deletar} fecharMenu={setExibirMenuOpcoes} dispararFormularioAtualizacao={setDispararFormularioAtualizacao} />}
-  {confirmar_deletar && <MensagemConfirmar _mensagem={"Deseja tirar este prato do menu?"} _fechar_mensagem_func={fecharMensagem_deletarConfirmacao_cancelar} _confirmar_ok_func={fecharMensagem_deletarConfirmacao_ok} />}
-  <header className={styles.header97}>
+     return (
 
-    <section className={styles.section1}>
+         <div id={styles.corpo}>
 
-      <button className={styles.botaoVoltar} onClick={() => {
+             {exibirMenuOpcoes === true  && <MenuOpcoes deletarEstePrato={setConfirmar_deletar} fecharMenu={setExibirMenuOpcoes} dispararFormularioAtualizacao={setDispararFormularioAtualizacao} />}
 
-	setCoordenadasTela(componente);
-	este_componente_fechou(true);
-	controle({renderizar: false, infos: null})
+             {confirmar_deletar && <MensagemConfirmar _mensagem={"Deseja tirar este prato do menu?"} _fechar_mensagem_func={fecharMensagem_deletarConfirmacao_cancelar} _confirmar_ok_func={fecharMensagem_deletarConfirmacao_ok} />}
 
- }}>Voltar</button>
+             <header className={styles.header97}>
+
+                 <section className={styles.section1}>
+
+                     <button className={styles.botaoVoltar} onClick={() => {
+
+	                 setCoordenadasTela(componente);
+
+	                 este_componente_fechou(true);
+
+	                 controle({renderizar: false, infos: null})
+
+                     }}>Voltar</button>
 
 
-      <button className={styles.botaoDeOpcoes} onTouchEnd={() => {
+                     <button className={styles.botaoDeOpcoes} onTouchEnd={() => {
 
-          if (confirmar_deletar === true) return 0;
-          if (exibirMenuOpcoes === false) setExibirMenuOpcoes(true);
+                         if (confirmar_deletar === true) return 0;
 
-      }}>
+                         if (exibirMenuOpcoes === false) setExibirMenuOpcoes(true);
 
-	 <img src={urlBackend + "/imagens.php?img=images.png"} alt="foto de menu" />
-      </button>
+                     }}>
 
-    </section>
+	                 <img src={urlBackend + "/imagens.php?img=images.png"} alt="foto de menu" />
 
-    <section className={styles.section2}>
+                     </button>
 
-      <h1 id={styles.h1}>{infos_prato.nome_prato}</h1>
-      <img src={urlBackend + "/imagens.php?img=" + infos_prato.imagem_prato + "&&tipo=nao-estatico"} alt="Imagem do prato não carregada!" />
+                 </section>
 
-    </section>
+                 <section className={styles.section2}>
 
-  </header>
+                     <h1 id={styles.h1}>{infos_prato.nome_prato}</h1>
 
-  <main className={styles.main97}>
+                     <img src={urlBackend + "/imagens.php?img=" + infos_prato.imagem_prato + "&&tipo=nao-estatico"} alt="Imagem do prato não carregada!" />
 
-    <section id={styles.sh}>
-      <h2 id={styles.h2}>Informações deste prato</h2>
-    </section>
+                 </section>
 
-    <section id={styles.sectionPreco}>
-      <p>Preço: <span>R${precoPrato}</span></p>
-    </section>
+             </header>
 
-    <section id={styles.sectionDescricao}>
-      <p>Descrição: <span>{infos_prato.descricao_prato}</span></p>
-    </section>
+             <main className={styles.main97}>
 
-    <section id={styles.sectionCategoria}>
-      <p>Categoria: <span>{infos_prato.categoria_prato}</span></p>
-    </section>
+                 <section id={styles.sh}>
 
-    <section id={styles.sectionIngredientes}>
-      <p>Ingredientes: <span>{infos_prato.ingredientes_prato}</span></p>
-    </section>
+                     <h2 id={styles.h2}>Informações deste prato</h2>
 
-    <section id={styles.sectionRestricoes}>
-      <p>Alergias/Restrições: <span>{infos_prato.alergias_restricoes_prato}</span></p>
-    </section>
+                 </section>
 
-  </main>
+                 <section id={styles.sectionPreco}>
 
-  <footer>
+                     <p>Preço: <span>R${precoPrato}</span></p>
 
-  </footer>
+                 </section>
 
- </div>
-);
+                 <section id={styles.sectionDescricao}>
 
-} else {
+                     <p>Descrição: <span>{infos_prato.descricao_prato}</span></p>
 
- return <FormularioDeAtualizacao coordenadas_alvo_botao_voltar={coordenadas_tela_este_componente} coordenadas_alvo={componente} exibirInfo_fechou={este_componente_fechou} mover_tela={setCoordenadasTela} informacoes_antigas={infos_prato} exibirFormulario={setDispararFormularioAtualizacao} />
+                 </section>
 
-}
+                 <section id={styles.sectionCategoria}>
+
+                     <p>Categoria: <span>{infos_prato.categoria_prato}</span></p>
+
+                 </section>
+
+                 <section id={styles.sectionIngredientes}>
+
+                     <p>Ingredientes: <span>{infos_prato.ingredientes_prato}</span></p>
+
+                 </section>
+
+                 <section id={styles.sectionRestricoes}>
+
+                     <p>Alergias/Restrições: <span>{infos_prato.alergias_restricoes_prato}</span></p>
+
+                 </section>
+
+             </main>
+
+         </div>
+     );
+
+ } else {
+
+     return <FormularioDeAtualizacao coordenadas_alvo_botao_voltar={coordenadas_tela_este_componente} coordenadas_alvo={componente} exibirInfo_fechou={este_componente_fechou} mover_tela={setCoordenadasTela} informacoes_antigas={infos_prato} exibirFormulario={setDispararFormularioAtualizacao} />
+
+ }
+
 }

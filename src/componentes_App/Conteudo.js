@@ -9,10 +9,10 @@ import Documentacao from "./componentes_Conteudo/Documentacao.js";
 
  export default function Conteudo () {
 
-   const [cadastro, setCadastro] = React.useState(false);
-   const [lista, setLista]       = React.useState(false);
+   const [cadastro,  setCadastro]  = React.useState(false);
+   const [lista,     setLista]     = React.useState(false);
    const [relatorio, setRelatorio] = React.useState(false);
-   const [doc, setDoc] = React.useState(false);
+   const [doc,       setDoc]       = React.useState(false);
 
    const [eParaAtualizarOsFiltrados, setEParaAtualizarOsFiltrados] = React.useState(false);
 
@@ -22,48 +22,58 @@ import Documentacao from "./componentes_Conteudo/Documentacao.js";
 }, []);
 
 
-  if (!cadastro && !lista && !relatorio && !doc) { return (<div id={styles.container}>
+  if (!cadastro && !lista && !relatorio && !doc) {
 
-     <Topo />
+      return (<div id={styles.container}>
 
-     <div className={styles.conteudo}>
+         <Topo />
 
-         <header>
+         <div className={styles.conteudo}>
 
-             <h1>Gerenciador de menu</h1>
+             <header>
 
-             <button onClick={() => setRelatorio(true)}
-	     className={styles.relatorio}>Relatório do menu</button>
+                 <h1>Gerenciador de menu</h1>
 
-             <button className={styles.sobre} onClick={() => setDoc(true)}>Sobre esta aplicação</button>
+                 <button onClick={() => setRelatorio(true)}
 
-         </header>
+   	             className={styles.relatorio}>Relatório do menu
 
-         <main>
+                 </button>
 
-             <button className={styles.menu} onClick={() => setLista(true)}>Ver menu</button>
+                 <button className={styles.sobre} onClick={() => setDoc(true)}>Sobre esta aplicação
 
-             <button className={styles.cadastro} onClick={() => setCadastro(true)}>Cadastrar pratos</button>
+                 </button>
 
-         </main>
+             </header>
 
-         <footer>
+             <main>
 
-	 <p>
-	     <small>
+                 <button className={styles.menu} onClick={() => setLista(true)}>Ver menu</button>
 
-	         &copy;{new Date().getFullYear()} Feito por <strong><em>César</em></strong>
+                 <button className={styles.cadastro} onClick={() => setCadastro(true)}>Cadastrar pratos</button>
 
-	     </small>
-	 </p>
+             </main>
 
-         </footer>
+             <footer>
 
-     </div>
+	         <p>
 
-     </div>
+    	             <small>
 
-    )};
+	                 &copy;{new Date().getFullYear()} Feito por <strong><em>César</em></strong>
+
+	             </small>
+
+	         </p>
+
+             </footer>
+
+         </div>
+
+         </div>
+
+    )
+  };
 
 
 

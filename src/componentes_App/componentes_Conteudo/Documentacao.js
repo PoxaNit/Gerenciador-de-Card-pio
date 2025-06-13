@@ -11,16 +11,18 @@ import Autenticado from "../Autenticado.js";
 
    const busca = React.useCallback(async function () {
 
-       if (executar.current)
-           setConteudo(await buscarDoc(urlBackend));
+       if (executar.current) setConteudo(await buscarDoc(urlBackend));
 
    }, [urlBackend]);
 
    React.useEffect(() => {
 
        if (executar.current) {
+
            busca();
+
            executar.current = false;
+
        }
 
    }, [busca]);
@@ -30,14 +32,14 @@ import Autenticado from "../Autenticado.js";
     <div>
 
         <header id={styles.header}>
+
             <button onClick={() => { window.scrollTo(0, 0); exibirDoc(false); }}>Sair</button>
+
             <strong>Documentação</strong>
+
         </header>
 
-
-        <main id={styles.main} dangerouslySetInnerHTML={{__html: conteudo}}>
-
-        </main>
+        <main id={styles.main} dangerouslySetInnerHTML={{__html: conteudo}}></main>
 
     </div>
   );

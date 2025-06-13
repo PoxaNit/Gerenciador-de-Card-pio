@@ -77,18 +77,25 @@ import styles from "./ItemDeLista.module.css";
 
         return (
 
-        <li className={styles.item} key={indiceParaItem} onClick={() => {
-          setComponenteExibir({renderizar: true, infos: prato});
-}}>
+            <li className={styles.item} key={indiceParaItem} onClick={() => {
 
-         {/*Verificando o tamanho da tela para exibir o elemento correto*/}
-         {!larguraDesktop ? <strong>{nomeDoPrato}</strong> : <h2>{nomeDoPrato}</h2>}
-        <br/>
-         <img alt={descricaoImagem} src={urlBackend + "/imagens.php?img=" + imagemDoPrato + "&&tipo=nao-estatico"} />
-        <br/>
-         <p>Clique para ver</p>
-        </li>
-  )
+                setComponenteExibir({renderizar: true, infos: prato});
+
+            }}>
+
+                {/*Verificando o tamanho da tela para exibir o elemento correto*/}
+                {!larguraDesktop ? <strong>{nomeDoPrato}</strong> : <h2>{nomeDoPrato}</h2>}
+
+                <br/>
+
+                <img alt={descricaoImagem} src={urlBackend + "/imagens.php?img=" + imagemDoPrato + "&&tipo=nao-estatico"} />
+
+                <br/>
+
+                <p>Clique para ver</p>
+
+            </li>
+        )
 
 
  };

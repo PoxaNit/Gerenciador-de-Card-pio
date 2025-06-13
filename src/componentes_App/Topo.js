@@ -87,7 +87,6 @@ import Confirmacao from "./componentes_Conteudo/Confirmacao";
             func_negativo: fecharConfirmacao,
             func_positivo: logout,
             mensagem: "Deseja fazer log-out?"});
-
     };
 
 
@@ -115,6 +114,7 @@ import Confirmacao from "./componentes_Conteudo/Confirmacao";
      return (<>
 
          {exibirConfirmacao.exibir && <Confirmacao func_negativo={exibirConfirmacao.func_negativo} func_positivo={exibirConfirmacao.func_positivo} mensagem={exibirConfirmacao.mensagem} />}
+
          <header id={styles.conteudo} className={!mostrar ? styles.esconder_menu : styles.mostrar_menu}>
 
 	     <section className={styles.section1}>
@@ -135,7 +135,9 @@ import Confirmacao from "./componentes_Conteudo/Confirmacao";
              </section>
 
          </header>
+
          </>
+
      );
 
  };
