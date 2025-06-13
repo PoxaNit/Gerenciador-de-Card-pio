@@ -275,7 +275,7 @@ conjunto com -F ou --configuracao-filtrada.
 
  echo "\
 token_gist=$([[ -z "${token_gist}" ]] && echo "'Token GitHub com permissão Gist aqui!'" || echo "'${token_gist}'")
-urlBackend=$([[ -z "${urlBackend}" ]] && echo "'Preenchida pelo sistema automaticamente.'" || echo "'${urlBackend}'")
+urlBackend=$([[ -z "${urlBackend}" ]] && echo "'Preenchida_pelo_sistema_automaticamente.'" || echo "'${urlBackend}'")
 porta=$([[ -z "$porta" ]] && echo 8080 || echo "$porta")
 caminho_logs_react=$([[ -z "$caminho_logs_react" ]] && echo "tmp/.logs_react_tmp.txt" || echo "$caminho_logs_react")
 caminho_logs_php=$([[ -z "$caminho_logs_php" ]] && echo "tmp/.logs_php_tmp.txt" || echo "$caminho_logs_php")
@@ -317,7 +317,7 @@ tentativas_sem_conexao=$([[ -z "$tentativas_sem_conexao" ]] && echo 0 || echo "$
 
  echo "\
 token_gist=$([[ -z "${token_gist}" ]] && echo "'Token GitHub com permissão Gist aqui!'" || echo "'${token_gist}'")
-urlBackend=$([[ -z "${urlBackend}" ]] && echo "'Preenchida pelo sistema automaticamente.'" || echo "'${urlBackend}'")
+urlBackend=$([[ -z "${urlBackend}" ]] && echo "'Preenchida_pelo_sistema_automaticamente.'" || echo "'${urlBackend}'")
 porta=8080
 caminho_logs_react=tmp/.logs_react_tmp.txt
 caminho_logs_php=tmp/.logs_php_tmp.txt
