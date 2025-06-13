@@ -7,7 +7,7 @@ import Confirmacao from "./componentes_Conteudo/Confirmacao";
 
  function Topo () {
 
-     const { usuario_nome, session_id } = React.useContext(Autenticado);
+     const { usuario_nome, session_id, urlBackend } = React.useContext(Autenticado);
 
      const [mostrar, setMostrar] = React.useState(false);
      const [exibirConfirmacao, setExibirConfirmacao] = React.useState({
@@ -28,7 +28,9 @@ import Confirmacao from "./componentes_Conteudo/Confirmacao";
 
      function logout() {
 
-         window.location = "http://0.0.0.0:8000/autenticacao/logout.php";
+         sessionStorage.clear();
+
+         window.location = urlBackend + "/autenticacao/logout.php?ngrok-skip-browser-warning=true";
 
      };
 
@@ -46,7 +48,7 @@ import Confirmacao from "./componentes_Conteudo/Confirmacao";
 
          const dados = JSON.stringify({email: session_id});
 
-         const resposta = await fetch("/autenticacao/deletar_conta.php", {method: "POST", body: dados});
+         const resposta = await fetch(urlBackend + "/autenticacao/deletar_conta.php?ngrok-skip-browser-warning=true", {method: "POST", body: dados});
 
          const json = await resposta.json();
 
@@ -54,7 +56,7 @@ import Confirmacao from "./componentes_Conteudo/Confirmacao";
 
              logout();
 
-         } else { alert(JSON.stringify(json))}
+         } else { alert(json.msg)}
 
      };
 
@@ -85,7 +87,6 @@ import Confirmacao from "./componentes_Conteudo/Confirmacao";
             func_negativo: fecharConfirmacao,
             func_positivo: logout,
             mensagem: "Deseja fazer log-out?"});
-
     };
 
 
@@ -113,27 +114,30 @@ import Confirmacao from "./componentes_Conteudo/Confirmacao";
      return (<>
 
          {exibirConfirmacao.exibir && <Confirmacao func_negativo={exibirConfirmacao.func_negativo} func_positivo={exibirConfirmacao.func_positivo} mensagem={exibirConfirmacao.mensagem} />}
+
          <header id={styles.conteudo} className={!mostrar ? styles.esconder_menu : styles.mostrar_menu}>
 
 	     <section className={styles.section1}>
 
 	         <p>Usuário(a): <strong>{usuario_nome}</strong></p>
 
-  	         <button onClick={() => setMostrar(m => !m)}>Conta <img id={styles.contaImg} alt="Opções de conta" src="/configurar.png"/></button>
+  	         <button onClick={() => setMostrar(m => !m)}>Conta <img id={styles.contaImg} alt="Opções de conta" src={urlBackend + "/imagens.php?img=configurar.png"}/></button>
 
              </section>
 
 
 	     <section className={styles.section2}>
 
-	         <button onClick={() => confirmar_logout()}>Sair da conta <img src="/logout_icon.png" alt="ícone de logout" /></button>
+	         <button onClick={() => confirmar_logout()}>Sair da conta <img src={urlBackend + "/statics/logout_icon.png"} alt="ícone de logout" /></button>
 
-		 <button onClick={() => confirmar_deletarConta()}>Deletar conta <img alt="Ícone de lixeira" src="/lixeira.png" id={styles.lixeira_img}/></button>
+		 <button onClick={() => confirmar_deletarConta()}>Deletar conta <img alt="Ícone de lixeira" src={urlBackend + "/statics/lixeira.png"} id={styles.lixeira_img}/></button>
 
              </section>
 
          </header>
+
          </>
+
      );
 
  };

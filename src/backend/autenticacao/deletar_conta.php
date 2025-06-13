@@ -1,5 +1,23 @@
 <?php
 
+ session_start();
+
+
+
+ if (!isset($_SESSION["autenticado"])):
+
+     http_response_code(401);
+
+     header("Content-Type: application/json");
+
+     echo json_encode(["sucesso" => false, "msg" => "Usuário(a) não logado(a)!", "status" => 401]);
+
+     exit;
+
+ endif;
+
+
+
  $erros = array();
 
  if ($_SERVER["REQUEST_METHOD"] === "POST"):
@@ -14,7 +32,9 @@
 
 
 
-         $db = new SQLite3("../restaurante.db");
+         $caminho_banco = __DIR__ . '/../../../' . trim(shell_exec('source ../../../.env && echo $caminho_banco'));
+
+         $db = new SQLite3($caminho_banco);
 
 
 //Deletando as imagens do diretório de imagens
@@ -22,9 +42,11 @@
          $stmt->bindValue(':email', $email);
          $result = $stmt->execute();
 
+         $caminho_imagens = __DIR__ . '/../../../' . trim(shell_exec('source ../../../.env && echo $caminho_imagens'));
+
          while ($linha = $result->fetchArray(SQLITE3_ASSOC)):
 
-	     shell_exec("rm " . __DIR__ . "/../$linha[imagem_prato]");
+	     shell_exec("rm $caminho_imagens/$linha[imagem_prato]");
 
          endwhile;
 

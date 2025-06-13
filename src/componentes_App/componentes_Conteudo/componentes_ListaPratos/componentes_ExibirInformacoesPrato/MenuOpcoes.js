@@ -9,39 +9,44 @@ import styles from "./MenuOpcoes.module.css";
 
 
  return (
-<div className={styles.container}>
 
+     <div className={styles.container}>
 
-    <section id={styles.section1}>
+         <section id={styles.section1}>
 
+	     <b>Opções</b>
 
-	<b>Opções</b>
-	<button onClick={() => fecharMenu(false)}>Fechar</button>
+	     <button onClick={() => fecharMenu(false)}>Fechar</button>
 
-    </section>
+         </section>
 
+         <section id={styles.section2}>
 
-    <section id={styles.section2}>
+	     <button onClick={() => {
 
-	<button onClick={() => {
-		dispararFormularioAtualizacao(true);
-		fecharMenu(false); //manda o booleano para o componente pai decidir se este menu deve ser renderizado
-}}>
-		Atualizar este prato
-	</button>
+	         dispararFormularioAtualizacao(true);
 
-    </section>
+		 fecharMenu(false); //manda o booleano para o componente pai decidir se este menu deve ser renderizado
 
+             }}>Atualizar este prato
 
-    <section id={styles.section3}>
+	     </button>
 
-	<button onClick={() => {
-		deletarEstePrato(true);
-		fecharMenu(false);
-}}>Deletar este prato</button>
+         </section>
 
-    </section>
+         <section id={styles.section3}>
 
-</div>
-);
- };
+	     <button onClick={() => {
+
+	         deletarEstePrato(true);
+
+		 fecharMenu(false);
+             }}>Deletar este prato
+
+             </button>
+
+         </section>
+
+     </div>
+ );
+};

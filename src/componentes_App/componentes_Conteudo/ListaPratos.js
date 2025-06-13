@@ -27,7 +27,7 @@ export default function ListaPratos ({setLista}) {
 
   const { eParaAtualizarOsFiltrados } = React.useContext(SincronizarPratos);
 
-  const { session_id } = React.useContext(Autenticado);
+  const { session_id, urlBackend } = React.useContext(Autenticado);
 
   const [componenteExibir, setComponenteExibir] = React.useState({ //controla quando e quais informações exibir do prato clicado.
     renderizar: false,
@@ -84,15 +84,17 @@ export default function ListaPratos ({setLista}) {
 
      if (mudarComponente) {
 
-	window.scrollTo(coordenadasTela.x, coordenadasTela.y);
-	armazenar_coordenadas_tela();
-        setMudarComponente(false);
+         window.scrollTo(coordenadasTela.x, coordenadasTela.y);
 
-   } else {
+	 armazenar_coordenadas_tela();
 
-	return null
+         setMudarComponente(false);
 
-   };
+     } else {
+
+         return null
+
+     };
 
  }, [mudarComponente, coordenadasTela.x, coordenadasTela.y]);
 
@@ -135,11 +137,14 @@ export default function ListaPratos ({setLista}) {
 
       if(pratos.info === undefined) {
 
+          // Não faz nada
 
       } else {
 
           const filtrados = pratos.info.filter(prato => prato.nome_prato.toLowerCase().includes(termoPesquisado.toLowerCase()));
+
           setPratosFiltrados(filtrados);
+
       }
 
  }, [termoPesquisado, pratos]);
@@ -186,8 +191,9 @@ export default function ListaPratos ({setLista}) {
 
   React.useEffect(() => {
 
-          const filtrados = pratosCategorizados.filter(prato => prato.nome_prato.toUpperCase().includes(termoPesquisado.toUpperCase()));
-          setFiltradosPesquisados(filtrados);
+      const filtrados = pratosCategorizados.filter(prato => prato.nome_prato.toUpperCase().includes(termoPesquisado.toUpperCase()));
+
+      setFiltradosPesquisados(filtrados);
 
   }, [pratosCategorizados, termoPesquisado]);
 
@@ -228,7 +234,7 @@ export default function ListaPratos ({setLista}) {
 
                    setDispararAlerta({mensagem: "carregando...", tempo: 20000, exibir: true});
 
-		   const pratosBuscados = await buscarPratos();
+		   const pratosBuscados = await buscarPratos(urlBackend);
 
 
 	           if (pratosBuscados) {
@@ -239,7 +245,15 @@ export default function ListaPratos ({setLista}) {
 
 	               setPratos(pratosBuscados);
 
-	           }
+	           } else {
+		   // Se a função buscarPratos retornar falsey é porque o usuário não
+          	   // está autenticado (logado).
+                       setDispararAlerta({mensagem: "Usuário(a) não logado(a)!", tempo: 5000, exibir: true});
+
+                       setTimeout(() => window.location.reload(), 5000);
+
+		       return null;
+                   }
 
 
                    setDispararAlerta({mensagem: "", tempo: 0, exibir: false});
@@ -282,157 +296,170 @@ export default function ListaPratos ({setLista}) {
 
 
   return (
-<>
- {dispararAlerta.exibir && <MensagemAlerta setDispararAlerta={setDispararAlerta} exibir={dispararAlerta.exibir} mensagem={dispararAlerta.mensagem} tempo={dispararAlerta.tempo} />}
- <Contexto.Provider value={{setComponenteExibir, setTermoPesquisado, setFiltragemCategoriaAtivo, setPratosCategorizados, setPratos, eParaAtualizarOsFiltrados, setAtualizar}}>
+  <>
 
- {componenteExibir.renderizar ? <ExibirInformacoesPrato func_tirar_evento_rolagem={armazenar_coordenadas_tela} func_coord_pai={armazenar_coordenadas_tela} infos_prato={componenteExibir.infos} controle={setComponenteExibir} coordenadas_tela_componente_pai={coordenadasTela} este_componente_fechou={setMudarComponente} setCoordenadasTela={setCoordenadasTela}/> : (
+      {dispararAlerta.exibir && <MensagemAlerta setDispararAlerta={setDispararAlerta} exibir={dispararAlerta.exibir} mensagem={dispararAlerta.mensagem} tempo={dispararAlerta.tempo} />}
 
- <div className={styles.conteudo}>
+      <Contexto.Provider value={{setComponenteExibir, setTermoPesquisado, setFiltragemCategoriaAtivo, setPratosCategorizados, setPratos, eParaAtualizarOsFiltrados, setAtualizar}}>
 
-     <header id={styles.hl}>
+          {componenteExibir.renderizar ? <ExibirInformacoesPrato func_tirar_evento_rolagem={armazenar_coordenadas_tela} func_coord_pai={armazenar_coordenadas_tela} infos_prato={componenteExibir.infos} controle={setComponenteExibir} coordenadas_tela_componente_pai={coordenadasTela} este_componente_fechou={setMudarComponente} setCoordenadasTela={setCoordenadasTela}/> : (
 
+              <div className={styles.conteudo}>
 
-         <section className={styles.s1}>
+                  <header id={styles.hl}>
 
-             <button onClick={() => setLista(false)}>Sair</button>
+                      <section className={styles.s1}>
 
-             <button onTouchEnd={() => {
+                          <button onClick={() => setLista(false)}>Sair</button>
 
+                          <button onTouchEnd={() => {
 
-	                                   if (!modoPesquisarPratos) {
+	                      if (!modoPesquisarPratos) {
 
+		                  setModoPesquisarPratos(true);
 
-		                               setModoPesquisarPratos(true);
+	                      }
 
+                          }} className={styles.btnImg}>
 
-	                                   }
+                              <img src={urlBackend + "/imagens.php?img=ePZfIIUTjEcAAAAASUVORK5CYII_-removebg-preview.png"} alt="Ícone de lupa" />
 
-                                       }
+                          </button>
 
-                                }
+                      </section>
 
-                 className={styles.btnImg}
 
-             >
+                      <section className={styles.s2}>
 
-                 <img src={"/ePZfIIUTjEcAAAAASUVORK5CYII_-removebg-preview.png"} alt="Ícone de lupa" />
+                          <h1>Pratos do menu</h1>
 
-             </button>
+                      </section>
 
-         </section>
+                      <section>
 
+                          <LayoutCategoria pratos={pratos.info} filtragemAtiva={filtragemCategoriaAtivo} setFiltragemAtiva={setFiltragemCategoriaAtivo} botaoAtivo={opcaoDeFiltroAtiva} setBotaoAtivo={setOpcaoDeFiltroAtiva} atualizarListaFiltrada={atualizar} setAtualizarListaFiltrada={setAtualizar} />
 
-         <section className={styles.s2}>
+                      </section>
 
-             <h1>Pratos do menu</h1>
+                  </header>
 
-         </section>
+                  <main>
 
+                      {(coordenadasTela.y >= 300) && <SubirAoTopo />}
 
-         <section>
+                      {modoPesquisarPratos && <RenderizarPesquisa setModoPesquisarPratos={setModoPesquisarPratos} pratos={pratos.info} setTermoPesquisado={setTermoPesquisado} setPratosFiltrados={setPratosFiltrados} termoPesquisado={termoPesquisado} />}
 
-             <LayoutCategoria pratos={pratos.info} filtragemAtiva={filtragemCategoriaAtivo} setFiltragemAtiva={setFiltragemCategoriaAtivo} botaoAtivo={opcaoDeFiltroAtiva} setBotaoAtivo={setOpcaoDeFiltroAtiva} atualizarListaFiltrada={atualizar} setAtualizarListaFiltrada={setAtualizar} />
 
-         </section>
+                      { /* Renderização padrão caso não haja filtragem nem busca por parte do usuário. Isto exibe normalmente os pratos do menu. */ }
 
-     </header>
+                      {((pratos.sucesso && !filtragemCategoriaAtivo) &&
+                       ((!modoPesquisarPratos && !termoPesquisado) ||
+                       (modoPesquisarPratos && !termoPesquisado))) &&
+                       (<ul id={styles.lista_pratos}>
 
-     <main>
+                           {pratos.info.map((prato, indice) => {
 
-{/*Lembrete: termine a refatoração deste retorno.*/}
+                               return <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={prato.imagem_prato} descricaoImagem="Imagem do prato" indiceParaItem={indice} prato={prato} />
 
-         {(coordenadasTela.y >= 300) && <SubirAoTopo />}
+                           }
+                       )
+                      }
 
-         {modoPesquisarPratos && <RenderizarPesquisa setModoPesquisarPratos={setModoPesquisarPratos} pratos={pratos.info} setTermoPesquisado={setTermoPesquisado} setPratosFiltrados={setPratosFiltrados} termoPesquisado={termoPesquisado} />}
+                        </ul>)}
 
 
-         { /* Renderização padrão caso não haja filtragem nem busca por parte do usuário. Isto exibe normalmente os pratos do menu. */ }
 
-         {((pratos.sucesso && !filtragemCategoriaAtivo) && ((!modoPesquisarPratos && !termoPesquisado) || (modoPesquisarPratos && !termoPesquisado))) && (<ul id={styles.lista_pratos}>
 
-             {pratos.info.map((prato, indice) => {
 
-                 return <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={prato.imagem_prato} descricaoImagem="Imagem do prato" indiceParaItem={indice} prato={prato} />
 
-             })}
 
-         </ul>)}
 
 
 
+                      { /* Caso o usuário tenha feito uma busca por nome, mas sem filtrar categorias. */ }
 
+                      {(pratos.sucesso && !filtragemCategoriaAtivo &&
+                       modoPesquisarPratos && termoPesquisado) &&
+                       (<ul id={styles.lista_pratos}>
 
+                           {pratosFiltrados.map((prato, indice) => {
 
+                               return <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={prato.imagem_prato} descricaoImagem={"Imagem do prato"} indiceParaItem={indice} prato={prato} />
 
+                            }
+                            )
+                           }
+                        </ul>
+                       )
+                      }
 
 
 
-     { /* Caso o usuário tenha feito uma busca por nome, mas sem filtrar categorias. */ }
 
-     {(pratos.sucesso && !filtragemCategoriaAtivo && modoPesquisarPratos && termoPesquisado) && (<ul id={styles.lista_pratos}>
 
-         {pratosFiltrados.map((prato, indice) => {
 
-             return <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={prato.imagem_prato} descricaoImagem={"Imagem do prato"} indiceParaItem={indice} prato={prato} />
+                      { /* Caso o usuário busque pratos filtrando as categorias e por nome, e a busca tenha tido sucesso. */ }
 
-         })
+                      {(pratos.sucesso && filtradosPesquisados.length !== 0 &&
+                       filtragemCategoriaAtivo && modoPesquisarPratos &&
+                       termoPesquisado) && (<ul id={styles.lista_pratos}>
 
-     }</ul>)}
+                           {filtradosPesquisados.map((prato, indice) => {
 
+                               return <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={prato.imagem_prato} descricaoImagem={"Imagem do prato"} indiceParaItem={indice} prato={prato} />
 
+                           }
+                         )
+                        }
+                       </ul>
+                       )
+                      }
 
 
 
 
-     { /* Caso o usuário busque pratos filtrando as categorias e por nome, e a busca tenha tido sucesso. */ }
 
-     {(pratos.sucesso && filtradosPesquisados.length !== 0 && filtragemCategoriaAtivo && modoPesquisarPratos && termoPesquisado) && (<ul id={styles.lista_pratos}>
+                      { /* Caso a filtragem por categoria esteja ativa, deve ser renderizada a lista com os pratos que correspondem.*/ }
 
-         {filtradosPesquisados.map((prato, indice) => {
+                      {((modoPesquisarPratos && !termoPesquisado) ||
+                       (!modoPesquisarPratos && !termoPesquisado)) &&
+                       (pratos.sucesso && filtragemCategoriaAtivo &&
+                       pratosCategorizados.length !== 0) && (<ul id={styles.lista_pratos}>
 
-             return <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={prato.imagem_prato} descricaoImagem={"Imagem do prato"} indiceParaItem={indice} prato={prato} />
+                           {pratosCategorizados.map((prato, indice) => {
 
-         })}
+                               return <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={prato.imagem_prato} descricaoImagem={"Imagem do prato"} indiceParaItem={indice} prato={prato} />
 
-     </ul>)}
+                           }
+                          )
+                        }
 
+                       </ul>
+                      )
+                     }
 
 
 
 
 
-     { /* Caso a filtragem por categoria esteja ativa, deve ser renderizada a lista com os pratos que correspondem.*/ }
 
-     {((modoPesquisarPratos && !termoPesquisado) || (!modoPesquisarPratos && !termoPesquisado)) && (pratos.sucesso && filtragemCategoriaAtivo && pratosCategorizados.length !== 0) && (<ul id={styles.lista_pratos}>
 
-         {pratosCategorizados.map((prato, indice) => {
 
-             return <ItemDeLista nomeDoPrato={prato.nome_prato} imagemDoPrato={prato.imagem_prato} descricaoImagem={"Imagem do prato"} indiceParaItem={indice} prato={prato} />
 
-         })}
 
-     </ul>)}
+                      {(!pratos.info.length ||
+                       (modoPesquisarPratos && termoPesquisado && pratosFiltrados.length === 0) ||
+                       (filtragemCategoriaAtivo && pratosCategorizados.length === 0) ||
+                       (filtragemCategoriaAtivo && termoPesquisado && filtradosPesquisados.length === 0)) && <h2 className={styles.h2}>Sem resultados</h2>
+                      }
 
+                  </main>
 
+              </div>
 
+              )
+          }
 
+      </Contexto.Provider>
 
-
-
-
-
-
-     {(!pratos.info.length ||
-      (modoPesquisarPratos && termoPesquisado && pratosFiltrados.length === 0) ||
-      (filtragemCategoriaAtivo && pratosCategorizados.length === 0) ||
-      (filtragemCategoriaAtivo && termoPesquisado && filtradosPesquisados.length === 0)) && <h2 className={styles.h2}>Sem resultados</h2>
-     }
- </main>
-</div>
-
-)}
-
-</Contexto.Provider>
-
-</>)}
+  </>)}

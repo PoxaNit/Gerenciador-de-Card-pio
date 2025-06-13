@@ -6,6 +6,8 @@
 
  setcookie("PHPSESSID", "", time() - 500, "/");
 
- header("Location: http://0.0.0.0:8000/autenticacao/login.php");
+ $urlBackend = trim(shell_exec('source ../../../.env && echo $urlBackend'));
+
+ header("Location: $urlBackend/autenticacao/login.php");
 
 ?>

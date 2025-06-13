@@ -3,7 +3,7 @@ import styles from "./RelatorioMenu.module.css";
 import Autenticado from "../Autenticado.js";
 import buscarPratos from "../../resources/buscarPratos.js";
 import verificarPratosEmCache from "../../resources/verificarPratosEmCache.js";
-
+import MensagemAlerta from "../MensagemAlerta.js";
 
 
  export default function RelatorioMenu ({ setRelatorio }) {
@@ -11,9 +11,12 @@ import verificarPratosEmCache from "../../resources/verificarPratosEmCache.js";
    React.useEffect(() => window.scrollTo(0, 0), []);
 
 
-   const { session_id } = React.useContext(Autenticado);
+   const { session_id, urlBackend } = React.useContext(Autenticado);
 
    const [informacoes, setInformacoes] = React.useState([]); //guarda as informações dos pratos do menu
+
+   const [dispararAlerta, setDispararAlerta] = React.useState({mensagem: "", tempo: 0, exibir: false});
+
 
 
 //                       Separação das categorias
@@ -224,20 +227,21 @@ import verificarPratosEmCache from "../../resources/verificarPratosEmCache.js";
 
                } else {
 
-                   const resposta = await buscarPratos();
+                   const resposta = await buscarPratos(urlBackend);
 
-                   const status = resposta?.sucesso;
-
-                   const info = resposta?.info;
-
-
-                   if (status && info) {
+                   if (resposta) {
 
 	               const valor = JSON.stringify(resposta);
 
                        sessionStorage.setItem(chave, valor); //Para acesso global dos dados na aplicação
 
-	               setInformacoes(info);
+	               setInformacoes(resposta.info);
+
+                   } else if (!resposta) {
+
+                       setDispararAlerta({mensagem: "Usuário(a) não logado(a)!", tempo: 5000, exibir: true});
+
+                       setTimeout(() => window.location.reload(), 5000);
 
                    }
 
@@ -259,11 +263,13 @@ import verificarPratosEmCache from "../../resources/verificarPratosEmCache.js";
 
       <div className={styles.conteudo}>
 
+          {dispararAlerta.exibir && <MensagemAlerta setDispararAlerta={setDispararAlerta} exibir={dispararAlerta.exibir} tempo={dispararAlerta.tempo} mensagem={dispararAlerta.mensagem} />}
+
           <header>
 
 	      <button id={styles.headBut} onClick={() => setRelatorio(false)}>
 
-		   <img src="/SetaBranca.png" alt="Voltar" />
+		   <img src={urlBackend + "/imagens.php?img=SetaBranca.png"} alt="Voltar" />
 
 	      </button>
 

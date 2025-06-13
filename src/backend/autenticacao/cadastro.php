@@ -14,7 +14,9 @@
 
 	 endif;
 
-         $db = new SQLite3('../restaurante.db');
+         $caminho_banco = __DIR__ . '/../../../' . trim(shell_exec('source ../../../.env && echo $caminho_banco'));
+
+         $db = new SQLite3($caminho_banco);
 
 	 $stmt = $db->prepare("SELECT usuario_email FROM usuarios WHERE usuario_email = :email");
          $stmt->bindValue(":email", $_POST["email"]);
@@ -64,6 +66,7 @@
 
  endif;
 
+ $urlBackend = trim(shell_exec('source ../../../.env && echo ${urlBackend}'));
 
 ?>
 
@@ -139,7 +142,7 @@
 	     <footer>
 
 	         <nav>
-	             <a href="http://0.0.0.0:8000/autenticacao/login.php">Já tem uma conta?</a>
+	             <a href= <?php echo $urlBackend . "/autenticacao/login.php" ?>>Já tem uma conta?</a>
 	         </nav>
   	             <?php if (!empty($erros)): ?>
 
@@ -165,7 +168,7 @@
 
   	         <?php
 
-		     echo "<a href=http://0.0.0.0:8000/autenticacao/login.php>Entrar</a>";
+		     echo "<a href=$urlBackend/autenticacao/login.php>Entrar</a>";
 
 	         ?>
 

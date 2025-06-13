@@ -2,9 +2,23 @@
 
   session_start();
 
+  if (!isset($_SESSION["autenticado"])):
+
+      http_response_status(401);
+
+      header("Content-Type: application/json");
+
+      echo json_encode(["sucesso" => false, "msg" => "Usuário(a) não logado(a)!"]);
+
+      exit;
+
+  endif;
+
   $usuario_email = $_SESSION["autenticado"];
 
-  $db = new SQLite3("restaurante.db");
+  $caminho_banco = __DIR__ . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_banco'));
+
+  $db = new SQLite3($caminho_banco);
 
   if ($_SERVER["REQUEST_METHOD"] === "POST"):
 
@@ -14,7 +28,8 @@
 
    //Deletando o prato
       $imagem_prato = $dados["imagem_prato"];
-      shell_exec("rm $imagem_prato");
+      $caminho_imagem = __DIR__ . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_prato')) . $imagem_prato;
+      shell_exec("rm $caminho_imagem");
 
       $nome_prato = $dados['nome_prato'];
       $descricao_prato = $dados['descricao_prato'];
@@ -56,12 +71,6 @@
       header("Content-Type: application/json");
 
       echo json_encode($resposta);
-
-      exit;
-
-  else:
-
-      header("Location: http://0.0.0.0:8000/autenticacao/login.php");
 
       exit;
 

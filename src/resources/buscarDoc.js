@@ -1,11 +1,11 @@
 
- async function buscarDoc () {
+ async function buscarDoc (urlBackend) {
 
      const doc = sessionStorage.getItem("doc");
 
      if (!doc) {
 
-         const dados = await fetch("/documentacao/provedor/documentacao.php");
+         const dados = await fetch(urlBackend + "/documentacao/provedor/documentacao.php");
 
          const json = await dados.json();
 

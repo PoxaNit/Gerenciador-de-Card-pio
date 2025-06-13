@@ -18,22 +18,27 @@ exibir //booleano indicando quando o alerta está ativo
 
 
 
-const tratarAlerta = React.useCallback(() => {
+ const tratarAlerta = React.useCallback(() => {
 
-        if (exibir) {
-          setTimeout(() => {
-		setDispararAlerta({disparar: false, msg: "", tempo: 0});
-    }, parseInt(tempo));
-  };
+     if (exibir) {
+
+         setTimeout(() => {
+
+             setDispararAlerta({disparar: false, msg: "", tempo: 0});
+
+         }, parseInt(tempo));
+
+     };
 
  }, [exibir, setDispararAlerta, tempo]);
 
 
 
    React.useEffect(() => {
-        tratarAlerta();
 
- }, [tratarAlerta]);
+       tratarAlerta();
+
+   }, [tratarAlerta]);
 
 
 
@@ -48,21 +53,24 @@ const tratarAlerta = React.useCallback(() => {
 
      return (
 
- <div id={styles.div}>
+         <div id={styles.div}>
 
-   <h2>{mensagem}</h2>
+             <h2>{mensagem}</h2>
 
- </div>
+         </div>
 
-  );
+     );
 
-} else {
-	return null;
-};
+ } else {
+
+     return null;
+
+ };
+
+/*---------------//////////////////////////---------------------*/
 
 
  };
 
 
 
-/*---------------//////////////////////////---------------------*/

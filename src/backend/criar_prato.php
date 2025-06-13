@@ -4,7 +4,21 @@
 
  session_start();
 
- $db = new SQLite3("restaurante.db");
+ if (!isset($_SESSION["autenticado"])):
+
+     http_response_code(401);
+
+     header("Content-Type: application/json");
+
+     echo json_encode(["sucesso" => false, "msg" => "Usuário(a) não logado(a)!", "status" => 401]);
+
+     exit;
+
+ endif;
+
+ $caminho_banco = __DIR__ . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_banco'));
+
+ $db = new SQLite3($caminho_banco);
 
  if ($_SERVER["REQUEST_METHOD"] === "POST"):
 
@@ -20,6 +34,8 @@
 
     if (verificarSePratoExiste($nome_prato, $usuario_email)):
 
+        http_response_code(409);
+
         echo json_encode(["msg" => "Prato já existente!",
 			  "sucesso" => false]);
         $db->close();
@@ -34,8 +50,9 @@
 
     $extensao = pathinfo($nome_imagem, PATHINFO_EXTENSION);
     $novoNome = uniqid().".".$extensao;
-    $caminho = "imagens/".$novoNome;
-    move_uploaded_file($nome_temporario_imagem, $caminho);
+
+    $caminho = __DIR__ . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_imagens'));
+    move_uploaded_file($nome_temporario_imagem, $caminho . "/" . $novoNome);
 
     $stmt = $db->prepare("INSERT INTO menu_pratos (nome_prato, descricao_prato, preco_prato, categoria_prato, ingredientes_prato, alergias_restricoes_prato, imagem_prato, usuario_email) VALUES (:nome_prato, :descricao_prato, :preco_prato, :categoria_prato, :ingredientes_prato, :alergias_restricoes_prato, :imagem_prato, :usuario_email)");
 
@@ -45,7 +62,7 @@
     $stmt->bindvalue(":categoria_prato", $categoria_prato);
     $stmt->bindvalue(":ingredientes_prato", $ingredientes_prato);
     $stmt->bindvalue(":alergias_restricoes_prato", $alergias_restricoes_prato);
-    $stmt->bindvalue(":imagem_prato", $caminho);
+    $stmt->bindvalue(":imagem_prato", $novoNome);
     $stmt->bindValue(":usuario_email", $usuario_email);
 
     $stmt->execute();
@@ -72,10 +89,5 @@
     $db->close();
 
     echo json_encode($dados);
-
- else:
-
-     header("Location: http://0.0.0.0:8000/autenticacao/login.php");
-     exit;
 
  endif;

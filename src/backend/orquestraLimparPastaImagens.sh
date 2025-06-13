@@ -11,33 +11,39 @@
 
      echo "Este programa não aceita parâmetros!"
 
-     sleep 5
-
      exit 1
 
  fi
 
 
 
-#Para isso funcionar, esse script deve ser executado
+#Para isso funcionar, este script deve ser executado
 #por rodarApp.sh, na raíz do projeto.
  cd src/backend
 
+ caminho_banco=$(grep -Po "^\s*caminho_banco=['\"]?\K[^'\"\s;]*" ../../.env)
+
+ caminho_completo="$(pwd)/../../${caminho_banco}"
+
+ caminho_pasta_imagens=$(pwd)/../../$(grep -Po "^\s*caminho_imagens=['\"]?\K[^'\"\s;]*" ../../.env)
 
  while true; do
 
      imagens=$(ls imagens)
 
+
+
      for img in $imagens; do
 
+         caminho_imagem="$caminho_pasta_imagens/${img}"
+
          php "limparPastaImagens.php" \
-             "restaurante.db"         \
-             "imagens/${img}"
+             "${caminho_completo}"    \
+             "${caminho_imagem}"
 
      done
 
-
-   # Espera 10 minutos
+   # Espera de 10 minutos
      sleep 600
 
  done

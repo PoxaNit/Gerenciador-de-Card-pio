@@ -23,7 +23,7 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
 
    const formulario = React.useRef(); //Faz referência ao formulário de atualização deste componente.
 
-   const { session_id } = React.useContext(Autenticado);
+   const { session_id, urlBackend } = React.useContext(Autenticado);
 
 
    const [novosDados_prato, despachar] = React.useReducer(reducer, { //local de armazenamento dos novos dados
@@ -95,25 +95,26 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
 
 
 	if ( //verifica se todas as infornações novas estão preenchidas
- novosDados_prato.novo_nome_prato &&
- novosDados_prato.novo_descricao_prato &&
- novosDados_prato.novo_preco_prato &&
- novosDados_prato.novo_categoria_prato &&
- novosDados_prato.novo_ingredientes_prato &&
- novosDados_prato.novo_alergias_restricoes_prato &&
- novosDados_prato.novo_imagem_prato )   {
+         novosDados_prato.novo_nome_prato &&
+         novosDados_prato.novo_descricao_prato &&
+         novosDados_prato.novo_preco_prato &&
+         novosDados_prato.novo_categoria_prato &&
+         novosDados_prato.novo_ingredientes_prato &&
+         novosDados_prato.novo_alergias_restricoes_prato &&
+         novosDados_prato.novo_imagem_prato
+        ) {
 
-	  setNovosDadosPreenchidos(true);
+	      setNovosDadosPreenchidos(true);
 
- } else {
+        } else {
 
-      setNovosDadosPreenchidos(false);
+            setNovosDadosPreenchidos(false);
 
- };
+        };
 
 
 
- };
+  };
 
 
 
@@ -149,11 +150,15 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
 	const arquivoBase64 = leitor.result;
 
 	despachar({tipo: "mudar imagem", valor: arquivoBase64});
+
 	setImagem_prato_novo(arquivoBase64); //arquivo de imagem que será mandada separadamente em uma futura requisição
+
 	setNovaImagemCarregada(leitor.result);
+
      };
 
      leitor.readAsDataURL(arquivo);
+
   };
 
 
@@ -162,33 +167,38 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
 
  async function tratarSalvamento () {
 
-   if (novosDadosPreenchidos) {
+     if (novosDadosPreenchidos) {
 
-        await atualizarEstePrato(
-              formulario,
-              novaImagemCarregada,
-              imagem_prato_novo,
-              setPratos,
-              session_id,
-              informacoes_antigas
-             );
+         await atualizarEstePrato(
+	     urlBackend,
+             formulario,
+             novaImagemCarregada,
+             imagem_prato_novo,
+             setPratos,
+             session_id,
+             informacoes_antigas
+         );
 
 
-	setTermoPesquisado("");
-        mover_tela(coordenadas_alvo);
-        setComponenteExibir({infos: null, renderizar: false});
-	exibirInfo_fechou(true); //Avisa ao componente ListaPratos.js quando o pai deste componente ( ExibirInformacoes.js ) fechar, para que as operações relacionadas ocorram.
-        if (eParaAtualizarOsFiltrados) {setAtualizar(true)}
+	 setTermoPesquisado("");
 
-  } else {
+         mover_tela(coordenadas_alvo);
 
-	setDispararAlerta({
-	    mensagem: "Forneça todos os novos dados",
-	    tempo: 2000,
-	    disparar: true,
-        });
+         setComponenteExibir({infos: null, renderizar: false});
 
-  };
+	 exibirInfo_fechou(true); //Avisa ao componente ListaPratos.js quando o pai deste componente ( ExibirInformacoes.js ) fechar, para que as operações relacionadas ocorram.
+
+         if (eParaAtualizarOsFiltrados) setAtualizar(true);
+
+     } else {
+
+         setDispararAlerta({
+	     mensagem: "Forneça todos os novos dados",
+	     tempo: 2000,
+	     disparar: true,
+         });
+
+     };
 
 
  };
@@ -197,152 +207,120 @@ import atualizarEstePrato from "./funcoes_FormularioDeAtualizacao/atualizarEsteP
 
  return (
  <>
- {dispararAlerta.disparar && <MensagemAlerta mensagem={dispararAlerta.mensagem} tempo={dispararAlerta.tempo} setDispararAlerta={setDispararAlerta} exibir={dispararAlerta.disparar} /> }
+     {dispararAlerta.disparar && <MensagemAlerta mensagem={dispararAlerta.mensagem} tempo={dispararAlerta.tempo} setDispararAlerta={setDispararAlerta} exibir={dispararAlerta.disparar} /> }
 
-   <form ref={formulario} onSubmit={e => e.preventDefault()} className={styles.formulario}>
+     <form ref={formulario} onSubmit={e => e.preventDefault()} className={styles.formulario}>
 
+         <section id={styles.sectionHeader}>
 
-     <section id={styles.sectionHeader}>
+ 	     <h1 id={styles.title}>Formulário de atualização</h1>
 
+         </section>
 
- 	<h1 id={styles.title}>Formulário de atualização</h1>
+         <section className={`${styles.sectionComInput} ${styles.sectionNome}`}>
 
+             <label className={styles.labels} htmlfor="novoNome">Novo nome:</label>
 
-     </section>
+             <br/>
 
+             <input name="novo_nome_prato" onChange={e => despachar({tipo: "mudar nome", valor: e.target.value})} type="text" required id="novoNome" /*value={novosDados_prato.novo_nome_prato}*/ />
 
-     <section className={`${styles.sectionComInput} ${styles.sectionNome}`}>
+         </section>
 
+         <section className={styles.sectionDescricao}>
 
-       <label className={styles.labels} htmlfor="novoNome">Novo nome:</label>
+             <label htmlfor="novaDescricao" className={`${styles.sectionComTextarea} ${styles.labels}`}>Nova descrição:</label>
 
-       <br/>
+             <br/>
 
-       <input name="novo_nome_prato" onChange={e => despachar({tipo: "mudar nome", valor: e.target.value})} type="text" required id="novoNome" /*value={novosDados_prato.novo_nome_prato}*/ />
+             <textarea id={styles.novaDescricao} name="novo_descricao_prato" onInput={e => despachar({tipo: "mudar descricao", valor: e.target.value})} /*value={novosDados_prato.novo_descricao_prato}*/ required></textarea>
 
+         </section>
 
-     </section>
+         <section className={`${styles.sectionComInput} ${styles.sectionPreco}`}>
 
+             <label className={styles.labels} htmlfor="novoPreco">Novo preço (R$):</label>
 
+             <br/>
 
+             <input type="number" name="novo_preco_prato" onInput={e => despachar({tipo: "mudar preco", valor: Number(e.target.value)})} required id="novoPreco" /*value={novosDados_prato.novo_preco_prato}*/ />
 
-     <section className={styles.sectionDescricao}>
+             </section>
 
+         <section className={styles.sectionCategoria}>
 
-       <label htmlfor="novaDescricao" className={`${styles.sectionComTextarea} ${styles.labels}`}>Nova descrição:</label>
+             <label className={styles.labels} htmlfor="novaCategoria">Nova categoria:</label>
 
-       <br/>
+             <select id="novaCategoria" name="novo_categoria_prato" required onChange={e => despachar({tipo: "mudar categoria", valor: e.target.value})}>
 
-       <textarea id={styles.novaDescricao} name="novo_descricao_prato" onInput={e => despachar({tipo: "mudar descricao", valor: e.target.value})} /*value={novosDados_prato.novo_descricao_prato}*/ required></textarea>
+	         <option selected disabled>          Escolher             </option>
 
+	         <option value="pratos principais">  Pratos principais    </option>
 
-     </section>
+	         <option value="lanches">            Lanches              </option>
 
+	         <option value="sobremesas">         Sobremesas           </option>
 
+             </select>
 
+         </section>
 
-     <section className={`${styles.sectionComInput} ${styles.sectionPreco}`}>
+         <section className={styles.sectionComInput_file}>
 
+             <label className={styles.labels} htmlfor="novaImagem">Nova imagem:</label>
 
-       <label className={styles.labels} htmlfor="novoPreco">Novo preço (R$):</label>
+             <br/>
 
-       <br/>
+             <input type="file" name="imagem_prato_novo" onChange={e => tratarImagem(e.target.files[0])}  />
 
-       <input type="number" name="novo_preco_prato" onInput={e => despachar({tipo: "mudar preco", valor: Number(e.target.value)})} required id="novoPreco" /*value={novosDados_prato.novo_preco_prato}*/ />
+             <br/>
 
+             <img src={imagem_prato_novo} alt="Selecione uma imagem" />
 
-     </section>
+         </section>
 
+         <section className={styles.sectionIngredientes}>
 
+             <label htmlfor="novosIngredientes" className={`${styles.sectionComTextarea} ${styles.labels}`}>Novos ingredientes:</label>
 
+             <br/>
 
-     <section className={styles.sectionCategoria}>
+             <textarea required id={styles.novosIngredientes} name="novo_ingredientes_prato" onInput={e => despachar({tipo: "mudar ingredientes", valor: e.target.value})} ></textarea>
 
+         </section>
 
-       <label className={styles.labels} htmlfor="novaCategoria">Nova categoria:</label>
+         <section className={styles.sectionRestricoes}>
 
-       <select id="novaCategoria" name="novo_categoria_prato" required onChange={e => despachar({tipo: "mudar categoria", valor: e.target.value})}>
+             <label htmlfor="novasAlergias_restricoes" className={`${styles.sectionComTextarea} ${styles.labels}`}>Alergias/restrições (mudar):</label>
 
+             <br/>
 
-	 <option selected disabled>Escolher</option>
+             <textarea required id={styles.novasAlergias_restricoes} name="novo_alergias_restricoes_prato" onInput={e => despachar({tipo: "mudar alergias_restricoes", valor: e.target.value})}></textarea>
 
-	 <option value="pratos principais">     Pratos principais    </option>
+         </section>
 
-	 <option value="lanches">     Lanches              </option>
+         <section id={styles.sectionComBotoes}>
 
-	 <option value="sobremesas">     Sobremesas           </option>
+             <button onClick={() => {
 
+	         function rolarTela () {
 
-       </select>
+	             window.scrollTo(coordenadasDeTelaDoComponentePai.x, coordenadasDeTelaDoComponentePai.y);
 
+                 };
 
-     </section>
+                 rolarTela();
 
+ 	 	 exibirFormulario(false)}}>Sair
 
+             </button>
 
-     <section className={styles.sectionComInput_file}>
+             <button onClick={() => tratarSalvamento()} disabled={!novosDadosPreenchidos}>Salvar</button>
 
-       <label className={styles.labels} htmlfor="novaImagem">Nova imagem:</label>
+         </section>
 
-       <br/>
-
-       <input type="file" name="imagem_prato_novo" onChange={e => tratarImagem(e.target.files[0])}  />
-
-       <br/>
-
-       <img src={imagem_prato_novo} alt="Selecione uma imagem" />
-
-     </section>
-
-
-
-     <section className={styles.sectionIngredientes}>
-
-
-       <label htmlfor="novosIngredientes" className={`${styles.sectionComTextarea} ${styles.labels}`}>Novos ingredientes:</label>
-
-       <br/>
-
-       <textarea required id={styles.novosIngredientes} name="novo_ingredientes_prato" onInput={e => despachar({tipo: "mudar ingredientes", valor: e.target.value})} ></textarea>
-
-
-     </section>
-
-
-
-
-     <section className={styles.sectionRestricoes}>
-
-
-       <label htmlfor="novasAlergias_restricoes" className={`${styles.sectionComTextarea} ${styles.labels}`}>Alergias/restrições (mudar):</label>
-
-       <br/>
-
-       <textarea required id={styles.novasAlergias_restricoes} name="novo_alergias_restricoes_prato" onInput={e => despachar({tipo: "mudar alergias_restricoes", valor: e.target.value})}></textarea>
-
-
-     </section>
-
-
-     <section id={styles.sectionComBotoes}>
-
-       <button onClick={() => {
-
-		function rolarTela () {
-
-			window.scrollTo(coordenadasDeTelaDoComponentePai.x, coordenadasDeTelaDoComponentePai.y);
-
-  };  rolarTela();
-
-
-		exibirFormulario(false)}}>Sair</button>
-
-       <button onClick={() => tratarSalvamento()} disabled={!novosDadosPreenchidos}>Salvar</button>
-
-     </section>
-
-   </form>
+     </form>
  </>
  )
 
- }
+}

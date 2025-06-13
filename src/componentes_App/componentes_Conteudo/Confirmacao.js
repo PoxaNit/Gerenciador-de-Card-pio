@@ -10,6 +10,7 @@ import styles from "./Confirmacao.module.css";
          <section id={styles.btns}>
 
 	     <button onClick={() => func_negativo()}>Não</button>
+
 	     <button onClick={() => func_positivo()}>Sim</button>
 
          </section>

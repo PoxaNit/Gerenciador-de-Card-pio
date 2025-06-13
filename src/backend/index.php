@@ -1,26 +1,52 @@
 <?php
 
+// Se o navegador pedir o arquivo js
+ if (preg_match("/\/static\/js\/main\.[a-f0-9]+\.js$/", $_SERVER["REQUEST_URI"])):
 
- if ($_SERVER["REQUEST_URI"] === "/retornar_dados"):
-	require_once "retornar_dados.php";
- exit;
+     $arquivoJs = glob(__DIR__ . "/../../build/static/js/main.*.js");
 
-   elseif ($_SERVER["REQUEST_URI"] === "/criar_prato"):
-	include "criar_prato.php";
- exit;
+     if ($arquivoJs && count($arquivoJs) > 0):
 
-   elseif ($_SERVER["REQUEST_URI"] === "/deletarPrato"):
-	include "deletarPrato.php";
- exit;
+         header("Content-Type: application/javascript");
 
-   elseif ($_SERVER["REQUEST_URI"] === "/atualizarPrato"):
-	include "atualizarPrato.php";
- exit;
+         readfile($arquivoJs[0]);
+
+         exit;
+
+     else:
+
+         http_response_code(404);
+
+         echo "Arquivo JavaScript não encontrado!";
+
+         exit;
+
+     endif;
+// Se pedir o css
+ elseif (preg_match("/\/static\/css\/main\.[a-f0-9]+\.css$/", $_SERVER["REQUEST_URI"])):
+
+     $arquivoCss = glob(__DIR__ . "/../../build/static/css/main.*.css");
+
+     if ($arquivoCss && count($arquivoCss) > 0):
+
+         header("Content-Type: text/css");
+
+         readfile($arquivoCss[0]);
+
+         exit;
+
+     else:
+
+         http_response_code(404);
+
+         echo "Arquivo CSS não encontrado!";
+
+         exit;
+
+     endif;
+
+ else:
+// Serve o html por padrão
+     readfile(__DIR__ . "/../../build/index.html");
 
  endif;
-
-
-
-
-
-?>

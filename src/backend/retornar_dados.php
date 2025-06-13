@@ -2,15 +2,24 @@
 
  session_start();
 
+
+
  if (!isset($_SESSION["autenticado"])):
 
-     header("Location: http://0.0.0.0:8000/autenticacao/login.php");
+     http_response_code(401);
+
+     header("Content-Type: application/json");
+
+     echo json_encode(["sucesso" => false, "msg" => "Usuário(a) não logado(a)!", "status_code" => 401]);
 
      exit;
 
  endif;
 
- $db = new SQLite3("restaurante.db");
+
+ $caminho_banco = __DIR__ . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_banco'));
+
+ $db = new SQLite3($caminho_banco);
 
  $stmt = $db->prepare("SELECT * FROM menu_pratos WHERE usuario_email = :email");
 

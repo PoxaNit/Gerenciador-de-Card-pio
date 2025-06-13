@@ -4,6 +4,8 @@
 
  session_start();
 
+ $urlBackend = trim(shell_exec('source ../../../.env && echo ${urlBackend}'));
+
  if (isset($_POST["email"]) && isset($_POST["senha"])):
 
      $erros = [];
@@ -21,7 +23,9 @@
 
  // Verificando se a senha existe para o email, e consequentemente se o email existe
 
-     $db = new SQLite3("../restaurante.db");
+     $caminho_banco = __DIR__ . '/../../../' . trim(shell_exec('source ../../../.env && echo $caminho_banco'));
+
+     $db = new SQLite3($caminho_banco);
 
      $stmt = $db->prepare("SELECT usuario_senha FROM usuarios WHERE usuario_email = :email");
 
@@ -54,7 +58,7 @@
      elseif (!empty($senha)): //Para a senha não estar vazia, o email e a senha devem estar corretos
 
 	 $_SESSION["autenticado"] = $_POST["email"];
-	 header("Location: http://0.0.0.0:3000"); //Redireciona o usuário para meu aplicativo web react
+	 header("Location: $urlBackend"); //Redireciona o usuário para meu aplicativo web react
 	 exit;
 
      endif;
@@ -119,7 +123,7 @@
 		 </section>
 
 		 <nav>
-		     <a href="http://0.0.0.0:8000/autenticacao/cadastro.php">Não tem uma conta?</a>
+		     <a href=<?php echo $urlBackend . "/autenticacao/cadastro.php"?>>Não tem uma conta?</a>
 		 </nav>
 
 		 <?php if (!empty($erros)): ?>
@@ -137,4 +141,3 @@
          </form>
      </body>
  </html>
-

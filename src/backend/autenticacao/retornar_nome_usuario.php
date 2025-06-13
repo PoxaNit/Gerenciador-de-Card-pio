@@ -2,6 +2,22 @@
 
  //Este programa retorna o nome de usuário que corresponde ao seu email ( id ) de autenticação guardado no banco de dados.
 
+ session_start();
+
+ $urlBackend = trim(shell_exec('cd ../../../ && source .env && echo $urlBackend'));
+
+
+
+ if (!isset($_SESSION["autenticado"])):
+
+     header("Location: $urlBackend/autenticacao/login.php");
+
+     exit;
+
+ endif;
+
+
+
  header("Content-Type: application/json");
 
  $erros = [];
@@ -15,7 +31,9 @@
      if (filter_var($id, FILTER_VALIDATE_EMAIL)):
 
 
-	 $db = new SQLite3("../restaurante.db");
+         $caminho_banco = __DIR__ . '/../../../' . trim(shell_exec('source ../../../.env && echo $caminho_banco'));
+
+	 $db = new SQLite3($caminho_banco);
 
 	 $stmt = $db->prepare("SELECT usuario_nome FROM usuarios WHERE usuario_email = :id");
 

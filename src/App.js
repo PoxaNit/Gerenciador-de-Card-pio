@@ -1,32 +1,63 @@
 import React from "react";
 import Conteudo from "./componentes_App/Conteudo.js";
 import Autenticado from "./componentes_App/Autenticado.js"; //Contexto de autenticação
+import buscarUrlDoBackend from "./resources/buscarUrlDoBackend.js";
+//import styles from "./App.css";
 
 function App() {
 
+    const [urlBackend, setUrlBackend] = React.useState("");
     const [autenticado, setAutenticado] = React.useState(false);
     const [session_id, setSession_id] = React.useState("");
     const [usuario_nome, setUsuario_nome] = React.useState("");
+//    const [carregando, setCarregando] = React.useState(true);
 
-    async function verificarAutenticacao() {
 
-        const autenticacao = await fetch("/autenticacao/session_id.php").then(r => r.json());
+
+    React.useEffect(() => {
+
+   // Guardando a URL no estado 'urlBackend'
+        if (!urlBackend) {
+
+            buscarUrlDoBackend(url => setUrlBackend(url));
+
+        }
+
+    }, [urlBackend]);
+
+
+
+
+
+
+    const verificarAutenticacao = React.useCallback(async () => {
+
+        const autenticacao = await fetch(urlBackend + "/autenticacao/session_id.php",
+        {
+         headers:{
+           "ngrok-skip-browser-warning":"true"
+         }
+        }).then(r => r.json());
 
 
         if (!autenticacao.sucesso) {
 
-            window.location = "http://0.0.0.0:8000/autenticacao/login.php";
+            window.location = urlBackend + "/autenticacao/login.php?ngrok-skip-browser-warning=any";
 
         } else {
 
+  //          setTimeout(() => setCarregando(false), 3000);
+
 	    const id = autenticacao.id;
 
-   	    const corpo = JSON.stringify({"id": id}); //Corpo da requisição.
+   	    const corpo = JSON.stringify({"id": id}); //Corpo da próxima requisição.
 
-	    const usuario_nome = await fetch("/autenticacao/retornar_nome_usuario.php", {
+	    const usuario_nome = await fetch(urlBackend + "/autenticacao/retornar_nome_usuario.php", {
 		   			      method: "POST",
-					      body: corpo
+					      body: corpo,
+         				      headers:{"ngrok-skip-browser-warning":"true"}
 					    });
+
 
 	    const json = await usuario_nome.json();
 
@@ -39,13 +70,17 @@ function App() {
 
 
 
-    };
+    }, [urlBackend]);
+
+
 
     const executar = React.useRef(true);
 
+
+
     React.useEffect(() => {
 
-        if (executar.current) {
+        if (urlBackend && executar.current) {
 
 	     verificarAutenticacao();
 
@@ -55,18 +90,28 @@ function App() {
 
         }
 
-    }, []);
+    }, [urlBackend, verificarAutenticacao]);
 
 
 
 
-    return autenticado && (
-        <Autenticado.Provider value={{autenticado, session_id, usuario_nome}}>
+    return autenticado ? (
+        <Autenticado.Provider value={{autenticado, setAutenticado, session_id, usuario_nome, urlBackend}}>
             <div className="App">
    	        <Conteudo />
             </div>
         </Autenticado.Provider>
-    );
+    ) : (
+
+        <>
+
+            <h1>Carregando...</h1>
+            <p>Se não der certo, recarregue a página</p>
+
+        </>
+
+    )
+
 }
 
 export default App;

@@ -10,27 +10,29 @@ import styles from "./MensagemConfirmar.module.css";
 
 
    return (
+
        <div id={styles.section_maior}>
 
-	 <div id={styles.conteudo}>
+           <div id={styles.conteudo}>
 
-		<section id={styles.section1}>
+                <section id={styles.section1}>
 
-		    <h2 id={styles.h2}>{_mensagem}</h2>
+	           <h2 id={styles.h2}>{_mensagem}</h2>
 
-		</section>
+	        </section>
 
 		<section id={styles.section2}>
 
 		    <button onClick={() => _fechar_mensagem_func()}>Não</button>
+
 		    <button onClick={() => _confirmar_ok_func()}>Ok</button>
 
 		</section>
 
-	 </div>
+           </div>
 
-	</div>
+       </div>
 
-  );
+   );
 
  };

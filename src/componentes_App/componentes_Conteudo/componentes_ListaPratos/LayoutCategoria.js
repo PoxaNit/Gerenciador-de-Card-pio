@@ -5,9 +5,15 @@ import estilos_pai from '../ListaPratos.module.css';
 import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
 
 
-  function LayoutCategoria ({pratos, filtragemAtiva,
-  setFiltragemAtiva, botaoAtivo, setBotaoAtivo,
-  atualizarListaFiltrada, setAtualizarListaFiltrada}) {
+  function LayoutCategoria ({
+  pratos,
+  filtragemAtiva,
+  setFiltragemAtiva,
+  botaoAtivo,
+  setBotaoAtivo,
+  atualizarListaFiltrada,
+  setAtualizarListaFiltrada
+  }) {
 
 //    Define os pratos filtrados atuais
       const { setPratosCategorizados } = React.useContext(Contexto);
@@ -29,6 +35,7 @@ import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
              const pratosFiltrados = pratos.filter(prato => prato.categoria_prato === "pratos principais");
 
              setPratosCategorizados(pratosFiltrados);
+
 	     setBotaoAtivo({pratos_principais: true});
 
              return null;
@@ -42,6 +49,7 @@ import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
              const pratosFiltrados = pratos.filter(prato => prato.categoria_prato === "lanches");
 
              setPratosCategorizados(pratosFiltrados);
+
 	     setBotaoAtivo({lanches: true});
 
              return null;
@@ -55,6 +63,7 @@ import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
              const pratosFiltrados = pratos.filter(prato => prato.categoria_prato === "sobremesas");
 
              setPratosCategorizados(pratosFiltrados);
+
 	     setBotaoAtivo({sobremesas: true});
 
              return null;
@@ -71,6 +80,7 @@ import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
 	      if (atualizarListaFiltrada && botaoAtivo?.pratos_principais) {
 
 	          filtrarPratosPrincipais();
+
 		  setAtualizarListaFiltrada(false);
 
 	      };
@@ -78,6 +88,7 @@ import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
 	      if (atualizarListaFiltrada && botaoAtivo?.lanches) {
 
 	          filtrarLanches();
+
 		  setAtualizarListaFiltrada(false);
 
 	      };
@@ -85,12 +96,13 @@ import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
 	      if (atualizarListaFiltrada && botaoAtivo?.sobremesas) {
 
 	          filtrarSobremesas();
+
 		  setAtualizarListaFiltrada(false);
 
 	      };
 
 
-	  }, [/*atualizarListaFiltrada*/]);
+	  }, []);
 
 
 
@@ -108,7 +120,9 @@ import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
 		  <main>
 
     	              <button id={(botaoAtivo?.pratos_principais && styles.botao_ativado) || (styles.s2b1)} onClick={() => filtrarPratosPrincipais()}>Pratos principais</button>
+
 	              <button id={(botaoAtivo?.lanches && styles.botao_ativado) || (styles.s2b2)} onClick={() => filtrarLanches()}>Lanches</button>
+
 	              <button id={(botaoAtivo?.sobremesas && styles.botao_ativado) || (styles.s2b3)} onClick={() => filtrarSobremesas()}>Sobremesas</button>
 
 		  </main>
@@ -128,8 +142,11 @@ import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
      function limparFiltragem () {
 
 	 setPratosCategorizados([]);
+
 	 setBotaoAtivo({botao_todos: true});
+
          setFiltragemAtiva(false);
+
 	 setEParaAtualizarOsFiltrados(false);
 
      };
@@ -138,7 +155,9 @@ import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
      function ligarFiltragem () {
 
 	 if (!pratos) {
+
 	     return null;
+
 	 };
 
          if (botaoAtivo?.botao_todos) {
@@ -146,8 +165,11 @@ import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
              const pratosFiltrados = pratos.filter(prato => prato.categoria_prato === "pratos principais");
 
              setFiltragemAtiva(true);
+
              setPratosCategorizados(pratosFiltrados);
+
              setBotaoAtivo({pratos_principais: true});
+
 	     setEParaAtualizarOsFiltrados(true);
 
          }
@@ -161,6 +183,7 @@ import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
 	      <section>
 
    	          <button id={(!filtragemAtiva && estilos_pai.botao_todos_ativo) || (styles.b1)} onClick={() => limparFiltragem()}>Todos</button>
+
 	          <button id={styles.b2} onClick={() => ligarFiltragem()}>Por categoria</button>
 
 	      </section>
@@ -169,8 +192,6 @@ import SincronizarPratos from "../../Contexto_sincronizacao_pratos.js";
 
           </div>
       );
-
-
 
 
 

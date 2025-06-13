@@ -2,11 +2,25 @@
 
  session_start();
 
+ if (!isset($_SESSION["autenticado"])):
+
+     http_response_code(401);
+
+     header("Content-Type: application/json");
+
+     echo json_encode(["sucesso" => false, "msg" => "Usuário(a) não logado(a)!"]);
+
+     exit;
+
+ endif;
+
  $email = $_SESSION["autenticado"];
 
  //ESTE ARQUIVO PHP ATUALIZA AS INFORMAÇÕES DO PRATO, TROCANDO AS INFORNAÇÕEA ANTIGAS PELAS NOVAS
 
- $db = new SQLite3("restaurante.db");
+ $caminho_banco = __DIR__ . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_banco'));
+
+ $db = new SQLite3($caminho_banco);
 
  header("Content-Type: application/json");
 
@@ -70,17 +84,16 @@
 
 //TRATANDO AS IMAGENS
 
-//teste
+ $caminho_imagens  = __DIR__ . '/../../' . trim(shell_exec('source ../../.env && echo $caminho_imagens'));
 
- shell_exec("rm $imagem_prato_antigo"); //já contém o caminho
+ shell_exec("rm $caminho_imagens/$imagem_prato_antigo");
 
 //nova imagem
 
  $extensao = pathinfo($imagem_prato_novo["name"], PATHINFO_EXTENSION);
- $novoNome = uniqid().".".$extensao;
- $caminho  = "imagens/$novoNome";
+ $novoNomePrato = uniqid().".".$extensao;
 
- move_uploaded_file($imagem_prato_novo["tmp_name"], $caminho);
+ move_uploaded_file($imagem_prato_novo["tmp_name"], $caminho_imagens . '/' . $novoNomePrato);
 
 //ÁREA DAS OPERAÇÕES COM BANCO DE DADOS -> INÍCIO
 
@@ -99,7 +112,7 @@
  $stmt->bindValue(":novo_categoria_prato", $categoria_prato_novo);
  $stmt->bindValue(":novo_ingredientes_prato", $ingredientes_prato_novo);
  $stmt->bindValue(":novo_alergias_restricoes_prato", $alergias_restricoes_prato_novo);
- $stmt->bindValue(":novo_imagem_prato", $caminho);
+ $stmt->bindValue(":novo_imagem_prato", $novoNomePrato);
 
  $stmt->bindValue(":antigo_nome_prato", $nome_prato_antigo);
  $stmt->bindValue(":antigo_descricao_prato", $descricao_prato_antigo);
