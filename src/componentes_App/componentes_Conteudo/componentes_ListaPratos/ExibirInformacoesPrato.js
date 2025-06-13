@@ -91,7 +91,7 @@ import Autenticado from "../../Autenticado.js";
 
 	setExibirMenuOpcoes(true);
 
-  b};
+   };
 
 
 
