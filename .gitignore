@@ -5,11 +5,12 @@ node_modules
 package-lock.json
 src/backend/imagens
 src/backend/testes
+src/backend/restaurante.db
 /.pnp
 .pnp.js
 .env
 tarefas
-tmp/*
+tmp
 # testing
 /coverage
 
